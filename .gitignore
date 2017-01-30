@@ -1,3 +1,4 @@
+.idea/
 /build/
 /var/*
 !/var/cache
@@ -12,4 +13,3 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-.idea/
