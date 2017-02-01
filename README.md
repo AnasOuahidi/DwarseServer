@@ -21,3 +21,5 @@ Responsable Métier : [Anas Ouahidi](https://github.com/AnasOuahidi) <br />
 Developpeur : [Mohamed Aziz Ben Miled](https://github.com/mabenmiled) <br />
 Developpeur : [Nihel Ben Gamra](https://github.com/nbengamra) <br />
 Developpeur : [Philippe Dezarnaud](https://github.com/Phi-l) <br />
+
+With Love :heart:
