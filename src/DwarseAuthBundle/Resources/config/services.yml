@@ -1,0 +1,4 @@
+services:
+#    dwarse_auth.example:
+#        class: DwarseAuthBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

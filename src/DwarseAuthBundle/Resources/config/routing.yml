@@ -1,0 +1,3 @@
+dwarse_auth_homepage:
+    path:     /
+    defaults: { _controller: DwarseAuthBundle:Default:index }
