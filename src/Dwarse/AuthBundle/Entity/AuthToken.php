@@ -3,6 +3,7 @@
 namespace Dwarse\AuthBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Dwarse\AuthBundle\Entity\User;
 
 /**
  * AuthToken
@@ -97,11 +98,11 @@ class AuthToken {
     /**
      * Set user
      *
-     * @param \DwarseAuthBundle\Entity\User $user
+     * @param User $user
      *
      * @return AuthToken
      */
-    public function setUser(\DwarseAuthBundle\Entity\User $user = null) {
+    public function setUser(User $user = null) {
         $this->user = $user;
 
         return $this;
@@ -110,7 +111,7 @@ class AuthToken {
     /**
      * Get user
      *
-     * @return \DwarseAuthBundle\Entity\User
+     * @return User
      */
     public function getUser() {
         return $this->user;
