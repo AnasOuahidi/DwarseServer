@@ -1,4 +1,0 @@
-dwarse_auth:
-    resource: "@DwarseAuthBundle/Resources/config/routing.yml"
-    prefix:   /auth
-
