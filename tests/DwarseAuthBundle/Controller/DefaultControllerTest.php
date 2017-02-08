@@ -1,6 +1,6 @@
 <?php
 
-namespace DwarseAuthBundle\Tests\Controller;
+namespace Dwarse\AuthBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

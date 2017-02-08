@@ -1,6 +1,6 @@
 <?php
 
-namespace DwarseAuthBundle\Entity;
+namespace Dwarse\AuthBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * AuthToken
  *
  * @ORM\Table(name="auth_token")
- * @ORM\Entity(repositoryClass="DwarseAuthBundle\Repository\AuthTokenRepository")
+ * @ORM\Entity(repositoryClass="Dwarse\AuthBundle\Repository\AuthTokenRepository")
  */
 class AuthToken {
     /**

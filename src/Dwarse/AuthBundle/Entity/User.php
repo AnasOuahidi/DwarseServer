@@ -1,6 +1,6 @@
 <?php
 
-namespace DwarseAuthBundle\Entity;
+namespace Dwarse\AuthBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="DwarseAuthBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="Dwarse\AuthBundle\Repository\UserRepository")
  */
 class User {
     /**

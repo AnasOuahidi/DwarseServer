@@ -1,6 +1,6 @@
 <?php
 
-namespace DwarseAuthBundle\Repository;
+namespace Dwarse\AuthBundle\Repository;
 
 /**
  * UserRepository

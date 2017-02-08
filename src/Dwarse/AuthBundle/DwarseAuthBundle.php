@@ -1,6 +1,6 @@
 <?php
 
-namespace DwarseAuthBundle;
+namespace Dwarse\AuthBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

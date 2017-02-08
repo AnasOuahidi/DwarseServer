@@ -1,6 +1,6 @@
 <?php
 
-namespace DwarseAuthBundle\Controller;
+namespace Dwarse\AuthBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
