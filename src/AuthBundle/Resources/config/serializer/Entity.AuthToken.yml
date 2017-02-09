@@ -1,0 +1,9 @@
+AuthBundle\Entity\AuthToken:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['user']
+        value:
+            groups: ['user']
+        createdAt:
+            groups: ['user']

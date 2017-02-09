@@ -1,0 +1,21 @@
+AuthBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: login
+    properties:
+        login:
+            - NotBlank: ~
+            - Type: string
+        email:
+            - NotBlank: ~
+            - Email: ~
+        role:
+            - NotBlank: ~
+            - Choice:
+                choices: [ROLE_EMPLOYE, ROLE_EMPLOYEUR, ROLE_COMMERCANT]
+        plainPassword:
+            - NotBlank: { groups: [New, FullUpdate] }
+            - Type: string
+            - Length:
+                min: 5
+                max: 50

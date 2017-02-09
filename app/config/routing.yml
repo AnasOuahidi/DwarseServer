@@ -1,0 +1,5 @@
+auth:
+    type:     rest
+    resource: AuthBundle\Controller\UserController
+    prefix:   /auth
+

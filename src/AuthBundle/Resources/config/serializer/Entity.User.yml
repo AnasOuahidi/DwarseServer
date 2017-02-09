@@ -1,0 +1,19 @@
+AuthBundle\Entity\User:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['user']
+        login:
+            groups: ['user']
+        password:
+            groups: ['user']
+        email:
+            groups: ['user']
+        role:
+            groups: ['user']
+        confirmed:
+            groups: ['user']
+        confirmationToken:
+            groups: ['user']
+        authToken:
+            groups: ['user']
