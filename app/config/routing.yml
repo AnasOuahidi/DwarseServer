@@ -1,5 +1,10 @@
-auth:
+insc:
     type:     rest
     resource: AuthBundle\Controller\UserController
+    prefix:   /auth
+
+auth:
+    type:     rest
+    resource: AuthBundle\Controller\AuthTokenController
     prefix:   /auth
 

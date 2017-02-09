@@ -4,7 +4,7 @@ AuthBundle\Entity\User:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: login
     properties:
         login:
-            - NotBlank: ~
+            - NotBlank: { message: 'Test message' }
             - Type: string
         email:
             - NotBlank: ~
@@ -19,3 +19,12 @@ AuthBundle\Entity\User:
             - Length:
                 min: 5
                 max: 50
+
+AuthBundle\Entity\Credentials:
+    properties:
+        login:
+            - NotBlank: ~
+            - Type: string
+        password:
+            - NotBlank: ~
+            - Type: string

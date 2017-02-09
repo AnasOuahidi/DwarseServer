@@ -11,7 +11,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @ORM\Entity(repositoryClass="AuthBundle\Repository\UserRepository")
  * @ORM\Table(name="users",
- *      uniqueConstraints={@ORM\UniqueConstraint(name="users_email_unique", columns={"email"})}
+ *      uniqueConstraints={@ORM\UniqueConstraint(name="users_email_unique", columns={"email"})},
+ *      uniqueConstraints={@ORM\UniqueConstraint(name="users_login_unique", columns={"login"})}
  * )
  */
 class User implements UserInterface {

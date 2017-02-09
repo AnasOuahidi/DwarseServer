@@ -40,4 +40,15 @@ class UserController extends Controller {
             return $form;
         }
     }
+
+    /**
+     * @Rest\View(serializerGroups={"user"})
+     * @Rest\Get("/users")
+     */
+    public function getUsersAction(Request $request) {
+        $users = $this->get('doctrine.orm.entity_manager')
+            ->getRepository('AuthBundle:User')
+            ->findAll();
+        return $users;
+    }
 }
