@@ -13,6 +13,27 @@ Lancer le serveur
 ```
 php bin/console server:run
 ```
+####Commandes utiles
+Créer la base de données
+```
+php bin/console doctrine:database:create
+```
+Créer le schema (les tables) de la base de données
+```
+php bin/console doctrine:schema:create
+```
+Mettre à jour le schema (les tables) de la base de données
+```
+php bin/console doctrine:schema:update --force
+```
+Ajouter des données de test à la base de données
+```
+php bin/console doctrine:fixture:load
+```
+Supprimer la base de données
+```
+php bin/console doctrine:database:drop --force
+```
 ####Equipe :<br />
 Chef de Projet : [Yasser Gueddou](https://github.com/herfedos) <br />
 Responsable Qualité : [Jenifer Gadomski](https://github.com/JeniferGadomski) <br />
