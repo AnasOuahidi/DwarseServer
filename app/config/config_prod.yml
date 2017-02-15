@@ -1,6 +1,6 @@
 imports:
     - { resource: config.yml }
-    - { resource: parameters_prod.php}
+    - { resource: parameters_prod.yml}
 
 #doctrine:
 #    orm:

@@ -1,0 +1,6 @@
+parameters:
+    database_host: eu-cdbr-west-01.cleardb.com
+    database_port: null
+    database_name: heroku_9214b9902249f51
+    database_user: b08d18194dd976
+    database_password: a94fd896
