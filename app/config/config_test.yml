@@ -1,5 +1,6 @@
 imports:
-    - { resource: config_dev.yml }
+    - { resource: config.yml }
+    - { resource: parameters_test.yml }
 
 framework:
     test: ~
@@ -14,3 +15,19 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver:  "%database_driver%"
+                user:    "%database_user%"
+                path:    "%database_path%"
+#                memory:  "%database_memory%"
+                charset: "%database_charset%"
+    orm:
+        entity_managers:
+            default:
+                metadata_cache_driver: apc
+                query_cache_driver:    apc
+                result_cache_driver:   apc

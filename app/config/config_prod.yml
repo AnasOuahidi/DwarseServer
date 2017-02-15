@@ -1,5 +1,6 @@
 imports:
     - { resource: config.yml }
+    - { resource: parameters_prod.yml}
 
 #doctrine:
 #    orm:
@@ -15,7 +16,7 @@ monolog:
             handler:      nested
         nested:
             type:  stream
-            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            path:  'php://stderr'
             level: debug
         console:
             type:  console
