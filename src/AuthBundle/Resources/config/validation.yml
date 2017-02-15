@@ -30,23 +30,21 @@ AuthBundle\Entity\User:
             - Length:
                 min: 5
                 max: 25
-                message: 'Veuillez entrer un mot de passe contenant de 5 à 25 caractères'
 
 AuthBundle\Entity\Credentials:
     properties:
         login:
             - NotBlank:
-                'Le champs login ne doit pas être vide'
+                message: Le champs login ne doit pas être vide
             - Type:
                 type: string
-                message: 'Veuillez entrer un login correct'
+                message: Veuillez entrer un login correct
         password:
             - NotBlank:
-                'Le champs login ne doit pas être vide'
+                message: Le champs login ne doit pas être vide
             - Type:
                 type: string
-                message: 'Veuillez entrer un mot de passe correct'
+                message: Veuillez entrer un mot de passe correct
             - Length:
                 min: 5
                 max: 25
-                message: 'Veuillez entrer un mot de passe contenant de 5 à 25 caractères'
