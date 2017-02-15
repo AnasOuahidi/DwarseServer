@@ -4,27 +4,49 @@ AuthBundle\Entity\User:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: login
     properties:
         login:
-            - NotBlank: { message: 'Test message' }
-            - Type: string
+            - NotBlank:
+                message: 'Le champs login ne doit pas être vide'
+            - Type:
+                type: string
+                message: 'Veuillez entrer un login correct'
         email:
-            - NotBlank: ~
-            - Email: ~
+            - NotBlank:
+                message: 'Le champs email ne doit pas être vide'
+            - Email:
+                message: 'Veuillez entrer un email correct'
         role:
-            - NotBlank: ~
+            - NotBlank:
+                message: 'Le champs role ne doit pas être vide'
             - Choice:
                 choices: [ROLE_EMPLOYE, ROLE_EMPLOYEUR, ROLE_COMMERCANT]
+                message:  'Veuillez entrer un role correct'
         plainPassword:
-            - NotBlank: { groups: [New, FullUpdate] }
-            - Type: string
+            - NotBlank:
+                groups: [New, FullUpdate]
+                message: 'Le champs mot de passe ne doit pas être vide'
+            - Type:
+                type: string
+                message: 'Veuillez entrer un mot de passe correct'
             - Length:
                 min: 5
-                max: 50
+                max: 25
+                message: 'Veuillez entrer un mot de passe contenant de 5 à 25 caractères'
 
 AuthBundle\Entity\Credentials:
     properties:
         login:
-            - NotBlank: ~
-            - Type: string
+            - NotBlank:
+                'Le champs login ne doit pas être vide'
+            - Type:
+                type: string
+                message: 'Veuillez entrer un login correct'
         password:
-            - NotBlank: ~
-            - Type: string
+            - NotBlank:
+                'Le champs login ne doit pas être vide'
+            - Type:
+                type: string
+                message: 'Veuillez entrer un mot de passe correct'
+            - Length:
+                min: 5
+                max: 25
+                message: 'Veuillez entrer un mot de passe contenant de 5 à 25 caractères'

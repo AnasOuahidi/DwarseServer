@@ -26,17 +26,28 @@ class AuthTokenController extends Controller {
         $user = $em->getRepository('AuthBundle:User')
             ->findOneByEmailOrLogin($credentials->getLogin());
         if (!$user) {
-            return $this->invalidCredentials();
+            return $this->invalidLogin();
         }
         $encoder = $this->get('security.password_encoder');
         $isPasswordValid = $encoder->isPasswordValid($user, $credentials->getPassword());
         if (!$isPasswordValid) {
-            return $this->invalidCredentials();
+            return $this->invalidPassword();
+        }
+        if (!$user->getConfirmed()) {
+            return $this->invalidActivated();
         }
         return $user;
     }
 
-    private function invalidCredentials() {
-        return View::create(['message' => 'Login ou mot de passe incorrect'], Response::HTTP_BAD_REQUEST);
+    private function invalidLogin() {
+        return View::create(['message' => 'Login incorrect'], Response::HTTP_BAD_REQUEST);
+    }
+
+    private function invalidPassword() {
+        return View::create(['message' => 'Mot de passe incorrect'], Response::HTTP_BAD_REQUEST);
+    }
+
+    private function invalidActivated() {
+        return View::create(['message' => 'Votre compte n\'est pas activé'], Response::HTTP_BAD_REQUEST);
     }
 }
