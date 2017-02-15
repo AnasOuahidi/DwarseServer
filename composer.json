@@ -39,6 +39,9 @@
 		"symfony/phpunit-bridge": "^3.0"
 	},
 	"scripts": {
+		"compile": [
+			"rm web/app_dev.php"
+		],
 		"symfony-scripts": [
 			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
 			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
