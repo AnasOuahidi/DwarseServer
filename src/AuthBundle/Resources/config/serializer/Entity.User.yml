@@ -5,8 +5,6 @@ AuthBundle\Entity\User:
             groups: ['user']
         login:
             groups: ['user']
-        password:
-            groups: ['user']
         email:
             groups: ['user']
         role:
