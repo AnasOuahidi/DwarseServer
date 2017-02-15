@@ -1,6 +1,6 @@
 parameters:
-#    database_host: 127.0.0.1
-#    database_port: null
-#    database_name: dwarse
-#    database_user: root
-#    database_password: null
+    database_host: eu-cdbr-west-01.cleardb.com
+    database_port: null
+    database_name: heroku_9214b9902249f51
+    database_user: b08d18194dd976:a94fd896
+    database_password: null
