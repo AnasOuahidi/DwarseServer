@@ -1,7 +1,0 @@
-parameters:
-#    database_url: mysql://b08d18194dd976:a94fd896@eu-cdbr-west-01.cleardb.com/heroku_9214b9902249f51?reconnect=true
-    database_host: 127.0.0.1
-    database_port: null
-    database_name: dwarse
-    database_user: root
-    database_password: null

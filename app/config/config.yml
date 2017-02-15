@@ -111,9 +111,3 @@ nelmio_cors:
             allow_methods: ['POST','GET','DELETE','PUT']
             expose_headers: []
             max_age: 3600
-
-#bravesheep_database_url:
-#    urls:
-#        default:
-#            url: %database_url%
-#            prefix: database_
