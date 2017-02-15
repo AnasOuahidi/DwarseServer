@@ -4,9 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "95cfb241f79a4d0508c7b490eb6780aa",
-    "content-hash": "2f79b4c1fb4d59eae9d183c7850eb928",
+    "hash": "80ac9a41f70680f452ab2951682920da",
+    "content-hash": "9b142bd20155fd18ce70ee56bf98a70f",
     "packages": [
+        {
+            "name": "bravesheep/database-url-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bravesheep/database-url-bundle.git",
+                "reference": "c2884d56e25b3b3933676262a8546f85a79c45a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bravesheep/database-url-bundle/zipball/c2884d56e25b3b3933676262a8546f85a79c45a0",
+                "reference": "c2884d56e25b3b3933676262a8546f85a79c45a0",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/config": "~2.3|~3.0",
+                "symfony/dependency-injection": "~2.3|~3.0",
+                "symfony/http-kernel": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "2.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bravesheep\\DatabaseUrlBundle\\": "src/Bravesheep/DatabaseUrlBundle/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ruben Nijveld",
+                    "email": "ruben@gewooniets.nl"
+                }
+            ],
+            "description": "Determine Symfony2 database settings from a single URL-based parameter",
+            "time": "2016-01-15 13:10:38"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",
@@ -2781,7 +2822,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "bravesheep/database-url-bundle": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
