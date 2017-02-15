@@ -40,7 +40,7 @@
 	},
 	"scripts": {
 		"compile": [
-			"rm web/app_dev.php"
+			"rm web/app_dev.php && rm web/.htaccess && mv web/~.htaccess web/.htaccess"
 		],
 		"symfony-scripts": [
 			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
