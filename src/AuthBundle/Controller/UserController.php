@@ -24,9 +24,9 @@ class UserController extends Controller {
             $encoded = $encoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($encoded);
             $user->setConfirmed(false);
-            $user->setConfirmationToken(base64_encode(random_bytes(64)));
+            $user->setConfirmationToken($this->generateToken(64));
             $authToken = new AuthToken();
-            $authToken->setValue(base64_encode(random_bytes(64)));
+            $authToken->setValue($this->generateToken(64));
             $authToken->setCreatedAt(new \DateTime('now'));
             $authToken->setUser($user);
             $user->setAuthToken($authToken);
@@ -53,5 +53,15 @@ class UserController extends Controller {
             ->getRepository('AuthBundle:User')
             ->findAll();
         return $users;
+    }
+
+    private function generateToken($length) {
+        $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        $string = '';
+        $max = strlen($characters) - 1;
+        for ($i = 0; $i < $length; $i++) {
+            $string .= $characters[mt_rand(0, $max)];
+        }
+        return $string;
     }
 }
