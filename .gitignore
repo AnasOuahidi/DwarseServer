@@ -14,3 +14,4 @@
 /vendor/
 /web/bundles/
 Supprimerait tests/
+app/sqlite.db.cache
