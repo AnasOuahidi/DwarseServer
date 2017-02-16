@@ -15,7 +15,7 @@ class UserControllerTest extends WebTestCase {
         $client = $this->createClient();
         $client->request(
             'GET',
-            '/auth/authtokens',
+            '/auth/users',
             [],
             [],
             [
