@@ -3,7 +3,6 @@
 namespace AuthBundle\Controller;
 
 use AuthBundle\Entity\User;
-use AuthBundle\Entity\AuthToken;
 use AuthBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,12 +24,6 @@ class UserController extends Controller {
             $user->setPassword($encoded);
             $user->setConfirmed(false);
             $user->setConfirmationToken($this->generateToken(64));
-//            $authToken = new AuthToken();
-//            $authToken->setValue($this->generateToken(64));
-//            $authToken->setCreatedAt(new \DateTime('now'));
-//            $authToken->setUser($user);
-//            $user->setAuthToken($authToken);
-//            $em->persist($authToken);
             $em = $this->get('doctrine.orm.entity_manager');
             $em->persist($user);
             $url = 'https://dwarse.github.io/#!/confirm/' . $user->getConfirmationToken();
@@ -59,9 +52,6 @@ class UserController extends Controller {
      * @Rest\Get("/users")
      */
     public function getUsersAction(Request $request) {
-//        $user = $this->get('doctrine.orm.entity_manager')
-//            ->getRepository('AuthBundle:AuthToken')
-//            ->findOneByValue($request->headers->get('X-Auth-Token'))->getUser();
         $users = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AuthBundle:User')
             ->findAll();

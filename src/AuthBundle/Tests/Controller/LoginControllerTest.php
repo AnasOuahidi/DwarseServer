@@ -4,13 +4,13 @@ namespace AuthBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UserControllerTest extends WebTestCase
+class LoginControllerTest extends WebTestCase
 {
-    public function testPostusers()
+    public function testLogin()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/users');
+        $crawler = $client->request('GET', '/login');
     }
 
 }

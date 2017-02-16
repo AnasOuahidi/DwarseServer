@@ -3,12 +3,17 @@ insc:
     resource: AuthBundle\Controller\UserController
     prefix:   /auth
 
-auth:
+login:
     type:     rest
-    resource: AuthBundle\Controller\AuthTokenController
+    resource: AuthBundle\Controller\LoginController
     prefix:   /auth
 
 images:
     type:     annotation
     resource: AuthBundle\Controller\ImageController
     prefix:   /image
+
+auth:
+    type:     rest
+    resource: AuthBundle\Controller\AuthTokenController
+    prefix:   /auth
