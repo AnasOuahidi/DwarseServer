@@ -1,9 +1,9 @@
 parameters:
-    mailer_transport: smtp
-    mailer_encryption: ssl
-    mailer_auth_mode:  login
-    mailer_host: smtp.gmail.com
-    mailer_user: dwarse.developement@gmail.com
-    mailer_password: dwarsiens
+#    mailer_transport: smtp
+#    mailer_encryption: ssl
+#    mailer_auth_mode:  login
+#    mailer_host: smtp.gmail.com
+#    mailer_user: dwarse.developement@gmail.com
+#    mailer_password: dwarsiens
     secret: d44a371b4f9a4274d5d90517e5b9485df6110f56
     locale: fr
