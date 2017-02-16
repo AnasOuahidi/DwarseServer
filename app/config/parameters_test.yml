@@ -5,6 +5,6 @@ parameters:
     database_password: null
     database_driver: pdo_sqlite
     database_user: test
-    database_path: kernel.root_dir%/sqlite.db.cache
+    database_path: %kernel.root_dir%/sqlite.db.cache
     database_memory: true
     database_charset: utf8
