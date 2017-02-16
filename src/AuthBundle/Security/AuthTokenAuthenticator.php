@@ -23,7 +23,12 @@ class AuthTokenAuthenticator implements SimplePreAuthenticatorInterface, Authent
     public function createToken(Request $request, $providerKey) {
         $authUrl = '/auth/authtokens';
         $signUrl = '/auth/users';
-        if (($request->getMethod() === "POST" && $this->httpUtils->checkRequestPath($request, $authUrl)) || ($request->getMethod() === "POST" && $this->httpUtils->checkRequestPath($request, $signUrl))) {
+        $imgLogoUrl = '/image/logo';
+        $imgHeartUrl = '/image/heart';
+        if (($request->getMethod() === "POST" && $this->httpUtils->checkRequestPath($request, $authUrl))
+            || ($request->getMethod() === "POST" && $this->httpUtils->checkRequestPath($request, $signUrl))
+            || ($request->getMethod() === "GET" && $this->httpUtils->checkRequestPath($request, $imgLogoUrl))
+            || ($request->getMethod() === "GET" && $this->httpUtils->checkRequestPath($request, $imgHeartUrl))) {
             return;
         }
         $authTokenHeader = $request->headers->get('X-Auth-Token');

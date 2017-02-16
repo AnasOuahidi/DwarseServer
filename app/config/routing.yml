@@ -8,3 +8,7 @@ auth:
     resource: AuthBundle\Controller\AuthTokenController
     prefix:   /auth
 
+images:
+    type:     annotation
+    resource: AuthBundle\Controller\ImageController
+    prefix:   /image

@@ -25,15 +25,28 @@ class UserController extends Controller {
             $user->setPassword($encoded);
             $user->setConfirmed(false);
             $user->setConfirmationToken($this->generateToken(64));
-            $authToken = new AuthToken();
-            $authToken->setValue($this->generateToken(64));
-            $authToken->setCreatedAt(new \DateTime('now'));
-            $authToken->setUser($user);
-            $user->setAuthToken($authToken);
+//            $authToken = new AuthToken();
+//            $authToken->setValue($this->generateToken(64));
+//            $authToken->setCreatedAt(new \DateTime('now'));
+//            $authToken->setUser($user);
+//            $user->setAuthToken($authToken);
+//            $em->persist($authToken);
             $em = $this->get('doctrine.orm.entity_manager');
             $em->persist($user);
-            $em->persist($authToken);
-//            // avant ça on doit gerer l'envoi de mail :)
+            $url = 'https://dwarse.github.io/#!/confirm/' . $user->getConfirmationToken();
+            $baseurl = $request->getScheme() . '://' . $request->getHttpHost();
+            $message = \Swift_Message::newInstance();
+            $logoImgUrl = $message->embed(\Swift_Image::fromPath($baseurl . '/image/logo'));
+            $heartImgUrl = $message->embed(\Swift_Image::fromPath($baseurl . '/image/heart'));
+            $message->setSubject('Confirmation de compte')
+                ->setFrom(array('dwarse.development@gmail.com' => 'Dwarse Team'))
+                ->setTo($user->getEmail())
+                ->setCharset('utf-8')
+                ->setContentType('text/html')
+                ->setBody($this->renderView('AuthBundle:Emails:post_auth_tokens.html.twig',
+                    ['login' => $user->getLogin(), 'url' => $url, 'logoImgUrl' => $logoImgUrl, 'heartImgUrl' => $heartImgUrl]
+                ));
+            $this->get('mailer')->send($message);
             $em->flush();
             return $user;
         } else {
@@ -42,7 +55,7 @@ class UserController extends Controller {
     }
 
     /**
-     * @Rest\View(serializerGroups={"user"})
+     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"user"})
      * @Rest\Get("/users")
      */
     public function getUsersAction(Request $request) {

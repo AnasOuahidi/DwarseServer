@@ -12,7 +12,7 @@ use AuthBundle\Form\CredentialsType;
 
 class AuthTokenController extends Controller {
     /**
-     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"user"})
+     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"user"})
      * @Rest\Post("/authtokens")
      */
     public function postAuthTokensAction(Request $request) {
