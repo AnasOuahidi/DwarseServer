@@ -3,12 +3,16 @@
 namespace Tests;
 
 trait getAllApiTokensTrait {
+    protected $em;
     protected $tokenEmploye;
     protected $tokenEmployeur;
     protected $tokenCommercant;
 
     public function setUp() {
         parent::setUp();
+        self::bootKernel();
+
+        $this->em = static::$kernel->getContainer()->get('doctrine')->getManager();
         $this->tokenEmploye = $this->getToken('employe', 'employe');
         $this->tokenEmployeur = $this->getToken('employeur', 'employeur');
         $this->tokenCommercant = $this->getToken('commercant', 'commercant');
