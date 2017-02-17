@@ -26,6 +26,9 @@ class AuthTokenController extends Controller {
             return $this->invalidToken(true);
         }
         if ($user->getConfirmed()) {
+            $user->setConfirmationToken(null);
+            $em->persist($user);
+            $em->flush();
             return $this->alreadyConfirmed(true);
         }
         $user->setConfirmed(true);

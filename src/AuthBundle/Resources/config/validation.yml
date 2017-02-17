@@ -18,8 +18,9 @@ AuthBundle\Entity\User:
             - NotBlank:
                 message: 'Le champs role ne doit pas être vide'
             - Choice:
-                choices: [ROLE_EMPLOYE, ROLE_EMPLOYEUR, ROLE_COMMERCANT]
-                message:  'Veuillez entrer un role correct'
+                choices: [ROLE_EMPLOYEUR, ROLE_COMMERCANT]
+                message: 'Veuillez entrer un role correct'
+                strict: true
         plainPassword:
             - NotBlank:
                 groups: [New, FullUpdate]
