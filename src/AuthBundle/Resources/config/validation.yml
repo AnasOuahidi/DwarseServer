@@ -1,7 +1,11 @@
 AuthBundle\Entity\User:
     constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: login
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [email]
+            message: 'Cet email est déja utilisé'
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [login]
+            message: 'Ce login est déja utilisé'
     properties:
         login:
             - NotBlank:
