@@ -2,16 +2,16 @@ AuthBundle\Entity\User:
     exclusion_policy: none
     properties:
         id:
-            groups: ['user']
+            groups: ['user', 'employeur']
         login:
-            groups: ['user']
+            groups: ['user', 'employeur']
         email:
-            groups: ['user']
+            groups: ['user', 'employeur']
         role:
-            groups: ['user']
+            groups: ['user', 'employeur']
         confirmed:
-            groups: ['user']
+            groups: ['user', 'employeur']
         confirmationToken:
-            groups: ['user']
+            groups: ['user', 'employeur']
         authToken:
-            groups: ['user']
+            groups: ['user', 'employeur']

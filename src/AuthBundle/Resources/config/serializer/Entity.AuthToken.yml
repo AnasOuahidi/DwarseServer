@@ -2,8 +2,8 @@ AuthBundle\Entity\AuthToken:
     exclusion_policy: none
     properties:
         id:
-            groups: ['user']
+            groups: ['user', 'employeur']
         value:
-            groups: ['user']
+            groups: ['user', 'employeur']
         createdAt:
-            groups: ['user']
+            groups: ['user', 'employeur']

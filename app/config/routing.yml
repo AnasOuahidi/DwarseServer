@@ -17,3 +17,8 @@ auth:
     type:     rest
     resource: AuthBundle\Controller\AuthTokenController
     prefix:   /auth
+
+employeProfile:
+    type:     rest
+    resource: EmployeurBundle\Controller\ProfileController
+    prefix:   /employeur

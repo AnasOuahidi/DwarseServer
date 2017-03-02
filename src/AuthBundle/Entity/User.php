@@ -73,6 +73,12 @@ class User implements UserInterface {
      */
     protected $authToken;
 
+    /**
+     * @ORM\OneToOne(targetEntity="EmployeurBundle\Entity\Employeur")
+     * @var Employeur
+     */
+    protected $employeur;
+
     protected $plainPassword;
 
     /**
@@ -294,5 +300,29 @@ class User implements UserInterface {
      */
     public function eraseCredentials() {
         $this->plainPassword = null;
+    }
+
+    /**
+     * Set employeur
+     *
+     * @param \EmployeurBundle\Entity\Employeur $employeur
+     *
+     * @return User
+     */
+    public function setEmployeur(\EmployeurBundle\Entity\Employeur $employeur = null)
+    {
+        $this->employeur = $employeur;
+
+        return $this;
+    }
+
+    /**
+     * Get employeur
+     *
+     * @return \EmployeurBundle\Entity\Employeur
+     */
+    public function getEmployeur()
+    {
+        return $this->employeur;
     }
 }

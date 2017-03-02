@@ -1,0 +1,23 @@
+EmployeurBundle\Entity\Employeur:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['employeur']
+        libelle:
+            groups: ['employeur']
+        nom:
+            groups: ['employeur']
+        prenom:
+            groups: ['employeur']
+        adresse:
+            groups: ['employeur']
+        siret:
+            groups: ['employeur']
+        numTel:
+            groups: ['employeur']
+        civilite:
+            groups: ['employeur']
+        photo:
+            groups: ['employeur']
+        user:
+            groups: ['user', 'employeur']

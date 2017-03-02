@@ -1,0 +1,46 @@
+EmployeurBundle\Entity\Employeur:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [libelle]
+            message: 'Le nom de cette entreprise est déja utilisé'
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [siret]
+            message: 'Ce siret est déja utilisé'
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [numTel]
+            message: 'Ce numéro de téléphone est déja utilisé'
+    properties:
+        libelle:
+            - NotBlank:
+                message: 'Le champs libelle ne doit pas être vide'
+        nom:
+            - NotBlank:
+                message: 'Le champs nom ne doit pas être vide'
+        prenom:
+            - NotBlank:
+                message: 'Le champs prenom ne doit pas être vide'
+        adresse:
+            - NotBlank:
+                message: 'Le champs adresse ne doit pas être vide'
+        siret:
+            - NotBlank:
+                message: 'Le champs siret ne doit pas être vide'
+            - Length:
+                exactMessage: 'Le format du siret est invalide'
+                min: 14
+                max: 14
+        numTel:
+            - NotBlank:
+                message: 'Le champs siret ne doit pas être vide'
+            - Length:
+                minMessage: 'Le format du numéro de téléphone est invalide'
+                maxMessage: 'Le format du numéro de téléphone est invalide'
+                min: 10
+                max: 14
+        civilite:
+            - NotBlank:
+                message: 'Le champs civilite ne doit pas être vide'
+            - Choice:
+                choices: [Mr., Mme.]
+                message: 'Veuillez choisir une civilite correcte'
+                strict: true
