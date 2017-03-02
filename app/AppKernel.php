@@ -18,6 +18,7 @@ class AppKernel extends Kernel {
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new AuthBundle\AuthBundle(),
+            new EmployeurBundle\EmployeurBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
