@@ -108,7 +108,7 @@ jms_serializer:
 
 nelmio_cors:
     paths:
-        '^/auth':
+        '^/':
             allow_credentials: true
             allow_origin: ['*']
             allow_headers: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']

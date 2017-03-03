@@ -16,23 +16,31 @@ class ProfileController extends Controller {
      * @Rest\Post("/profile")
      */
     public function postEmployeurAction(Request $request) {
-//        $file = $request->files->get('file');
         $employeur = new Employeur();
         $form = $this->createForm(EmployeurType::class, $employeur);
-        $form->submit($request->request->all());
+        $form->submit($request->request->get('profile'));
         if (!$form->isValid()) {
             return $form;
         }
-        $token = $request->headers->get('X-Auth-Token');
+//        $token = $request->request->get('token');
         $em = $this->get('doctrine.orm.entity_manager');
-        $authToken = $em->getRepository('AuthBundle:AuthToken')->findOneByValue($token);
-        $user = $authToken->getUser();
-        $user->setEmployeur($employeur);
-        $employeur->setUser($user);
-        $employeur->setPhoto("testing2");
+//        $authToken = $em->getRepository('AuthBundle:AuthToken')->findOneByValue($token);
+//        $user = $authToken->getUser();
+//        $user->setEmployeur($employeur);
+//        $employeur->setUser($user);
+        $em->persist($employeur);
+        $file = $request->files->get('file');
+        $extention = $file->getClientOriginalExtension();
+        $libelle = $employeur->getId() . '.' . $extention;
+        $directory = $this->get('kernel')->getRootDir() . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'web' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'employeur';
+        $photo = $directory . DIRECTORY_SEPARATOR . $libelle;
+        $employeur->setPhoto($photo);
         $em->persist($employeur);
         $em->persist($user);
         $em->flush();
+        if (is_object($file) && $file->isValid()) {
+            $file->move($directory, $libelle);
+        }
         return $employeur;
     }
 }
