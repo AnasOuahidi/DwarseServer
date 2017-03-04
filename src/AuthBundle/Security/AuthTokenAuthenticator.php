@@ -24,13 +24,9 @@ class AuthTokenAuthenticator implements SimplePreAuthenticatorInterface, Authent
         $confirmUrl = '/auth/authtokens';
         $loginUrl = '/auth/login';
         $signUrl = '/auth/users';
-        $imgLogoUrl = '/image/logo';
-        $imgHeartUrl = '/image/heart';
         if (($request->getMethod() === "POST" && $this->httpUtils->checkRequestPath($request, $loginUrl))
             || ($request->getMethod() === "POST" && $this->httpUtils->checkRequestPath($request, $confirmUrl))
-            || ($request->getMethod() === "POST" && $this->httpUtils->checkRequestPath($request, $signUrl))
-            || ($request->getMethod() === "GET" && $this->httpUtils->checkRequestPath($request, $imgLogoUrl))
-            || ($request->getMethod() === "GET" && $this->httpUtils->checkRequestPath($request, $imgHeartUrl))) {
+            || ($request->getMethod() === "POST" && $this->httpUtils->checkRequestPath($request, $signUrl))) {
             return;
         }
         $authTokenHeader = $request->query->get('token');
