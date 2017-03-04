@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
+use Aws\S3\S3Client;
 
 class ProfileController extends Controller {
     /**
@@ -29,21 +30,27 @@ class ProfileController extends Controller {
         if ($user->getRole() != 'ROLE_EMPLOYEUR') {
             return View::create(['message' => 'Vous êtes pas un employeur'], Response::HTTP_BAD_REQUEST);
         }
-        $user->setEmployeur($employeur);
-        $employeur->setUser($user);
         $file = $request->files->get('file');
+        if (!is_object($file) || !$file->isValid()) {
+            return View::create(['message' => 'Votre photo ne passe pas'], Response::HTTP_BAD_REQUEST);
+        }
+        $root = $this->get('kernel')->getRootDir();
+        $keyContent = file_get_contents($root . '/AWS_ACCESS_KEY_ID.txt');
+        $secretContent = file_get_contents($root . '/AWS_SECRET_ACCESS_KEY.txt');
+        $bucket = getenv('S3_BUCKET_NAME')? getenv('S3_BUCKET_NAME') : 'dwarse';
+        $key = getenv('AWS_ACCESS_KEY_ID')? getenv('AWS_ACCESS_KEY_ID') : $keyContent;
+        $secret = getenv('AWS_SECRET_ACCESS_KEY')? getenv('AWS_SECRET_ACCESS_KEY') : $secretContent;
+        $s3 = S3Client::factory(['key' => $key, 'secret' => $secret]);
         $extention = $file->getClientOriginalExtension();
-        $libelle = $user->getLogin() . '.' . $extention;
-        $root = str_replace('app', '', $this->get('kernel')->getRootDir());
-        $directory = $root . 'web' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'employeur';
-        $photo = $directory . DIRECTORY_SEPARATOR . $libelle;
+        $libelle = 'employeur/photo/' . $user->getLogin() . '.' . $extention;
+        $upload = $s3->upload($bucket, $libelle, fopen($_FILES['file']['tmp_name'], 'rb'), 'public-read');
+        $photo = $upload->get('ObjectURL');
         $employeur->setPhoto($photo);
+        $employeur->setUser($user);
+        $user->setEmployeur($employeur);
         $em->persist($employeur);
         $em->persist($user);
         $em->flush();
-        if (is_object($file) && $file->isValid()) {
-            $file->move($directory, $libelle);
-        }
         return $user;
     }
 }
