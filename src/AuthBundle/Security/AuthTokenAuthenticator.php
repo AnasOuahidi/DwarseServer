@@ -30,11 +30,10 @@ class AuthTokenAuthenticator implements SimplePreAuthenticatorInterface, Authent
             || ($request->getMethod() === "POST" && $this->httpUtils->checkRequestPath($request, $confirmUrl))
             || ($request->getMethod() === "POST" && $this->httpUtils->checkRequestPath($request, $signUrl))
             || ($request->getMethod() === "GET" && $this->httpUtils->checkRequestPath($request, $imgLogoUrl))
-            || ($request->getMethod() === "GET" && $this->httpUtils->checkRequestPath($request, $imgHeartUrl))
-            || ($request->getMethod() === "POST" && $this->httpUtils->checkRequestPath($request, '/employeur/profile'))) {
+            || ($request->getMethod() === "GET" && $this->httpUtils->checkRequestPath($request, $imgHeartUrl))) {
             return;
         }
-        $authTokenHeader = $request->headers->get('X-Auth-Token');
+        $authTokenHeader = $request->query->get('token');
         if (!$authTokenHeader) {
             throw new BadCredentialsException('Le token d\'authentification est obligatoire');
         }
