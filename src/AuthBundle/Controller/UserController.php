@@ -27,10 +27,9 @@ class UserController extends Controller {
             $em = $this->get('doctrine.orm.entity_manager');
             $em->persist($user);
             $url = 'https://dwarse.github.io/#!/confirm/' . $user->getConfirmationToken();
-            $baseurl = $request->getScheme() . '://' . $request->getHttpHost();
             $message = \Swift_Message::newInstance();
-            $logoImgUrl = $message->embed(\Swift_Image::fromPath($baseurl . '/image/logo'));
-            $heartImgUrl = $message->embed(\Swift_Image::fromPath($baseurl . '/image/heart'));
+            $logoImgUrl = $message->embed(\Swift_Image::fromPath('https://s3.amazonaws.com/dwarse/assets/img/logo.png'));
+            $heartImgUrl = $message->embed(\Swift_Image::fromPath('https://s3.amazonaws.com/dwarse/assets/img/heart.png'));
             $message->setSubject('Confirmation de compte')
                 ->setFrom(array('dwarse.development@gmail.com' => 'Dwarse Team'))
                 ->setTo($user->getEmail())
@@ -45,17 +44,6 @@ class UserController extends Controller {
         } else {
             return $form;
         }
-    }
-
-    /**
-     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"user"})
-     * @Rest\Get("/users")
-     */
-    public function getUsersAction(Request $request) {
-        $users = $this->get('doctrine.orm.entity_manager')
-            ->getRepository('AuthBundle:User')
-            ->findAll();
-        return $users;
     }
 
     private function generateToken($length) {
