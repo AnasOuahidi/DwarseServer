@@ -17,3 +17,8 @@ employeProfile:
     type:     rest
     resource: EmployeurBundle\Controller\ProfileController
     prefix:   /employeur
+
+commercantProfile:
+    type:     rest
+    resource: CommercantBundle\Controller\ProfileController
+    prefix:   /commercant

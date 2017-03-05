@@ -1,8 +1,8 @@
-EmployeurBundle\Entity\Employeur:
+CommercantBundle\Entity\Commercant:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
             fields: [libelle]
-            message: 'Le nom de cette entreprise est déja utilisé'
+            message: 'Le nom de cette boutique est déja utilisé'
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
             fields: [siret]
             message: 'Ce siret est déja utilisé'
@@ -44,3 +44,6 @@ EmployeurBundle\Entity\Employeur:
                 choices: [Mr., Mme., Mlle.]
                 message: 'Veuillez choisir une civilite correcte'
                 strict: true
+        iban:
+            - Iban:
+                message: 'Cet iban est incorrect'

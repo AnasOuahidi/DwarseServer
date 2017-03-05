@@ -1,9 +1,9 @@
 <?php
 
-namespace EmployeurBundle\Controller;
+namespace CommercantBundle\Controller;
 
-use EmployeurBundle\Entity\Employeur;
-use EmployeurBundle\Form\EmployeurType;
+use CommercantBundle\Entity\Commercant;
+use CommercantBundle\Form\CommercantType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +16,9 @@ class ProfileController extends Controller {
      * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"user"})
      * @Rest\Post("/profile")
      */
-    public function postEmployeurAction(Request $request) {
-        $employeur = new Employeur();
-        $form = $this->createForm(EmployeurType::class, $employeur);
+    public function postCommercantAction(Request $request) {
+        $commercant = new Commercant();
+        $form = $this->createForm(CommercantType::class, $commercant);
         $form->submit($request->request->get('profile'));
         if (!$form->isValid()) {
             return $form;
@@ -27,8 +27,8 @@ class ProfileController extends Controller {
         $em = $this->get('doctrine.orm.entity_manager');
         $authToken = $em->getRepository('AuthBundle:AuthToken')->findOneByValue($token);
         $user = $authToken->getUser();
-        if ($user->getRole() != 'ROLE_EMPLOYEUR') {
-            return View::create(['message' => 'Vous n\'êtes pas un employeur'], Response::HTTP_BAD_REQUEST);
+        if ($user->getRole() != 'ROLE_COMMERCANT') {
+            return View::create(['message' => 'Vous n\'êtes pas un commerçant'], Response::HTTP_BAD_REQUEST);
         }
         $file = $request->files->get('file');
         if (!is_object($file) || !$file->isValid()) {
@@ -42,13 +42,13 @@ class ProfileController extends Controller {
         $secret = getenv('AWS_SECRET_ACCESS_KEY')? getenv('AWS_SECRET_ACCESS_KEY') : $secretContent;
         $s3 = S3Client::factory(['key' => $key, 'secret' => $secret]);
         $extention = $file->getClientOriginalExtension();
-        $libelle = 'employeur/photo/' . $user->getLogin() . '.' . $extention;
+        $libelle = 'commercant/photo/' . $user->getLogin() . '.' . $extention;
         $upload = $s3->upload($bucket, $libelle, fopen($_FILES['file']['tmp_name'], 'rb'), 'public-read');
         $photo = $upload->get('ObjectURL');
-        $employeur->setPhoto($photo);
-        $employeur->setUser($user);
-        $user->setEmployeur($employeur);
-        $em->persist($employeur);
+        $commercant->setPhoto($photo);
+        $commercant->setUser($user);
+        $user->setCommercant($commercant);
+        $em->persist($commercant);
         $em->persist($user);
         $em->flush();
         return $user;

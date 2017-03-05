@@ -3,7 +3,9 @@
 namespace AuthBundle\Entity;
 
 use AuthBundle\Entity\AuthToken;
+use CommercantBundle\Entity\Commercant;
 use Doctrine\ORM\Mapping as ORM;
+use EmployeurBundle\Entity\Employeur;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -78,6 +80,12 @@ class User implements UserInterface {
      * @var Employeur
      */
     protected $employeur;
+
+    /**
+     * @ORM\OneToOne(targetEntity="CommercantBundle\Entity\Commercant")
+     * @var Commercant
+     */
+    protected $commercant;
 
     protected $plainPassword;
 
@@ -305,12 +313,11 @@ class User implements UserInterface {
     /**
      * Set employeur
      *
-     * @param \EmployeurBundle\Entity\Employeur $employeur
+     * @param Employeur $employeur
      *
      * @return User
      */
-    public function setEmployeur(\EmployeurBundle\Entity\Employeur $employeur = null)
-    {
+    public function setEmployeur(Employeur $employeur = null) {
         $this->employeur = $employeur;
 
         return $this;
@@ -319,10 +326,31 @@ class User implements UserInterface {
     /**
      * Get employeur
      *
-     * @return \EmployeurBundle\Entity\Employeur
+     * @return Employeur
      */
-    public function getEmployeur()
-    {
+    public function getEmployeur() {
         return $this->employeur;
+    }
+
+    /**
+     * Set commercant
+     *
+     * @param Commercant $commercant
+     *
+     * @return User
+     */
+    public function setCommercant(Commercant $commercant = null) {
+        $this->commercant = $commercant;
+
+        return $this;
+    }
+
+    /**
+     * Get commercant
+     *
+     * @return Commercant
+     */
+    public function getCommercant() {
+        return $this->commercant;
     }
 }

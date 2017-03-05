@@ -21,7 +21,7 @@ security:
             provider: auth_token_user_provider
             anonymous: ~
 
-#    access_control:
-#        - { path: ^/employe, role: ROLE_EMPLOYE }
-#        - { path: ^/employeur, role: ROLE_EMPLOYEUR }
-#        - { path: ^/commercant, role: ROLE_COMMERCANT }
+    access_control:
+        - { path: ^/employe, role: ROLE_EMPLOYE }
+        - { path: ^/employeur, role: ROLE_EMPLOYEUR }
+        - { path: ^/commercant, role: ROLE_COMMERCANT }

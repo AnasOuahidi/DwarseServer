@@ -1,22 +1,22 @@
 <?php
 
-namespace EmployeurBundle\Entity;
+namespace CommercantBundle\Entity;
 
 use AuthBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Employeur
+ * Commercant
  *
- * @ORM\Entity(repositoryClass="EmployeurBundle\Repository\EmployeurRepository")
- * @ORM\Table(name="employeurs",
- *      uniqueConstraints={@ORM\UniqueConstraint(name="employeurs_libelle_unique", columns={"libelle"})},
- *      uniqueConstraints={@ORM\UniqueConstraint(name="employeurs_siret_unique", columns={"siret"})},
- *      uniqueConstraints={@ORM\UniqueConstraint(name="employeurs_photo_unique", columns={"photo"})},
- *      uniqueConstraints={@ORM\UniqueConstraint(name="employeurs_numTel_unique", columns={"numTel"})}
+ * @ORM\Entity(repositoryClass="CommercantBundle\Repository\CommercantRepository")
+ * @ORM\Table(name="commercants",
+ *      uniqueConstraints={@ORM\UniqueConstraint(name="commercants_libelle_unique", columns={"libelle"})},
+ *      uniqueConstraints={@ORM\UniqueConstraint(name="commercants_siret_unique", columns={"siret"})},
+ *      uniqueConstraints={@ORM\UniqueConstraint(name="commercants_photo_unique", columns={"photo"})},
+ *      uniqueConstraints={@ORM\UniqueConstraint(name="commercants_numTel_unique", columns={"numTel"})}
  * )
  */
-class Employeur {
+class Commercant {
     /**
      * @var int
      *
@@ -57,6 +57,13 @@ class Employeur {
     /**
      * @var string
      *
+     * @ORM\Column(name="iban", type="string", length=255)
+     */
+    private $iban;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="siret", type="string", length=255, unique=true)
      */
     private $siret;
@@ -88,7 +95,6 @@ class Employeur {
      */
     private $user;
 
-
     /**
      * Get id
      *
@@ -103,7 +109,7 @@ class Employeur {
      *
      * @param string $libelle
      *
-     * @return Employeur
+     * @return Commercant
      */
     public function setLibelle($libelle) {
         $this->libelle = $libelle;
@@ -125,7 +131,7 @@ class Employeur {
      *
      * @param string $nom
      *
-     * @return Employeur
+     * @return Commercant
      */
     public function setNom($nom) {
         $this->nom = $nom;
@@ -147,7 +153,7 @@ class Employeur {
      *
      * @param string $prenom
      *
-     * @return Employeur
+     * @return Commercant
      */
     public function setPrenom($prenom) {
         $this->prenom = $prenom;
@@ -169,7 +175,7 @@ class Employeur {
      *
      * @param string $adresse
      *
-     * @return Employeur
+     * @return Commercant
      */
     public function setAdresse($adresse) {
         $this->adresse = $adresse;
@@ -187,11 +193,33 @@ class Employeur {
     }
 
     /**
+     * Set iban
+     *
+     * @param string $iban
+     *
+     * @return Commercant
+     */
+    public function setIban($iban) {
+        $this->iban = $iban;
+
+        return $this;
+    }
+
+    /**
+     * Get iban
+     *
+     * @return string
+     */
+    public function getIban() {
+        return $this->iban;
+    }
+
+    /**
      * Set siret
      *
      * @param string $siret
      *
-     * @return Employeur
+     * @return Commercant
      */
     public function setSiret($siret) {
         $this->siret = $siret;
@@ -213,7 +241,7 @@ class Employeur {
      *
      * @param string $numTel
      *
-     * @return Employeur
+     * @return Commercant
      */
     public function setNumTel($numTel) {
         $this->numTel = $numTel;
@@ -235,7 +263,7 @@ class Employeur {
      *
      * @param string $civilite
      *
-     * @return Employeur
+     * @return Commercant
      */
     public function setCivilite($civilite) {
         $this->civilite = $civilite;
@@ -257,7 +285,7 @@ class Employeur {
      *
      * @param string $photo
      *
-     * @return Employeur
+     * @return Commercant
      */
     public function setPhoto($photo) {
         $this->photo = $photo;
@@ -279,7 +307,7 @@ class Employeur {
      *
      * @param User $user
      *
-     * @return Employeur
+     * @return Commercant
      */
     public function setUser(User $user = null) {
         $this->user = $user;

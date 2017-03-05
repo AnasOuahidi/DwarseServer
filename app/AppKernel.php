@@ -19,6 +19,7 @@ class AppKernel extends Kernel {
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new AuthBundle\AuthBundle(),
             new EmployeurBundle\EmployeurBundle(),
+            new CommercantBundle\CommercantBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

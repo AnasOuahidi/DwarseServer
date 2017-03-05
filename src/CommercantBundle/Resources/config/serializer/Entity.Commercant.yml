@@ -1,21 +1,23 @@
-AuthBundle\Entity\User:
+CommercantBundle\Entity\Commercant:
     exclusion_policy: none
     properties:
         id:
             groups: ['user']
-        login:
+        libelle:
             groups: ['user']
-        email:
+        nom:
             groups: ['user']
-        role:
+        iban:
             groups: ['user']
-        confirmed:
+        prenom:
             groups: ['user']
-        confirmationToken:
+        adresse:
             groups: ['user']
-        authToken:
+        siret:
             groups: ['user']
-        employeur:
+        numTel:
             groups: ['user']
-        commercant:
+        civilite:
+            groups: ['user']
+        photo:
             groups: ['user']
