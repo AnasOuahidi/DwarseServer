@@ -19,3 +19,5 @@ AuthBundle\Entity\User:
             groups: ['user']
         commercant:
             groups: ['user']
+        employe:
+            groups: ['user']

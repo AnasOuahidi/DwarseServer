@@ -46,7 +46,7 @@ AuthBundle\Entity\Credentials:
                 message: Veuillez entrer un login correct
         password:
             - NotBlank:
-                message: Le champs login ne doit pas être vide
+                message: Le champs mot de passe ne doit pas être vide
             - Type:
                 type: string
                 message: Veuillez entrer un mot de passe correct

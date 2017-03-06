@@ -36,13 +36,22 @@ class LoadUsersData extends AbstractFixture implements OrderedFixtureInterface, 
         $employe = $this->addUser('employe', 'employe@dwarse.fr', 'ROLE_EMPLOYE');
         $employeur = $this->addUser('employeur', 'employeur@dwarse.fr', 'ROLE_EMPLOYEUR');
         $commercant = $this->addUser('commercant', 'commercant@dwarse.fr', 'ROLE_COMMERCANT');
+        $employe1 = $this->addUser('employe1', 'employe1@dwarse.fr', 'ROLE_EMPLOYE');
+        $employe2 = $this->addUser('employe2', 'employe2@dwarse.fr', 'ROLE_EMPLOYE');
+        $employe3 = $this->addUser('employe3', 'employe3@dwarse.fr', 'ROLE_EMPLOYE');
         $manager->persist($employe);
         $manager->persist($employeur);
         $manager->persist($commercant);
+        $manager->persist($employe1);
+        $manager->persist($employe2);
+        $manager->persist($employe3);
         $manager->flush();
-        $this->addReference('employe', $employe);
-        $this->addReference('employeur', $employeur);
-        $this->addReference('commercant', $commercant);
+        $this->addReference('employeUser', $employe);
+        $this->addReference('employeurUser', $employeur);
+        $this->addReference('commercantUser', $commercant);
+        $this->addReference('employeUser1', $employe1);
+        $this->addReference('employeUser2', $employe2);
+        $this->addReference('employeUser3', $employe3);
     }
 
     public function getOrder() {

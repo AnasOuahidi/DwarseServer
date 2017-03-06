@@ -20,6 +20,7 @@ class AppKernel extends Kernel {
             new AuthBundle\AuthBundle(),
             new EmployeurBundle\EmployeurBundle(),
             new CommercantBundle\CommercantBundle(),
+            new EmployeBundle\EmployeBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

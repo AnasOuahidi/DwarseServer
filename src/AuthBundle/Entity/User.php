@@ -5,6 +5,7 @@ namespace AuthBundle\Entity;
 use AuthBundle\Entity\AuthToken;
 use CommercantBundle\Entity\Commercant;
 use Doctrine\ORM\Mapping as ORM;
+use EmployeBundle\Entity\Employe;
 use EmployeurBundle\Entity\Employeur;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -86,6 +87,12 @@ class User implements UserInterface {
      * @var Commercant
      */
     protected $commercant;
+
+    /**
+     * @ORM\OneToOne(targetEntity="EmployeBundle\Entity\Employe")
+     * @var Employe
+     */
+    protected $employe;
 
     protected $plainPassword;
 
@@ -352,5 +359,27 @@ class User implements UserInterface {
      */
     public function getCommercant() {
         return $this->commercant;
+    }
+
+    /**
+     * Set employe
+     *
+     * @param Employe $employe
+     *
+     * @return User
+     */
+    public function setEmploye(Employe $employe = null) {
+        $this->employe = $employe;
+
+        return $this;
+    }
+
+    /**
+     * Get employe
+     *
+     * @return Employe
+     */
+    public function getEmploye() {
+        return $this->employe;
     }
 }

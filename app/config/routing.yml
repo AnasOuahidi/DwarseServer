@@ -13,12 +13,22 @@ auth:
     resource: AuthBundle\Controller\AuthTokenController
     prefix:   /auth
 
-employeProfile:
+employeurProfile:
     type:     rest
     resource: EmployeurBundle\Controller\ProfileController
+    prefix:   /employeur
+
+employeurEmploye:
+    type:     rest
+    resource: EmployeurBundle\Controller\EmployeController
     prefix:   /employeur
 
 commercantProfile:
     type:     rest
     resource: CommercantBundle\Controller\ProfileController
     prefix:   /commercant
+
+employeProfile:
+    type:     rest
+    resource: EmployeBundle\Controller\ProfileController
+    prefix:   /employe

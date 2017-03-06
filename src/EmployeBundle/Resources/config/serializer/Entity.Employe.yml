@@ -1,0 +1,17 @@
+EmployeBundle\Entity\Employe:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['user']
+        nom:
+            groups: ['user']
+        prenom:
+            groups: ['user']
+        dateNaissance:
+            groups: ['user']
+        numTel:
+            groups: ['user']
+        civilite:
+            groups: ['user']
+        photo:
+            groups: ['user']

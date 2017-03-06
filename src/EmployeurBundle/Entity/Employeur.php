@@ -3,7 +3,9 @@
 namespace EmployeurBundle\Entity;
 
 use AuthBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use EmployeBundle\Entity\Employe;
 
 /**
  * Employeur
@@ -87,6 +89,11 @@ class Employeur {
      * @var User
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="EmployeBundle\Entity\Employe", mappedBy="employeurs")
+     */
+    private $employes;
 
 
     /**
@@ -294,5 +301,46 @@ class Employeur {
      */
     public function getUser() {
         return $this->user;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->employes = new ArrayCollection();
+    }
+
+    /**
+     * Add employe
+     *
+     * @param Employe $employe
+     *
+     * @return Employeur
+     */
+    public function addEmploye(Employe $employe)
+    {
+        $this->employes[] = $employe;
+
+        return $this;
+    }
+
+    /**
+     * Remove employe
+     *
+     * @param Employe $employe
+     */
+    public function removeEmploye(Employe $employe)
+    {
+        $this->employes->removeElement($employe);
+    }
+
+    /**
+     * Get employes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEmployes()
+    {
+        return $this->employes;
     }
 }

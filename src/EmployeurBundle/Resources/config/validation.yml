@@ -31,7 +31,7 @@ EmployeurBundle\Entity\Employeur:
                 max: 14
         numTel:
             - NotBlank:
-                message: 'Le champs siret ne doit pas être vide'
+                message: 'Le champs numéro de téléphone ne doit pas être vide'
             - Length:
                 minMessage: 'Le format du numéro de téléphone est invalide'
                 maxMessage: 'Le format du numéro de téléphone est invalide'
@@ -43,4 +43,25 @@ EmployeurBundle\Entity\Employeur:
             - Choice:
                 choices: [Mr., Mme., Mlle.]
                 message: 'Veuillez choisir une civilite correcte'
+                strict: true
+
+EmployeurBundle\Entity\Compte:
+    properties:
+        login:
+            - NotBlank:
+                message: Le champs login ne doit pas être vide
+            - Type:
+                type: string
+                message: Veuillez entrer un login correct
+        email:
+            - NotBlank:
+                message: Le champs email ne doit pas être vide
+            - Email:
+                message: Veuillez entrer un email correct
+        categorie:
+            - NotBlank:
+                message: Le champs categorie ne doit pas être vide
+            - Choice:
+                choices: [Responsable, Cadre, Stagiaire]
+                message: Veuillez choisir une categorie correcte
                 strict: true

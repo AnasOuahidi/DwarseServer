@@ -22,6 +22,6 @@ security:
             anonymous: ~
 
     access_control:
-        - { path: ^/employe, role: ROLE_EMPLOYE }
         - { path: ^/employeur, role: ROLE_EMPLOYEUR }
+        - { path: ^/employe, role: ROLE_EMPLOYE }
         - { path: ^/commercant, role: ROLE_COMMERCANT }
