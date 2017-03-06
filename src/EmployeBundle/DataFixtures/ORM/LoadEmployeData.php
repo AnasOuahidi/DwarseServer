@@ -49,7 +49,7 @@ class LoadEmployeData extends AbstractFixture implements OrderedFixtureInterface
         $user3 = $this->getReference('employeUser3');
         $employe = $this->addEmploye('employe', 'Mr.', 'https://s3.amazonaws.com/dwarse/employe/photo/employe.png'
             , '1234567890', $user, $employeur);
-        $employe1 = $this->addEmploye('employe1', 'Mr.', 'https://s3.amazonaws.com/dwarse/employ/photo/employe1.png'
+        $employe1 = $this->addEmploye('employe1', 'Mr.', 'https://s3.amazonaws.com/dwarse/employe/photo/employe1.png'
             , '1234567891', $user, $employeur);
         $employe2 = $this->addEmploye('employe2', 'Mr.', 'https://s3.amazonaws.com/dwarse/employe/photo/employe2.png'
             , '1234567892', $user, $employeur);
