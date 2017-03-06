@@ -39,9 +39,9 @@ class Employe {
     private $prenom;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="dateNaissance", type="string", length=255, nullable=true)
+     * @ORM\Column(name="dateNaissance", type="datetime", length=255, nullable=true)
      */
     private $dateNaissance;
 
