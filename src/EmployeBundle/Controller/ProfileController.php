@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Aws\S3\S3Client;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 
 class ProfileController extends Controller {
