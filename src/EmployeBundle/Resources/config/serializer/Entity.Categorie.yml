@@ -1,0 +1,9 @@
+EmployeBundle\Entity\Categorie:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['transaction']
+        libelle:
+            groups: ['transaction']
+        credit:
+            groups: ['transaction']

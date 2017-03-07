@@ -2,11 +2,11 @@ EmployeBundle\Entity\Employe:
     exclusion_policy: none
     properties:
         id:
-            groups: ['user']
+            groups: ['user', 'transaction']
         nom:
-            groups: ['user']
+            groups: ['user', 'transaction']
         prenom:
-            groups: ['user']
+            groups: ['user', 'transaction']
         dateNaissance:
             groups: ['user']
         numTel:

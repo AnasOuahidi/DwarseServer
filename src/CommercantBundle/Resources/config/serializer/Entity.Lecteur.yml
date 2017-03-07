@@ -1,0 +1,11 @@
+CommercantBundle\Entity\Lecteur:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['transaction']
+        numero:
+            groups: ['transaction']
+        solde:
+            groups: ['transaction']
+        commercant:
+            groups: ['transaction']

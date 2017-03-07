@@ -28,7 +28,7 @@ class ConsultationController extends Controller {
     }
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_OK)
+     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"transactions"})
      * @Rest\Get("/historique")
      */
     public function ConsultationHistoriqueAction(Request $request) {
@@ -41,7 +41,7 @@ class ConsultationController extends Controller {
         if ($lecteur == null) {
             return View::create(['message' => 'Vous n\'avez pas de lecteur'], Response::HTTP_BAD_REQUEST);
         }
-        return $lecteur->getTransactions();
+        return $lecteur->getTransactions()[0];
     }
 
 }

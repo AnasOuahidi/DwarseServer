@@ -2,9 +2,9 @@ CommercantBundle\Entity\Commercant:
     exclusion_policy: none
     properties:
         id:
-            groups: ['user']
+            groups: ['user', 'transaction']
         libelle:
-            groups: ['user']
+            groups: ['user', 'transaction']
         nom:
             groups: ['user']
         iban:

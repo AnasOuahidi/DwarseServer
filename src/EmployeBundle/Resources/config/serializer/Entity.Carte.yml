@@ -1,0 +1,15 @@
+EmployeBundle\Entity\Carte:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['transaction']
+        numero:
+            groups: ['transaction']
+        solde:
+            groups: ['transaction']
+        opposed:
+            groups: ['transaction']
+        categorie:
+            groups: ['transaction']
+        employe:
+            groups: ['transaction']
