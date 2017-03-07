@@ -18,14 +18,14 @@ class LoadEmployeData extends AbstractFixture implements OrderedFixtureInterface
         $this->container = $container;
     }
 
-    private function addEmploye($nom, $civilite, $photo, $numTel, $user, $employeur) {
+    private function addEmploye($nom, $civilite, $photo, $numTel, $date, $user, $employeur) {
         $employe = new Employe();
         $employe->setNom($nom);
         $employe->setPrenom($nom);
         $employe->setCivilite($civilite);
         $employe->setPhoto($photo);
         $employe->setNumTel($numTel);
-        $employe->setDateNaissance(new \DateTime());
+        $employe->setDateNaissance(new \DateTime($date));
         $employe->setEmployeur($employeur);
         $employe->setUser($user);
         return $employe;
@@ -48,13 +48,13 @@ class LoadEmployeData extends AbstractFixture implements OrderedFixtureInterface
         $user2 = $this->getReference('employeUser2');
         $user3 = $this->getReference('employeUser3');
         $employe = $this->addEmploye('employe', 'Mr.', 'https://s3.amazonaws.com/dwarse/employe/photo/employe.png'
-            , '1234567890', $user, $employeur);
+            , '1234567890', '1970-11-10', $user, $employeur);
         $employe1 = $this->addEmploye('employe1', 'Mr.', 'https://s3.amazonaws.com/dwarse/employe/photo/employe1.png'
-            , '1234567891', $user, $employeur);
+            , '1234567891', '1980-11-15', $user, $employeur);
         $employe2 = $this->addEmploye('employe2', 'Mr.', 'https://s3.amazonaws.com/dwarse/employe/photo/employe2.png'
-            , '1234567892', $user, $employeur);
+            , '1234567892', '1990-11-15', $user, $employeur);
         $employe3 = $this->addEmploye('employe3', 'Mr.', 'https://s3.amazonaws.com/dwarse/employe/photo/employe3.png'
-            , '1234567893', $user, $employeur);
+            , '1234567893', '1993-07-11', $user, $employeur);
         $this->employeToemployeur($manager, $user, $employeur, $employe);
         $this->employeToemployeur($manager, $user1, $employeur, $employe1);
         $this->employeToemployeur($manager, $user2, $employeur, $employe2);

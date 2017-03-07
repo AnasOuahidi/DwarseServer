@@ -10,9 +10,6 @@ EmployeBundle\Entity\Employe:
         prenom:
             - NotBlank:
                 message: 'Le champs prenom ne doit pas être vide'
-        dateNaissance:
-            - NotBlank:
-                message: 'Le champs date de naissance ne doit pas être vide'
         numTel:
             - NotBlank:
                 message: 'Le champs numéro de téléphone ne doit pas être vide'

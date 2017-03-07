@@ -26,10 +26,14 @@ class ProfileController extends Controller {
         }
         $employe = $user->getEmploye();
         $form = $this->createForm(EmployeType::class, $employe);
-        $form->submit($request->request->get('profile'));
+        $profile = $request->request->get('profile');
+        $dateNaissance = new \DateTime($profile['dateNaissance']);
+        unset($profile['dateNaissance']);
+        $form->submit($profile);
         if (!$form->isValid()) {
             return $form;
         }
+        $employe->setDateNaissance($dateNaissance);
         $encoder = $this->get('security.password_encoder');
         $encoded = $encoder->encodePassword($user, $employe->getPassword());
         $user->setPassword($encoded);
