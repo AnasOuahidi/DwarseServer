@@ -96,6 +96,11 @@ class Commercant {
     private $user;
 
     /**
+     * @ORM\OneToOne(targetEntity="CommercantBundle\Entity\Lecteur")
+     * @var Lecteur
+     */
+    private $lecteur;
+    /**
      * Get id
      *
      * @return int
@@ -322,5 +327,29 @@ class Commercant {
      */
     public function getUser() {
         return $this->user;
+    }
+
+    /**
+     * Set lecteur
+     *
+     * @param \CommercantBundle\Entity\Lecteur $lecteur
+     *
+     * @return Commercant
+     */
+    public function setLecteur(\CommercantBundle\Entity\Lecteur $lecteur = null)
+    {
+        $this->lecteur = $lecteur;
+
+        return $this;
+    }
+
+    /**
+     * Get lecteur
+     *
+     * @return \CommercantBundle\Entity\Lecteur
+     */
+    public function getLecteur()
+    {
+        return $this->lecteur;
     }
 }

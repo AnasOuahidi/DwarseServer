@@ -21,6 +21,7 @@ class AppKernel extends Kernel {
             new EmployeurBundle\EmployeurBundle(),
             new CommercantBundle\CommercantBundle(),
             new EmployeBundle\EmployeBundle(),
+            new TransactionBundle\TransactionBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

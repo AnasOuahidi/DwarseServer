@@ -78,6 +78,12 @@ class Employe {
      */
     private $employeur;
 
+    /**
+     * @ORM\OneToOne(targetEntity="EmployeBundle\Entity\Carte")
+     * @var Carte
+     */
+    private $carte;
+
     protected $password;
 
     /**
@@ -283,5 +289,29 @@ class Employe {
      */
     public function setPassword($password) {
         $this->password = $password;
+    }
+
+    /**
+     * Set carte
+     *
+     * @param \EmployeBundle\Entity\Carte $carte
+     *
+     * @return Employe
+     */
+    public function setCarte(\EmployeBundle\Entity\Carte $carte = null)
+    {
+        $this->carte = $carte;
+
+        return $this;
+    }
+
+    /**
+     * Get carte
+     *
+     * @return \EmployeBundle\Entity\Carte
+     */
+    public function getCarte()
+    {
+        return $this->carte;
     }
 }

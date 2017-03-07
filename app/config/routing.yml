@@ -28,6 +28,16 @@ commercantProfile:
     resource: CommercantBundle\Controller\ProfileController
     prefix:   /commercant
 
+commercantConsultation:
+    type:     rest
+    resource: CommercantBundle\Controller\ConsultationController
+    prefix:   /commercant/consultation
+
+employeConsultation:
+    type:     rest
+    resource: EmployeBundle\Controller\ConsultationController
+    prefix:   /employe/consultation
+
 employeProfile:
     type:     rest
     resource: EmployeBundle\Controller\ProfileController
