@@ -31,8 +31,17 @@ class ConsultationController extends Controller {
      * @Rest\View(statusCode=Response::HTTP_OK)
      * @Rest\Get("/historique")
      */
-    public function ConsultationHistoriqueAction() {
-        return [];
+    public function ConsultationHistoriqueAction(Request $request) {
+        $token = $request->query->get("token");
+        $em = $this->get('doctrine.orm.entity_manager');
+        $authToken = $em->getRepository('AuthBundle:AuthToken')->findOneByValue($token);
+        $user = $authToken->getUser();
+        $commercant = $user->getCommercant();
+        $lecteur = $commercant->getLecteur();
+        if ($lecteur == null) {
+            return View::create(['message' => 'Vous n\'avez pas de lecteur'], Response::HTTP_BAD_REQUEST);
+        }
+        return $lecteur->getTransactions();
     }
 
 }

@@ -15,7 +15,7 @@ class ConsultationController extends Controller
      * @Rest\View(statusCode=Response::HTTP_OK)
      * @Rest\Get("/solde")
      */
-    public function ConsultationSoldeAction(Request $request)
+    public function ConsultationSoldesAction(Request $request)
     {
         $token = $request->query->get("token");
         $em = $this->get('doctrine.orm.entity_manager');
@@ -34,7 +34,7 @@ class ConsultationController extends Controller
      * @Rest\View(statusCode=Response::HTTP_OK)
      * @Rest\Get("/historique")
      */
-    public function ConsultationHistoriqueAction()
+    public function ConsultationHistoriquesAction()
     {
 
         return [];
