@@ -28,7 +28,7 @@ class ConsultationController extends Controller {
     }
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"transactions"})
+     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"transaction"})
      * @Rest\Get("/historique")
      */
     public function ConsultationHistoriqueAction(Request $request) {

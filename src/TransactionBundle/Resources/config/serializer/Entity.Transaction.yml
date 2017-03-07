@@ -1,0 +1,13 @@
+TransactionBundle\Entity\Transaction:
+    exclusion_policy: none
+    properties:
+        id:
+            groups: ['transaction']
+        date:
+            groups: ['transaction']
+        montant:
+            groups: ['transaction']
+        carte:
+            groups: ['transaction']
+        lecteur:
+            groups: ['transaction']
