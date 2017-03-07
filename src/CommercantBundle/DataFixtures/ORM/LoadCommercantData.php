@@ -33,7 +33,7 @@ class LoadCommercantData extends AbstractFixture implements OrderedFixtureInterf
 
     public function load(ObjectManager $manager) {
         $user = $this->getReference('commercantUser');
-        $commercant = $this->addCommercant('employeur', 'Mr.', 'https://s3.amazonaws.com/dwarse/commercant/photo/commercant.png'
+        $commercant = $this->addCommercant('commercant', 'Mr.', 'https://s3.amazonaws.com/dwarse/commercant/photo/commercant.png'
             , 'Test', '12345678912345', 'BE68539007547034', '1234567890', $user);
         $manager->persist($commercant);
         $user->setCommercant($commercant);
