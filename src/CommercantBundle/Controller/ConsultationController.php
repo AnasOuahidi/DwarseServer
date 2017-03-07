@@ -41,7 +41,6 @@ class ConsultationController extends Controller {
         if ($lecteur == null) {
             return View::create(['message' => 'Vous n\'avez pas de lecteur'], Response::HTTP_BAD_REQUEST);
         }
-        return $lecteur->getTransactions()[0];
+        return $lecteur->getTransactions();
     }
-
 }
