@@ -48,6 +48,11 @@ employeConsultation:
     resource: EmployeBundle\Controller\ConsultationController
     prefix:   /employe/consultation
 
+employeOpposition:
+    type:     rest
+    resource: EmployeBundle\Controller\OppositionController
+    prefix:   /employe
+
 employeProfile:
     type:     rest
     resource: EmployeBundle\Controller\ProfileController
