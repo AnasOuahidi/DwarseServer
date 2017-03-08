@@ -33,6 +33,11 @@ commercantConsultation:
     resource: CommercantBundle\Controller\ConsultationController
     prefix:   /commercant/consultation
 
+commercantPaiement:
+    type:     rest
+    resource: TransactionBundle\Controller\TransactionController
+    prefix:   /commercant
+
 employeConsultation:
     type:     rest
     resource: EmployeBundle\Controller\ConsultationController

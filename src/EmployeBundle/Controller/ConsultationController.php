@@ -31,14 +31,21 @@ class ConsultationController extends Controller
     }
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_OK)
+     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"transaction"})
      * @Rest\Get("/historique")
      */
-    public function ConsultationHistoriquesAction()
+    public function ConsultationHistoriquesAction(Request $request)
     {
-
-        return [];
-
+        $token = $request->query->get("token");
+        $em = $this->get('doctrine.orm.entity_manager');
+        $authToken = $em->getRepository('AuthBundle:AuthToken')->findOneByValue($token);
+        $user = $authToken->getUser();
+        $employe = $user->getEmploye();
+        $carte = $employe->getCarte();
+        if ($carte == null) {
+            return View::create(['message' => 'Vous n\'avez pas de carte'], Response::HTTP_BAD_REQUEST);
+        }
+        return $carte->getTransactions();
     }
 
 }
