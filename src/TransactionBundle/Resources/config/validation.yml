@@ -15,7 +15,7 @@ TransactionBundle\Entity\VerifTransaction:
             - LessThan:
                 value: 100
                 message: 'Le montant ne peut pas dépasser 100 euros'
-           - LessThan:
+            - GreaterThan:
                 value: 1
                 message: 'Le montant doit être supérieur à 1 euro'
         pin:
@@ -25,9 +25,8 @@ TransactionBundle\Entity\VerifTransaction:
                 type: integer
                 message: 'Veuillez entrer un pin correct'
             - Length:
-                min: 4
+                exactMessage: 'Le pin doit comporter 4 chiffres'
                 minMessage: 'Le pin doit comporter 4 chiffres'
                 maxMessage: 'Le pin doit comporter 4 chiffres'
+                min: 4
                 max: 4
-
-
