@@ -23,6 +23,11 @@ employeurProfile:
     resource: EmployeurBundle\Controller\ProfileController
     prefix:   /employeur
 
+employeurOpposition:
+    type:     rest
+    resource: EmployeurBundle\Controller\OppositionController
+    prefix:   /employeur
+
 commercantProfile:
     type:     rest
     resource: CommercantBundle\Controller\ProfileController
