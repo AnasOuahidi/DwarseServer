@@ -1,13 +1,11 @@
 <?php
-namespace AuthBundle\DataFixtures\ORM;
+namespace EmployeBundle\DataFixtures\ORM;
 
-use AuthBundle\Entity\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use EmployeBundle\Entity\Employe;
-use EmployeurBundle\Entity\Employeur;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

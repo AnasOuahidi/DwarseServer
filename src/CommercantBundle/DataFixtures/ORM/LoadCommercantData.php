@@ -1,5 +1,5 @@
 <?php
-namespace AuthBundle\DataFixtures\ORM;
+namespace CommercantBundle\DataFixtures\ORM;
 
 use CommercantBundle\Entity\Commercant;
 use Doctrine\Common\DataFixtures\AbstractFixture;
