@@ -2,17 +2,19 @@
 
 namespace CommercantBundle\Entity;
 
+use CommercantBundle\Entity\Commercant;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use TransactionBundle\Entity\Transaction;
 
 /**
  * Lecteur
  *
- * @ORM\Table(name="lecteur",
+ * @ORM\Table(name="lecteurs",
  * uniqueConstraints={@ORM\UniqueConstraint(name="Lecteur_Numero_unique", columns={"numero"})})
  * @ORM\Entity(repositoryClass="CommercantBundle\Repository\LecteurRepository")
  */
-class Lecteur
-{
+class Lecteur {
     /**
      * @var int
      *
@@ -52,8 +54,7 @@ class Lecteur
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -64,8 +65,7 @@ class Lecteur
      *
      * @return Lecteur
      */
-    public function setNumero($numero)
-    {
+    public function setNumero($numero) {
         $this->numero = $numero;
 
         return $this;
@@ -76,8 +76,7 @@ class Lecteur
      *
      * @return int
      */
-    public function getNumero()
-    {
+    public function getNumero() {
         return $this->numero;
     }
 
@@ -88,8 +87,7 @@ class Lecteur
      *
      * @return Lecteur
      */
-    public function setSolde($solde)
-    {
+    public function setSolde($solde) {
         $this->solde = $solde;
 
         return $this;
@@ -100,20 +98,18 @@ class Lecteur
      *
      * @return int
      */
-    public function getSolde()
-    {
+    public function getSolde() {
         return $this->solde;
     }
 
     /**
      * Set commercant
      *
-     * @param \CommercantBundle\Entity\Commercant $commercant
+     * @param Commercant $commercant
      *
      * @return Lecteur
      */
-    public function setCommercant(\CommercantBundle\Entity\Commercant $commercant = null)
-    {
+    public function setCommercant(Commercant $commercant = null) {
         $this->commercant = $commercant;
 
         return $this;
@@ -122,29 +118,27 @@ class Lecteur
     /**
      * Get commercant
      *
-     * @return \CommercantBundle\Entity\Commercant
+     * @return Commercant
      */
-    public function getCommercant()
-    {
+    public function getCommercant() {
         return $this->commercant;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
-        $this->transactions = new \Doctrine\Common\Collections\ArrayCollection();
+    public function __construct() {
+        $this->transactions = new ArrayCollection();
     }
 
     /**
      * Add transaction
      *
-     * @param \TransactionBundle\Entity\Transaction $transaction
+     * @param Transaction $transaction
      *
      * @return Lecteur
      */
-    public function addTransaction(\TransactionBundle\Entity\Transaction $transaction)
-    {
+    public function addTransaction(Transaction $transaction) {
         $this->transactions[] = $transaction;
 
         return $this;
@@ -153,10 +147,9 @@ class Lecteur
     /**
      * Remove transaction
      *
-     * @param \TransactionBundle\Entity\Transaction $transaction
+     * @param Transaction $transaction
      */
-    public function removeTransaction(\TransactionBundle\Entity\Transaction $transaction)
-    {
+    public function removeTransaction(Transaction $transaction) {
         $this->transactions->removeElement($transaction);
     }
 
@@ -165,8 +158,7 @@ class Lecteur
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTransactions()
-    {
+    public function getTransactions() {
         return $this->transactions;
     }
 }

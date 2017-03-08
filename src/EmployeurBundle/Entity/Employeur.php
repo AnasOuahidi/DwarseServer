@@ -91,7 +91,7 @@ class Employeur {
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="EmployeBundle\Entity\Employe", mappedBy="employeurs")
+     * @ORM\OneToMany(targetEntity="EmployeBundle\Entity\Employe", mappedBy="employeur")
      */
     private $employes;
 
@@ -302,11 +302,11 @@ class Employeur {
     public function getUser() {
         return $this->user;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->employes = new ArrayCollection();
     }
 
@@ -317,8 +317,7 @@ class Employeur {
      *
      * @return Employeur
      */
-    public function addEmploye(Employe $employe)
-    {
+    public function addEmploye(Employe $employe) {
         $this->employes[] = $employe;
 
         return $this;
@@ -329,8 +328,7 @@ class Employeur {
      *
      * @param Employe $employe
      */
-    public function removeEmploye(Employe $employe)
-    {
+    public function removeEmploye(Employe $employe) {
         $this->employes->removeElement($employe);
     }
 
@@ -339,8 +337,7 @@ class Employeur {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getEmployes()
-    {
+    public function getEmployes() {
         return $this->employes;
     }
 }

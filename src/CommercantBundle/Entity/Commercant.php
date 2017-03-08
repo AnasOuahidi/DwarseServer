@@ -3,6 +3,7 @@
 namespace CommercantBundle\Entity;
 
 use AuthBundle\Entity\User;
+use CommercantBundle\Entity\Lecteur;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -100,6 +101,7 @@ class Commercant {
      * @var Lecteur
      */
     private $lecteur;
+
     /**
      * Get id
      *
@@ -332,12 +334,11 @@ class Commercant {
     /**
      * Set lecteur
      *
-     * @param \CommercantBundle\Entity\Lecteur $lecteur
+     * @param Lecteur $lecteur
      *
      * @return Commercant
      */
-    public function setLecteur(\CommercantBundle\Entity\Lecteur $lecteur = null)
-    {
+    public function setLecteur(Lecteur $lecteur = null) {
         $this->lecteur = $lecteur;
 
         return $this;
@@ -346,10 +347,9 @@ class Commercant {
     /**
      * Get lecteur
      *
-     * @return \CommercantBundle\Entity\Lecteur
+     * @return Lecteur
      */
-    public function getLecteur()
-    {
+    public function getLecteur() {
         return $this->lecteur;
     }
 }

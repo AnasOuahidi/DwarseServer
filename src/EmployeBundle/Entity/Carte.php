@@ -2,16 +2,19 @@
 
 namespace EmployeBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use EmployeBundle\Entity\Categorie;
+use EmployeBundle\Entity\Employe;
+use TransactionBundle\Entity\Transaction;
 
 /**
  * Carte
  *
- * @ORM\Table(name="carte")
+ * @ORM\Table(name="cartes")
  * @ORM\Entity(repositoryClass="EmployeBundle\Repository\CarteRepository")
  */
-class Carte
-{
+class Carte {
     /**
      * @var int
      *
@@ -56,7 +59,7 @@ class Carte
     private $employe;
 
     /**
-     * @ORM\ManyToOne(targetEntity="EmployeBundle\Entity\Categorie", inversedBy="carte")
+     * @ORM\ManyToOne(targetEntity="EmployeBundle\Entity\Categorie", inversedBy="cartes")
      * @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
      */
     private $categorie;
@@ -71,8 +74,7 @@ class Carte
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -83,8 +85,7 @@ class Carte
      *
      * @return Carte
      */
-    public function setNumero($numero)
-    {
+    public function setNumero($numero) {
         $this->numero = $numero;
 
         return $this;
@@ -95,8 +96,7 @@ class Carte
      *
      * @return int
      */
-    public function getNumero()
-    {
+    public function getNumero() {
         return $this->numero;
     }
 
@@ -107,8 +107,7 @@ class Carte
      *
      * @return Carte
      */
-    public function setSolde($solde)
-    {
+    public function setSolde($solde) {
         $this->solde = $solde;
 
         return $this;
@@ -119,8 +118,7 @@ class Carte
      *
      * @return float
      */
-    public function getSolde()
-    {
+    public function getSolde() {
         return $this->solde;
     }
 
@@ -131,8 +129,7 @@ class Carte
      *
      * @return Carte
      */
-    public function setOpposed($opposed)
-    {
+    public function setOpposed($opposed) {
         $this->opposed = $opposed;
 
         return $this;
@@ -143,8 +140,7 @@ class Carte
      *
      * @return bool
      */
-    public function getOpposed()
-    {
+    public function getOpposed() {
         return $this->opposed;
     }
 
@@ -155,8 +151,7 @@ class Carte
      *
      * @return Carte
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -167,20 +162,18 @@ class Carte
      *
      * @return int
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
     /**
      * Set employe
      *
-     * @param \EmployeBundle\Entity\Employe $employe
+     * @param Employe $employe
      *
      * @return Carte
      */
-    public function setEmploye(\EmployeBundle\Entity\Employe $employe = null)
-    {
+    public function setEmploye(Employe $employe = null) {
         $this->employe = $employe;
 
         return $this;
@@ -189,22 +182,20 @@ class Carte
     /**
      * Get employe
      *
-     * @return \EmployeBundle\Entity\Employe
+     * @return Employe
      */
-    public function getEmploye()
-    {
+    public function getEmploye() {
         return $this->employe;
     }
 
     /**
      * Set categorie
      *
-     * @param \EmployeBundle\Entity\Categorie $categorie
+     * @param Categorie $categorie
      *
      * @return Carte
      */
-    public function setCategorie(\EmployeBundle\Entity\Categorie $categorie = null)
-    {
+    public function setCategorie(Categorie $categorie = null) {
         $this->categorie = $categorie;
 
         return $this;
@@ -213,29 +204,27 @@ class Carte
     /**
      * Get categorie
      *
-     * @return \EmployeBundle\Entity\Categorie
+     * @return Categorie
      */
-    public function getCategorie()
-    {
+    public function getCategorie() {
         return $this->categorie;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
-        $this->transactions = new \Doctrine\Common\Collections\ArrayCollection();
+    public function __construct() {
+        $this->transactions = new ArrayCollection();
     }
 
     /**
      * Add transaction
      *
-     * @param \TransactionBundle\Entity\Transaction $transaction
+     * @param Transaction $transaction
      *
      * @return Carte
      */
-    public function addTransaction(\TransactionBundle\Entity\Transaction $transaction)
-    {
+    public function addTransaction(Transaction $transaction) {
         $this->transactions[] = $transaction;
 
         return $this;
@@ -244,10 +233,9 @@ class Carte
     /**
      * Remove transaction
      *
-     * @param \TransactionBundle\Entity\Transaction $transaction
+     * @param Transaction $transaction
      */
-    public function removeTransaction(\TransactionBundle\Entity\Transaction $transaction)
-    {
+    public function removeTransaction(Transaction $transaction) {
         $this->transactions->removeElement($transaction);
     }
 
@@ -256,8 +244,7 @@ class Carte
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTransactions()
-    {
+    public function getTransactions() {
         return $this->transactions;
     }
 }

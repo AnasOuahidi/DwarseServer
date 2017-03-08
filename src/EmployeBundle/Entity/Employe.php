@@ -2,7 +2,9 @@
 
 namespace EmployeBundle\Entity;
 
+use AuthBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use EmployeBundle\Entity\Carte;
 use EmployeurBundle\Entity\Employeur;
 
 /**
@@ -212,8 +214,7 @@ class Employe {
      *
      * @return Employe
      */
-    public function setPhoto($photo)
-    {
+    public function setPhoto($photo) {
         $this->photo = $photo;
 
         return $this;
@@ -224,20 +225,18 @@ class Employe {
      *
      * @return string
      */
-    public function getPhoto()
-    {
+    public function getPhoto() {
         return $this->photo;
     }
 
     /**
      * Set user
      *
-     * @param \AuthBundle\Entity\User $user
+     * @param User $user
      *
      * @return Employe
      */
-    public function setUser(\AuthBundle\Entity\User $user = null)
-    {
+    public function setUser(User $user = null) {
         $this->user = $user;
 
         return $this;
@@ -246,10 +245,9 @@ class Employe {
     /**
      * Get user
      *
-     * @return \AuthBundle\Entity\User
+     * @return User
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
 
@@ -260,8 +258,7 @@ class Employe {
      *
      * @return Employe
      */
-    public function setEmployeur(Employeur $employeur = null)
-    {
+    public function setEmployeur(Employeur $employeur = null) {
         $this->employeur = $employeur;
 
         return $this;
@@ -272,8 +269,7 @@ class Employe {
      *
      * @return Employeur
      */
-    public function getEmployeur()
-    {
+    public function getEmployeur() {
         return $this->employeur;
     }
 
@@ -294,12 +290,11 @@ class Employe {
     /**
      * Set carte
      *
-     * @param \EmployeBundle\Entity\Carte $carte
+     * @param Carte $carte
      *
      * @return Employe
      */
-    public function setCarte(\EmployeBundle\Entity\Carte $carte = null)
-    {
+    public function setCarte(Carte $carte = null) {
         $this->carte = $carte;
 
         return $this;
@@ -308,10 +303,9 @@ class Employe {
     /**
      * Get carte
      *
-     * @return \EmployeBundle\Entity\Carte
+     * @return Carte
      */
-    public function getCarte()
-    {
+    public function getCarte() {
         return $this->carte;
     }
 }

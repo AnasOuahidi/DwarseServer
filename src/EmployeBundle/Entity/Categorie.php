@@ -2,16 +2,17 @@
 
 namespace EmployeBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use EmployeBundle\Entity\Carte;
 
 /**
  * Categorie
  *
- * @ORM\Table(name="categorie")
+ * @ORM\Table(name="categories")
  * @ORM\Entity(repositoryClass="EmployeBundle\Repository\CategorieRepository")
  */
-class Categorie
-{
+class Categorie {
     /**
      * @var int
      *
@@ -45,8 +46,7 @@ class Categorie
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -57,8 +57,7 @@ class Categorie
      *
      * @return Categorie
      */
-    public function setLibelle($libelle)
-    {
+    public function setLibelle($libelle) {
         $this->libelle = $libelle;
 
         return $this;
@@ -69,8 +68,7 @@ class Categorie
      *
      * @return string
      */
-    public function getLibelle()
-    {
+    public function getLibelle() {
         return $this->libelle;
     }
 
@@ -81,8 +79,7 @@ class Categorie
      *
      * @return Categorie
      */
-    public function setCredit($credit)
-    {
+    public function setCredit($credit) {
         $this->credit = $credit;
 
         return $this;
@@ -93,27 +90,25 @@ class Categorie
      *
      * @return float
      */
-    public function getCredit()
-    {
+    public function getCredit() {
         return $this->credit;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
-        $this->cartes = new \Doctrine\Common\Collections\ArrayCollection();
+    public function __construct() {
+        $this->cartes = new ArrayCollection();
     }
 
     /**
      * Add carte
      *
-     * @param \EmployeBundle\Entity\Carte $carte
+     * @param Carte $carte
      *
      * @return Categorie
      */
-    public function addCarte(\EmployeBundle\Entity\Carte $carte)
-    {
+    public function addCarte(Carte $carte) {
         $this->cartes[] = $carte;
 
         return $this;
@@ -122,10 +117,9 @@ class Categorie
     /**
      * Remove carte
      *
-     * @param \EmployeBundle\Entity\Carte $carte
+     * @param Carte $carte
      */
-    public function removeCarte(\EmployeBundle\Entity\Carte $carte)
-    {
+    public function removeCarte(Carte $carte) {
         $this->cartes->removeElement($carte);
     }
 
@@ -134,8 +128,7 @@ class Categorie
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCartes()
-    {
+    public function getCartes() {
         return $this->cartes;
     }
 }

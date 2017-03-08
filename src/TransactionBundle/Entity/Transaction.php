@@ -2,16 +2,17 @@
 
 namespace TransactionBundle\Entity;
 
+use CommercantBundle\Entity\Lecteur;
 use Doctrine\ORM\Mapping as ORM;
+use EmployeBundle\Entity\Carte;
 
 /**
  * Transaction
  *
- * @ORM\Table(name="transaction")
+ * @ORM\Table(name="transactions")
  * @ORM\Entity(repositoryClass="TransactionBundle\Repository\TransactionRepository")
  */
-class Transaction
-{
+class Transaction {
     /**
      * @var int
      *
@@ -36,13 +37,13 @@ class Transaction
     private $montant;
 
     /**
-     * @ORM\ManyToOne(targetEntity="EmployeBundle\Entity\Carte", inversedBy="transaction")
+     * @ORM\ManyToOne(targetEntity="EmployeBundle\Entity\Carte", inversedBy="transactions")
      * @ORM\JoinColumn(name="carte_id", referencedColumnName="id")
      */
     private $carte;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CommercantBundle\Entity\Lecteur", inversedBy="transaction")
+     * @ORM\ManyToOne(targetEntity="CommercantBundle\Entity\Lecteur", inversedBy="transactions")
      * @ORM\JoinColumn(name="lecteur_id", referencedColumnName="id")
      */
     private $lecteur;
@@ -52,8 +53,7 @@ class Transaction
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -64,8 +64,7 @@ class Transaction
      *
      * @return Transaction
      */
-    public function setDate($date)
-    {
+    public function setDate($date) {
         $this->date = $date;
 
         return $this;
@@ -76,8 +75,7 @@ class Transaction
      *
      * @return \DateTime
      */
-    public function getDate()
-    {
+    public function getDate() {
         return $this->date;
     }
 
@@ -88,8 +86,7 @@ class Transaction
      *
      * @return Transaction
      */
-    public function setMontant($montant)
-    {
+    public function setMontant($montant) {
         $this->montant = $montant;
 
         return $this;
@@ -100,20 +97,18 @@ class Transaction
      *
      * @return float
      */
-    public function getMontant()
-    {
+    public function getMontant() {
         return $this->montant;
     }
 
     /**
      * Set carte
      *
-     * @param \EmployeBundle\Entity\Carte $carte
+     * @param Carte $carte
      *
      * @return Transaction
      */
-    public function setCarte(\EmployeBundle\Entity\Carte $carte = null)
-    {
+    public function setCarte(Carte $carte = null) {
         $this->carte = $carte;
 
         return $this;
@@ -122,22 +117,20 @@ class Transaction
     /**
      * Get carte
      *
-     * @return \EmployeBundle\Entity\Carte
+     * @return Carte
      */
-    public function getCarte()
-    {
+    public function getCarte() {
         return $this->carte;
     }
 
     /**
      * Set lecteur
      *
-     * @param \CommercantBundle\Entity\Lecteur $lecteur
+     * @param Lecteur $lecteur
      *
      * @return Transaction
      */
-    public function setLecteur(\CommercantBundle\Entity\Lecteur $lecteur = null)
-    {
+    public function setLecteur(Lecteur $lecteur = null) {
         $this->lecteur = $lecteur;
 
         return $this;
@@ -146,10 +139,9 @@ class Transaction
     /**
      * Get lecteur
      *
-     * @return \CommercantBundle\Entity\Lecteur
+     * @return Lecteur
      */
-    public function getLecteur()
-    {
+    public function getLecteur() {
         return $this->lecteur;
     }
 }
