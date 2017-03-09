@@ -2,14 +2,14 @@ EmployeBundle\Entity\Carte:
     exclusion_policy: none
     properties:
         id:
-            groups: ['transaction']
+            groups: ['user', 'transaction']
         numero:
-            groups: ['transaction']
+            groups: ['user', 'transaction']
         solde:
-            groups: ['transaction']
+            groups: ['user', 'transaction']
         opposed:
-            groups: ['transaction']
+            groups: ['user', 'transaction']
         categorie:
-            groups: ['transaction']
+            groups: ['user', 'transaction']
         employe:
             groups: ['transaction']

@@ -15,3 +15,5 @@ EmployeBundle\Entity\Employe:
             groups: ['user']
         photo:
             groups: ['user']
+        carte:
+            groups: ['user']

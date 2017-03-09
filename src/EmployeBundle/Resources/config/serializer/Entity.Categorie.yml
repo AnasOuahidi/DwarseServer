@@ -2,8 +2,9 @@ EmployeBundle\Entity\Categorie:
     exclusion_policy: none
     properties:
         id:
-            groups: ['transaction']
+            groups: ['user', 'transaction']
         libelle:
-            groups: ['transaction']
+            groups: ['user', 'transaction']
         credit:
-            groups: ['transaction']
+            groups: ['user', 'transaction']
+    
