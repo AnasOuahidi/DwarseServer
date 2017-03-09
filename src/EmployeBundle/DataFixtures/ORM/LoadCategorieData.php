@@ -24,9 +24,9 @@ class LoadCategorieData extends AbstractFixture implements OrderedFixtureInterfa
     }
 
     public function load(ObjectManager $manager) {
-        $resonsable = $this->addCategorie('Responsable', 350);
-        $cadre = $this->addCategorie('Cadre', 250);
-        $stagiaire = $this->addCategorie('Stagiaire', 150);
+        $resonsable = $this->addCategorie('Responsable', 360);
+        $cadre = $this->addCategorie('Cadre', 270);
+        $stagiaire = $this->addCategorie('Stagiaire', 180);
         $manager->persist($resonsable);
         $manager->persist($cadre);
         $manager->persist($stagiaire);
