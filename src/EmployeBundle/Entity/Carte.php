@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use EmployeBundle\Entity\Categorie;
 use EmployeBundle\Entity\Employe;
+use Symfony\Component\Security\Core\User\UserInterface;
 use TransactionBundle\Entity\Transaction;
 
 /**
@@ -14,7 +15,7 @@ use TransactionBundle\Entity\Transaction;
  * @ORM\Table(name="cartes")
  * @ORM\Entity(repositoryClass="EmployeBundle\Repository\CarteRepository")
  */
-class Carte {
+class Carte implements UserInterface {
     /**
      * @var int
      *
@@ -27,7 +28,7 @@ class Carte {
     /**
      * @var int
      *
-     * @ORM\Column(name="numero", type="integer", unique=true)
+     * @ORM\Column(name="numero", type="string", length=255, unique=false)
      */
     private $numero;
 
@@ -48,7 +49,7 @@ class Carte {
     /**
      * @var int
      *
-     * @ORM\Column(name="password", type="integer")
+     * @ORM\Column(name="password", type="string", length=255, unique=false)
      */
     private $password;
 
@@ -246,5 +247,51 @@ class Carte {
      */
     public function getTransactions() {
         return $this->transactions;
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     * <code>
+     * public function getRoles()
+     * {
+     *     return array('ROLE_USER');
+     * }
+     * </code>
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles() {
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt() {
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername() {
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials() {
     }
 }

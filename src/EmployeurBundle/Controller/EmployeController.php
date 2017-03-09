@@ -3,6 +3,7 @@
 namespace EmployeurBundle\Controller;
 
 use AuthBundle\Entity\User;
+use EmployeBundle\Entity\Carte;
 use EmployeBundle\Entity\Employe;
 use EmployeurBundle\Entity\Compte;
 use EmployeurBundle\Form\CompteType;
@@ -49,11 +50,11 @@ class EmployeController extends Controller {
         $authToken = $em->getRepository('AuthBundle:AuthToken')->findOneByValue($token);
         $userEmployeur = $authToken->getUser();
         $employeur = $userEmployeur->getEmployeur();
-        if ($employeur == null) {
-            return View::create(['message' => 'Créer d\'abord votre profile avant de penser à ajouter des employes!'], Response::HTTP_BAD_REQUEST);
-        }
         if ($userEmployeur->getRole() != 'ROLE_EMPLOYEUR') {
             return View::create(['message' => 'Vous n\'êtes pas un employeur'], Response::HTTP_BAD_REQUEST);
+        }
+        if ($employeur == null) {
+            return View::create(['message' => 'Créer d\'abord votre profile avant de penser à ajouter des employes!'], Response::HTTP_BAD_REQUEST);
         }
         $user = new User();
         $user->setEmail($compte->getEmail());
@@ -69,11 +70,22 @@ class EmployeController extends Controller {
         $employe = new Employe();
         $employe->setUser($user);
         $employe->setEmployeur($employeur);
-        $employeur->addEmploye($employe);
         $user->setEmploye($employe);
+        $category = $em->getRepository('EmployeBundle:Categorie')->findOneByLibelle($compte->getCategorie());
+        $carte = new Carte();
+        $carte->setNumero($this->generateToken(8));
+        $planPin = $this->generatePassword(4);
+        $encoded = $encoder->encodePassword($carte, $planPin);
+        $carte->setPassword($encoded);
+        $carte->setSolde($category->getCredit());
+        $carte->setOpposed(false);
+        $carte->setCategorie($category);
+        $carte->setEmploye($employe);
+        $employe->setCarte($carte);
         $em->persist($user);
         $em->persist($employeur);
         $em->persist($employe);
+        $em->persist($carte);
         $url = 'https://dwarse.github.io/#!/confirm/' . $user->getConfirmationToken();
         $message = \Swift_Message::newInstance();
         $logoImgUrl = $message->embed(\Swift_Image::fromPath('https://s3.amazonaws.com/dwarse/assets/img/logo.png'));
@@ -88,6 +100,7 @@ class EmployeController extends Controller {
                     'loginEmploye' => $user->getLogin(),
                     'loginEmployeur' => $userEmployeur->getLogin(),
                     'password' => $password,
+                    'pin' => $planPin,
                     'url' => $url,
                     'logoImgUrl' => $logoImgUrl,
                     'heartImgUrl' => $heartImgUrl
@@ -100,6 +113,16 @@ class EmployeController extends Controller {
 
     private function generateToken($length) {
         $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        $string = '';
+        $max = strlen($characters) - 1;
+        for ($i = 0; $i < $length; $i++) {
+            $string .= $characters[mt_rand(0, $max)];
+        }
+        return $string;
+    }
+
+    private function generatePassword($length) {
+        $characters = '0123456789';
         $string = '';
         $max = strlen($characters) - 1;
         for ($i = 0; $i < $length; $i++) {

@@ -11,9 +11,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LoadCarteData extends AbstractFixture implements OrderedFixtureInterface, FixtureInterface, ContainerAwareInterface {
     private $container;
+    private $encoder;
 
     public function setContainer(ContainerInterface $container = null) {
         $this->container = $container;
+        $this->encoder = $this->container->get('security.password_encoder');
     }
 
     private function addCarte($numero, $solde, $employe, $categorie) {
@@ -21,7 +23,7 @@ class LoadCarteData extends AbstractFixture implements OrderedFixtureInterface, 
         $carte->setNumero($numero);
         $carte->setSolde($solde);
         $carte->setOpposed(false);
-        $carte->setPassword(1234);
+        $carte->setPassword($this->encoder->encodePassword($carte, "0000"));
         $carte->setCategorie($categorie);
         $carte->setEmploye($employe);
         return $carte;
@@ -35,10 +37,10 @@ class LoadCarteData extends AbstractFixture implements OrderedFixtureInterface, 
         $employe1 = $this->getReference('employe1');
         $employe2 = $this->getReference('employe2');
         $employe3 = $this->getReference('employe3');
-        $carte = $this->addCarte(123456, 250, $employe, $stagiaire);
-        $carte1 = $this->addCarte(1234567, 250, $employe1, $cadre);
-        $carte2 = $this->addCarte(12345678, 150, $employe2, $stagiaire);
-        $carte3 = $this->addCarte(123456789, 350, $employe3, $responsable);
+        $carte = $this->addCarte($this->generateToken(8), 250, $employe, $stagiaire);
+        $carte1 = $this->addCarte($this->generateToken(8), 250, $employe1, $cadre);
+        $carte2 = $this->addCarte($this->generateToken(8), 150, $employe2, $stagiaire);
+        $carte3 = $this->addCarte($this->generateToken(8), 350, $employe3, $responsable);
         $employe->setCarte($carte);
         $employe1->setCarte($carte1);
         $employe2->setCarte($carte2);
@@ -60,5 +62,15 @@ class LoadCarteData extends AbstractFixture implements OrderedFixtureInterface, 
 
     public function getOrder() {
         return 8;
+    }
+
+    private function generateToken($length) {
+        $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        $string = '';
+        $max = strlen($characters) - 1;
+        for ($i = 0; $i < $length; $i++) {
+            $string .= $characters[mt_rand(0, $max)];
+        }
+        return $string;
     }
 }

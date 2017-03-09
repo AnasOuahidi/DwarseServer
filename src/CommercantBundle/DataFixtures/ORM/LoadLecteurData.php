@@ -26,7 +26,7 @@ class LoadLecteurData extends AbstractFixture implements OrderedFixtureInterface
 
     public function load(ObjectManager $manager) {
         $commercant = $this->getReference('commercant');
-        $lecteur = $this->addLecteur(123456, 250, $commercant);
+        $lecteur = $this->addLecteur($this->generateToken(8), 250, $commercant);
         $commercant->setLecteur($lecteur);
         $manager->persist($commercant);
         $manager->persist($lecteur);
@@ -36,5 +36,15 @@ class LoadLecteurData extends AbstractFixture implements OrderedFixtureInterface
 
     public function getOrder() {
         return 6;
+    }
+
+    private function generateToken($length) {
+        $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        $string = '';
+        $max = strlen($characters) - 1;
+        for ($i = 0; $i < $length; $i++) {
+            $string .= $characters[mt_rand(0, $max)];
+        }
+        return $string;
     }
 }

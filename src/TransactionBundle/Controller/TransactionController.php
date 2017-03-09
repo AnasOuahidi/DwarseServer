@@ -10,6 +10,7 @@ use FOS\RestBundle\View\View;
 use TransactionBundle\Entity\Transaction;
 use TransactionBundle\Entity\VerifTransaction;
 use TransactionBundle\Form\VerifTransactionType;
+
 class TransactionController extends Controller {
     /**
      * @Rest\View(statusCode=Response::HTTP_OK)
@@ -33,8 +34,9 @@ class TransactionController extends Controller {
         if ($lecteur == null) {
             return View::create(['message' => 'Lecteur introuvable'], Response::HTTP_BAD_REQUEST);
         }
-        $pin = $carte->getPassword();
-        if ($pin != $verifTransaction->getPin()) {
+        $encoder = $this->get('security.password_encoder');
+        $isPinValid = $encoder->isPasswordValid($carte, $verifTransaction->getPin());
+        if (!$isPinValid) {
             return View::create(['message' => 'Votre code pin est incorrecte'], Response::HTTP_BAD_REQUEST);
         }
         $opposed = $carte->getOpposed();

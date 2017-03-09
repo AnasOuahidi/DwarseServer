@@ -53,7 +53,6 @@ class AuthTokenController extends Controller {
     }
 
     private function alreadyConfirmed() {
-        // Normalement ne devrait jamais arriver
         return View::create(['message' => 'Votre compte a déjà été confirmé'], Response::HTTP_BAD_REQUEST);
     }
 

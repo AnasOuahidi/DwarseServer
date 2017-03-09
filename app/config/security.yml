@@ -3,6 +3,9 @@ security:
         AuthBundle\Entity\User:
             algorithm: bcrypt
             cost: 12
+        EmployeBundle\Entity\Carte:
+            algorithm: bcrypt
+            cost: 12
 
     providers:
         auth_token_user_provider:

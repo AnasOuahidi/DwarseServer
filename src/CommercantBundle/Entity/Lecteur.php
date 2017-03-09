@@ -27,7 +27,7 @@ class Lecteur {
     /**
      * @var int
      *
-     * @ORM\Column(name="numero", type="integer", unique=true)
+     * @ORM\Column(name="numero", type="string", length=255, unique=false)
      */
     private $numero;
 
