@@ -18,8 +18,10 @@ class AddCreditCommand extends ContainerAwareCommand {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $cartes = $em->getRepository('EmployeBundle:Carte')->findAll();
         foreach ($cartes as $carte) {
-            $carte->setSolde($carte->getSolde() + ($carte->getCategorie()->getCredit() / 30));
-            $em->persist($carte);
+            if (!$carte->getOpposed()) {
+                $carte->setSolde($carte->getSolde() + ($carte->getCategorie()->getCredit() / 30));
+                $em->persist($carte);
+            }
         }
         $em->flush();
         $output->writeln('Fin de la mise à jour du solde des cartes');
