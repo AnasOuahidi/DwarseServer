@@ -22,7 +22,7 @@ TransactionBundle\Entity\VerifTransaction:
             - NotBlank:
                 message: 'Le pin ne doit pas être vide'
             - Type:
-                type: integer
+                type: string
                 message: 'Veuillez entrer un pin correct'
             - Length:
                 exactMessage: 'Le pin doit comporter 4 chiffres'
