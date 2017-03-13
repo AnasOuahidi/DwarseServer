@@ -41,7 +41,7 @@ commercantConsultation:
 commercantPaiement:
     type:     rest
     resource: TransactionBundle\Controller\TransactionController
-    prefix:   /commercant
+    prefix:   /
 
 employeConsultation:
     type:     rest
