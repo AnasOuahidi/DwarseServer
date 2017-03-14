@@ -17,3 +17,5 @@ EmployeBundle\Entity\Employe:
             groups: ['user']
         carte:
             groups: ['user']
+        employeur:
+            groups: ['transaction']
