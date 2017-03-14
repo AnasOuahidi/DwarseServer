@@ -3,6 +3,7 @@
 namespace CommercantBundle\Controller;
 
 use CommercantBundle\Entity\Commercant;
+use CommercantBundle\Entity\Lecteur;
 use CommercantBundle\Form\CommercantType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,9 +49,25 @@ class ProfileController extends Controller {
         $commercant->setPhoto($photo);
         $commercant->setUser($user);
         $user->setCommercant($commercant);
+        $lecteur = new Lecteur();
+        $lecteur->setNumero($this->generateToken(8));
+        $lecteur->setSolde(0,0);
+        $lecteur->setCommercant($commercant);
+        $commercant->setLecteur($lecteur);
+        $em->persist($lecteur);
         $em->persist($commercant);
         $em->persist($user);
         $em->flush();
         return $user;
+    }
+
+    private function generateToken($length) {
+        $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        $string = '';
+        $max = strlen($characters) - 1;
+        for ($i = 0; $i < $length; $i++) {
+            $string .= $characters[mt_rand(0, $max)];
+        }
+        return $string;
     }
 }

@@ -20,8 +20,7 @@ class AuthTokenController extends Controller {
             return $this->invalidToken(false);
         }
         $em = $this->get('doctrine.orm.entity_manager');
-        $user = $em->getRepository('AuthBundle:User')
-            ->findOneByConfirmationToken($token);
+        $user = $em->getRepository('AuthBundle:User')->findOneByConfirmationToken($token);
         if (!$user) {
             return $this->invalidToken(true);
         }
