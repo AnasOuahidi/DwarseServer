@@ -27,7 +27,8 @@ class ConsultationController extends Controller
             return View::create(['message' => 'Vous n\'avez pas de carte'], Response::HTTP_BAD_REQUEST);
         }
         $solde = $carte->getSolde();
-        return ["solde" => $solde];
+        $etat = $carte->getOpposed();
+        return ["solde" => $solde, "etat" => $etat];
     }
 
     /**
