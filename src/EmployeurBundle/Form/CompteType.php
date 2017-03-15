@@ -11,20 +11,14 @@ class CompteType extends AbstractType {
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder
-            ->add('login')
-            ->add('email')
-            ->add('categorie');
+        $builder->add('login')->add('email')->add('categorie');
     }
 
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(array(
-            'data_class' => 'EmployeurBundle\Entity\Compte',
-            'csrf_protection' => false
-        ));
+        $resolver->setDefaults(array('data_class' => 'EmployeurBundle\Entity\Compte', 'csrf_protection' => false));
     }
 
     /**

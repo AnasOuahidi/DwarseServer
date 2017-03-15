@@ -8,9 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AddCreditCommand extends ContainerAwareCommand {
     protected function configure() {
-        $this
-            ->setName('add:credit')
-            ->setDescription('Ajout du crédit au cartes selon la catégorie');
+        $this->setName('add:credit')->setDescription('Ajout du crédit au cartes selon la catégorie');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {

@@ -12,9 +12,6 @@ class CredentialsType extends AbstractType {
     }
 
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults([
-            'data_class' => 'AuthBundle\Entity\Credentials',
-            'csrf_protection' => false
-        ]);
+        $resolver->setDefaults(['data_class' => 'AuthBundle\Entity\Credentials', 'csrf_protection' => false]);
     }
 }

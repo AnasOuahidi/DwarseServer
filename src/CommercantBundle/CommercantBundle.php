@@ -4,6 +4,5 @@ namespace CommercantBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class CommercantBundle extends Bundle
-{
+class CommercantBundle extends Bundle {
 }

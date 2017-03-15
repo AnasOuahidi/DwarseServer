@@ -32,8 +32,7 @@ class LoadEmployeurData extends AbstractFixture implements OrderedFixtureInterfa
 
     public function load(ObjectManager $manager) {
         $user = $this->getReference('employeurUser');
-        $employeur = $this->addEmployeur('employeur', 'Mr.', 'https://s3.amazonaws.com/dwarse/employeur/photo/employeur.png'
-            , 'Test', '12345678912345', '1234567890', $user);
+        $employeur = $this->addEmployeur('employeur', 'Mr.', 'https://s3.amazonaws.com/dwarse/employeur/photo/employeur.png', 'Test', '12345678912345', '1234567890', $user);
         $manager->persist($employeur);
         $user->setEmployeur($employeur);
         $manager->persist($user);

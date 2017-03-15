@@ -3,6 +3,7 @@
 namespace AuthBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+
 /**
  * UserRepository
  *
@@ -10,7 +11,7 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class UserRepository extends EntityRepository {
-    public function findOneByEmailOrLogin($label){
+    public function findOneByEmailOrLogin($label) {
         $user = $this->findOneByLogin($label);
         if (!$user) {
             $user = $this->findOneByEmail($label);

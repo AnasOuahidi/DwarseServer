@@ -9,14 +9,12 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 
 
-class ConsultationController extends Controller
-{
+class ConsultationController extends Controller {
     /**
      * @Rest\View(statusCode=Response::HTTP_OK)
      * @Rest\Get("/solde")
      */
-    public function ConsultationSoldesAction(Request $request)
-    {
+    public function ConsultationSoldesAction(Request $request) {
         $token = $request->query->get("token");
         $em = $this->get('doctrine.orm.entity_manager');
         $authToken = $em->getRepository('AuthBundle:AuthToken')->findOneByValue($token);
@@ -35,8 +33,7 @@ class ConsultationController extends Controller
      * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"transaction"})
      * @Rest\Get("/historique")
      */
-    public function ConsultationHistoriquesAction(Request $request)
-    {
+    public function ConsultationHistoriquesAction(Request $request) {
         $token = $request->query->get("token");
         $em = $this->get('doctrine.orm.entity_manager');
         $authToken = $em->getRepository('AuthBundle:AuthToken')->findOneByValue($token);

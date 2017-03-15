@@ -23,8 +23,7 @@ class LoginController extends Controller {
             return $form;
         }
         $em = $this->get('doctrine.orm.entity_manager');
-        $user = $em->getRepository('AuthBundle:User')
-            ->findOneByEmailOrLogin($credentials->getLogin());
+        $user = $em->getRepository('AuthBundle:User')->findOneByEmailOrLogin($credentials->getLogin());
         if (!$user) {
             return $this->invalidLogin();
         }

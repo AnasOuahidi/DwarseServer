@@ -8,14 +8,12 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 
-class OppositionController extends Controller
-{
+class OppositionController extends Controller {
     /**
      * @Rest\View(statusCode=Response::HTTP_OK)
      * @Rest\Post("/opposition")
      */
-    public function OppositionsAction(Request $request)
-    {
+    public function OppositionsAction(Request $request) {
         $token = $request->query->get("token");
         $em = $this->get('doctrine.orm.entity_manager');
         $authToken = $em->getRepository('AuthBundle:AuthToken')->findOneByValue($token);

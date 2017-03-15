@@ -24,13 +24,11 @@ class TransactionController extends Controller {
             return $form;
         }
         $em = $this->get('doctrine.orm.entity_manager');
-        $carte = $em->getRepository("EmployeBundle:Carte")
-            ->findOneByNumero($verifTransaction->getNumeroCarte());
+        $carte = $em->getRepository("EmployeBundle:Carte")->findOneByNumero($verifTransaction->getNumeroCarte());
         if ($carte == null) {
             return View::create(['message' => 'Carte introuvable'], Response::HTTP_BAD_REQUEST);
         }
-        $lecteur = $em->getRepository("CommercantBundle:Lecteur")
-            ->findOneByNumero($verifTransaction->getNumeroLecteur());
+        $lecteur = $em->getRepository("CommercantBundle:Lecteur")->findOneByNumero($verifTransaction->getNumeroLecteur());
         if ($lecteur == null) {
             return View::create(['message' => 'Lecteur introuvable'], Response::HTTP_BAD_REQUEST);
         }
@@ -61,41 +59,13 @@ class TransactionController extends Controller {
         $logoImgUrl = $messageCommercant->embed(\Swift_Image::fromPath('https://s3.amazonaws.com/dwarse/assets/img/logo.png'));
         $heartImgUrl = $messageCommercant->embed(\Swift_Image::fromPath('https://s3.amazonaws.com/dwarse/assets/img/heart.png'));
         $nameCommercant = $lecteur->getCommercant()->getCivilite() . ' ' . $lecteur->getCommercant()->getNom() . ' ' . $lecteur->getCommercant()->getPrenom();
-        $messageCommercant->setSubject('Nouvelle transaction Aventix')
-            ->setFrom(array('dwarse.development@gmail.com' => 'Dwarse Team'))
-            ->setTo($lecteur->getCommercant()->getUser()->getEmail())
-            ->setCharset('utf-8')
-            ->setContentType('text/html')
-            ->setBody($this->renderView('@Transaction/Emails/post_transaction_commercant.html.twig',
-                [
-                    'logoImgUrl' => $logoImgUrl,
-                    'heartImgUrl' => $heartImgUrl,
-                    'name' => $nameCommercant,
-                    'date' => $transaction->getDate()->format('d/m/Y'),
-                    'heure' => $transaction->getDate()->format('H:i'),
-                    'montant' => $transaction->getMontant()
-                ]
-            ));
+        $messageCommercant->setSubject('Nouvelle transaction Aventix')->setFrom(array('dwarse.development@gmail.com' => 'Dwarse Team'))->setTo($lecteur->getCommercant()->getUser()->getEmail())->setCharset('utf-8')->setContentType('text/html')->setBody($this->renderView('@Transaction/Emails/post_transaction_commercant.html.twig', ['logoImgUrl' => $logoImgUrl, 'heartImgUrl' => $heartImgUrl, 'name' => $nameCommercant, 'date' => $transaction->getDate()->format('d/m/Y'), 'heure' => $transaction->getDate()->format('H:i'), 'montant' => $transaction->getMontant()]));
         $this->get('mailer')->send($messageCommercant);
         $messageEmploye = \Swift_Message::newInstance();
         $logoImgUrl = $messageEmploye->embed(\Swift_Image::fromPath('https://s3.amazonaws.com/dwarse/assets/img/logo.png'));
         $heartImgUrl = $messageEmploye->embed(\Swift_Image::fromPath('https://s3.amazonaws.com/dwarse/assets/img/heart.png'));
         $nameEmploye = $carte->getEmploye()->getCivilite() . ' ' . $carte->getEmploye()->getNom() . ' ' . $carte->getEmploye()->getPrenom();
-        $messageEmploye->setSubject('Nouvelle transaction Aventix')
-            ->setFrom(array('dwarse.development@gmail.com' => 'Dwarse Team'))
-            ->setTo($carte->getEmploye()->getUser()->getEmail())
-            ->setCharset('utf-8')
-            ->setContentType('text/html')
-            ->setBody($this->renderView('@Transaction/Emails/post_transaction_employe.html.twig',
-                [
-                    'logoImgUrl' => $logoImgUrl,
-                    'heartImgUrl' => $heartImgUrl,
-                    'name' => $nameEmploye,
-                    'date' => $transaction->getDate()->format('d/m/Y'),
-                    'heure' => $transaction->getDate()->format('H:i'),
-                    'montant' => $transaction->getMontant()
-                ]
-            ));
+        $messageEmploye->setSubject('Nouvelle transaction Aventix')->setFrom(array('dwarse.development@gmail.com' => 'Dwarse Team'))->setTo($carte->getEmploye()->getUser()->getEmail())->setCharset('utf-8')->setContentType('text/html')->setBody($this->renderView('@Transaction/Emails/post_transaction_employe.html.twig', ['logoImgUrl' => $logoImgUrl, 'heartImgUrl' => $heartImgUrl, 'name' => $nameEmploye, 'date' => $transaction->getDate()->format('d/m/Y'), 'heure' => $transaction->getDate()->format('H:i'), 'montant' => $transaction->getMontant()]));
         $this->get('mailer')->send($messageEmploye);
         return ["Success" => "La transaction à bien été effectuée"];
     }

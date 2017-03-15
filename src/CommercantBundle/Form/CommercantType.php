@@ -11,25 +11,14 @@ class CommercantType extends AbstractType {
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder
-            ->add('libelle')
-            ->add('nom')
-            ->add('prenom')
-            ->add('adresse')
-            ->add('iban')
-            ->add('siret')
-            ->add('numTel')
-            ->add('civilite');
+        $builder->add('libelle')->add('nom')->add('prenom')->add('adresse')->add('iban')->add('siret')->add('numTel')->add('civilite');
     }
 
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(array(
-            'data_class' => 'CommercantBundle\Entity\Commercant',
-            'csrf_protection' => false
-        ));
+        $resolver->setDefaults(array('data_class' => 'CommercantBundle\Entity\Commercant', 'csrf_protection' => false));
     }
 
     /**

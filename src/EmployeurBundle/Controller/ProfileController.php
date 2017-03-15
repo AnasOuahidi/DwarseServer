@@ -37,9 +37,9 @@ class ProfileController extends Controller {
         $root = $this->get('kernel')->getRootDir();
         $keyContent = file_get_contents($root . '/AWS_ACCESS_KEY_ID.txt');
         $secretContent = file_get_contents($root . '/AWS_SECRET_ACCESS_KEY.txt');
-        $bucket = getenv('S3_BUCKET_NAME')? getenv('S3_BUCKET_NAME') : 'dwarse';
-        $key = getenv('AWS_ACCESS_KEY_ID')? getenv('AWS_ACCESS_KEY_ID') : $keyContent;
-        $secret = getenv('AWS_SECRET_ACCESS_KEY')? getenv('AWS_SECRET_ACCESS_KEY') : $secretContent;
+        $bucket = getenv('S3_BUCKET_NAME') ? getenv('S3_BUCKET_NAME') : 'dwarse';
+        $key = getenv('AWS_ACCESS_KEY_ID') ? getenv('AWS_ACCESS_KEY_ID') : $keyContent;
+        $secret = getenv('AWS_SECRET_ACCESS_KEY') ? getenv('AWS_SECRET_ACCESS_KEY') : $secretContent;
         $s3 = S3Client::factory(['key' => $key, 'secret' => $secret]);
         $extention = $file->getClientOriginalExtension();
         $libelle = 'employeur/photo/' . $user->getLogin() . '.' . $extention;

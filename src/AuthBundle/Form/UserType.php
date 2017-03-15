@@ -9,17 +9,10 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class UserType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder
-            ->add('login')
-            ->add('plainPassword')
-            ->add('email', EmailType::class)
-            ->add('role');
+        $builder->add('login')->add('plainPassword')->add('email', EmailType::class)->add('role');
     }
 
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(array(
-            'data_class' => 'AuthBundle\Entity\User',
-            'csrf_protection' => false
-        ));
+        $resolver->setDefaults(array('data_class' => 'AuthBundle\Entity\User', 'csrf_protection' => false));
     }
 }
