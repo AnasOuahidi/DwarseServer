@@ -34,7 +34,8 @@
 		"nelmio/cors-bundle": "^1.5",
 		"doctrine/doctrine-fixtures-bundle": "^2.3",
 		"aws/aws-sdk-php": "~2.6",
-		"fzaninotto/faker": "^1.6"
+		"fzaninotto/faker": "^1.6",
+		"spipu/html2pdf": "^4.6"
 	},
 	"require-dev": {
 		"sensio/generator-bundle": "^3.0",
