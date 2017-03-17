@@ -5,6 +5,13 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Faker\Generator;
+use Faker\Provider\fr_FR\Address;
+use Faker\Provider\DateTime;
+use Faker\Provider\fr_FR\Company;
+use Faker\Provider\fr_FR\Internet;
+use Faker\Provider\fr_FR\Person;
+use Faker\Provider\fr_FR\PhoneNumber;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use AuthBundle\Entity\User;
@@ -12,15 +19,23 @@ use AuthBundle\Entity\AuthToken;
 
 class LoadAuthTokensData extends AbstractFixture implements OrderedFixtureInterface, FixtureInterface, ContainerAwareInterface {
     private $container;
+    private $faker;
 
     public function setContainer(ContainerInterface $container = null) {
         $this->container = $container;
+        $this->faker = new Generator();
+        $this->faker->addProvider(new Person($this->faker));
+        $this->faker->addProvider(new Address($this->faker));
+        $this->faker->addProvider(new DateTime($this->faker));
+        $this->faker->addProvider(new PhoneNumber($this->faker));
+        $this->faker->addProvider(new Company($this->faker));
+        $this->faker->addProvider(new Internet($this->faker));
     }
 
     private function addAuthToken() {
         $authToken = new AuthToken();
         $authToken->setValue($this->generateToken(64));
-        $authToken->setCreatedAt(new \DateTime('now'));
+        $authToken->setCreatedAt($this->faker->dateTimeBetween('-10 days', '+4 days'));
         return $authToken;
     }
 
@@ -31,14 +46,19 @@ class LoadAuthTokensData extends AbstractFixture implements OrderedFixtureInterf
         $manager->merge($user);
     }
 
-
     public function load(ObjectManager $manager) {
-        $this->tokenToUser($manager, $this->getReference('employeUser'), $this->addAuthToken());
-        $this->tokenToUser($manager, $this->getReference('employeurUser'), $this->addAuthToken());
-        $this->tokenToUser($manager, $this->getReference('commercantUser'), $this->addAuthToken());
-        $this->tokenToUser($manager, $this->getReference('employeUser1'), $this->addAuthToken());
-        $this->tokenToUser($manager, $this->getReference('employeUser2'), $this->addAuthToken());
-        $this->tokenToUser($manager, $this->getReference('employeUser3'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('aouahidiUser'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('ygueddouUser'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('jgadomskiUser'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('nbengamraUser'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('abenmiledUser'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('pdezarnaudUser'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('employeur1User'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('employeur2User'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('employeur3User'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('commercant1User'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('commercant2User'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('commercant3User'), $this->addAuthToken());
         $manager->flush();
     }
 

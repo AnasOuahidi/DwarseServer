@@ -5,20 +5,37 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Faker\Generator;
+use Faker\Provider\fr_FR\Address;
+use Faker\Provider\DateTime;
+use Faker\Provider\fr_FR\Company;
+use Faker\Provider\fr_FR\Internet;
+use Faker\Provider\fr_FR\Person;
+use Faker\Provider\fr_FR\Payment;
+use Faker\Provider\fr_FR\PhoneNumber;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use TransactionBundle\Entity\Transaction;
 
 class LoadTransactionData extends AbstractFixture implements OrderedFixtureInterface, FixtureInterface, ContainerAwareInterface {
     private $container;
+    private $faker;
 
     public function setContainer(ContainerInterface $container = null) {
         $this->container = $container;
+        $this->faker = new Generator();
+        $this->faker->addProvider(new Person($this->faker));
+        $this->faker->addProvider(new Address($this->faker));
+        $this->faker->addProvider(new DateTime($this->faker));
+        $this->faker->addProvider(new Payment($this->faker));
+        $this->faker->addProvider(new PhoneNumber($this->faker));
+        $this->faker->addProvider(new Company($this->faker));
+        $this->faker->addProvider(new Internet($this->faker));
     }
 
     private function addTransaction($montant, $carte, $lecteur) {
         $transaction = new Transaction();
-        $transaction->setDate(new \DateTime());
+        $transaction->setDate($this->faker->dateTimeBetween('-10 days', 'now'));
         $transaction->setMontant($montant);
         $transaction->setCarte($carte);
         $transaction->setLecteur($lecteur);
@@ -26,43 +43,21 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
     }
 
     public function load(ObjectManager $manager) {
-        $carte = $this->getReference('carte');
-        $carte1 = $this->getReference('carte1');
-        $carte2 = $this->getReference('carte2');
-        $carte3 = $this->getReference('carte3');
-        $lecteur = $this->getReference('lecteur');
-        $transaction1 = $this->addTransaction(15, $carte, $lecteur);
-        $transaction2 = $this->addTransaction(25, $carte, $lecteur);
-        $transaction3 = $this->addTransaction(20, $carte, $lecteur);
-        $transaction4 = $this->addTransaction(22, $carte, $lecteur);
-        $transaction5 = $this->addTransaction(16, $carte1, $lecteur);
-        $transaction6 = $this->addTransaction(9, $carte1, $lecteur);
-        $transaction7 = $this->addTransaction(17, $carte1, $lecteur);
-        $transaction8 = $this->addTransaction(12, $carte1, $lecteur);
-        $transaction9 = $this->addTransaction(13, $carte2, $lecteur);
-        $transaction10 = $this->addTransaction(18, $carte2, $lecteur);
-        $transaction11 = $this->addTransaction(15, $carte2, $lecteur);
-        $transaction12 = $this->addTransaction(14, $carte2, $lecteur);
-        $transaction13 = $this->addTransaction(6, $carte3, $lecteur);
-        $transaction14 = $this->addTransaction(8, $carte3, $lecteur);
-        $transaction15 = $this->addTransaction(9, $carte3, $lecteur);
-        $transaction16 = $this->addTransaction(16, $carte3, $lecteur);
-        $manager->persist($transaction1);
-        $manager->persist($transaction2);
-        $manager->persist($transaction3);
-        $manager->persist($transaction4);
-        $manager->persist($transaction5);
-        $manager->persist($transaction6);
-        $manager->persist($transaction7);
-        $manager->persist($transaction8);
-        $manager->persist($transaction9);
-        $manager->persist($transaction10);
-        $manager->persist($transaction11);
-        $manager->persist($transaction12);
-        $manager->persist($transaction13);
-        $manager->persist($transaction14);
-        $manager->persist($transaction15);
-        $manager->persist($transaction16);
+        $carteAouahidi = $this->getReference('carteAouahidi');
+        $carteYgueddou = $this->getReference('carteYgueddou');
+        $carteJgadomski = $this->getReference('carteJgadomski');
+        $carteNbengamra = $this->getReference('carteNbengamra');
+        $carteAbenmiled = $this->getReference('carteAbenmiled');
+        $cartePdezarnaud = $this->getReference('cartePdezarnaud');
+        $lecteur1 = $this->getReference('lecteur1');
+        $lecteur2 = $this->getReference('lecteur2');
+        $lecteur3 = $this->getReference('lecteur3');
+        $lecteurs = [$lecteur1, $lecteur2, $lecteur3];
+        $cartes = [$carteAouahidi, $carteYgueddou, $carteJgadomski, $carteNbengamra, $carteAbenmiled, $cartePdezarnaud];
+        for ($i = 0; $i < 100; $i++) {
+            $transaction = $this->addTransaction(rand(5, 50), $cartes[rand(0, 5)], $lecteurs[rand(0, 2)]);
+            $manager->persist($transaction);
+        }
         $manager->flush();
     }
 

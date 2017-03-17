@@ -16,22 +16,32 @@ class LoadLecteurData extends AbstractFixture implements OrderedFixtureInterface
         $this->container = $container;
     }
 
-    private function addLecteur($numero, $solde, $commercant) {
+    private function addLecteur($numero, $commercant) {
         $lecteur = new Lecteur();
         $lecteur->setNumero($numero);
-        $lecteur->setSolde($solde);
+        $lecteur->setSolde(0);
         $lecteur->setCommercant($commercant);
+        $commercant->setLecteur($lecteur);
         return $lecteur;
     }
 
     public function load(ObjectManager $manager) {
-        $commercant = $this->getReference('commercant');
-        $lecteur = $this->addLecteur($this->generateToken(8), 250, $commercant);
-        $commercant->setLecteur($lecteur);
-        $manager->persist($commercant);
-        $manager->persist($lecteur);
+        $commercant1 = $this->getReference('commercant1');
+        $commercant2 = $this->getReference('commercant2');
+        $commercant3 = $this->getReference('commercant3');
+        $lecteur1 = $this->addLecteur($this->generateToken(8), $commercant1);
+        $lecteur2 = $this->addLecteur($this->generateToken(8), $commercant2);
+        $lecteur3 = $this->addLecteur($this->generateToken(8), $commercant3);
+        $manager->persist($commercant1);
+        $manager->persist($commercant2);
+        $manager->persist($commercant3);
+        $manager->persist($lecteur1);
+        $manager->persist($lecteur2);
+        $manager->persist($lecteur3);
         $manager->flush();
-        $this->addReference('lecteur', $lecteur);
+        $this->addReference('lecteur1', $lecteur1);
+        $this->addReference('lecteur2', $lecteur2);
+        $this->addReference('lecteur3', $lecteur3);
     }
 
     public function getOrder() {

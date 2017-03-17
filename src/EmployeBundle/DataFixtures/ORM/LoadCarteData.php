@@ -18,46 +18,53 @@ class LoadCarteData extends AbstractFixture implements OrderedFixtureInterface, 
         $this->encoder = $this->container->get('security.password_encoder');
     }
 
-    private function addCarte($numero, $solde, $employe, $categorie) {
+    private function addCarte($numero, $employe, $categorie) {
         $carte = new Carte();
         $carte->setNumero($numero);
-        $carte->setSolde($solde);
+        $carte->setSolde($categorie->getCredit());
         $carte->setOpposed(false);
         $carte->setPassword($this->encoder->encodePassword($carte, "0000"));
         $carte->setCategorie($categorie);
         $carte->setEmploye($employe);
+        $employe->setCarte($carte);
         return $carte;
     }
 
     public function load(ObjectManager $manager) {
-        $responsable = $this->getReference('responsable');
-        $cadre = $this->getReference('cadre');
-        $stagiaire = $this->getReference('stagiaire');
-        $employe = $this->getReference('employe');
-        $employe1 = $this->getReference('employe1');
-        $employe2 = $this->getReference('employe2');
-        $employe3 = $this->getReference('employe3');
-        $carte = $this->addCarte($this->generateToken(8), 250, $employe, $stagiaire);
-        $carte1 = $this->addCarte($this->generateToken(8), 250, $employe1, $cadre);
-        $carte2 = $this->addCarte($this->generateToken(8), 150, $employe2, $stagiaire);
-        $carte3 = $this->addCarte($this->generateToken(8), 350, $employe3, $responsable);
-        $employe->setCarte($carte);
-        $employe1->setCarte($carte1);
-        $employe2->setCarte($carte2);
-        $employe3->setCarte($carte3);
-        $manager->persist($carte);
-        $manager->persist($carte1);
-        $manager->persist($carte2);
-        $manager->persist($carte3);
-        $manager->persist($employe);
-        $manager->persist($employe1);
-        $manager->persist($employe2);
-        $manager->persist($employe3);
+        $responsable = $this->getReference('categorieResponsable');
+        $cadre = $this->getReference('categorieCadre');
+        $stagiaire = $this->getReference('categorieStagiaire');
+        $aouahidi = $this->getReference('aouahidi');
+        $ygueddou = $this->getReference('ygueddou');
+        $jgadomski = $this->getReference('jgadomski');
+        $nbengamra = $this->getReference('nbengamra');
+        $abenmiled = $this->getReference('abenmiled');
+        $pdezarnaud = $this->getReference('pdezarnaud');
+        $carteAouahidi = $this->addCarte($this->generateToken(8), $aouahidi, $responsable);
+        $carteYgueddou = $this->addCarte($this->generateToken(8), $ygueddou, $cadre);
+        $carteJgadomski = $this->addCarte($this->generateToken(8), $jgadomski, $responsable);
+        $carteNbengamra = $this->addCarte($this->generateToken(8), $nbengamra, $cadre);
+        $carteAbenmiled = $this->addCarte($this->generateToken(8), $abenmiled, $stagiaire);
+        $cartePdezarnaud = $this->addCarte($this->generateToken(8), $pdezarnaud, $stagiaire);
+        $manager->persist($carteAouahidi);
+        $manager->persist($carteYgueddou);
+        $manager->persist($carteJgadomski);
+        $manager->persist($carteNbengamra);
+        $manager->persist($carteAbenmiled);
+        $manager->persist($cartePdezarnaud);
+        $manager->persist($aouahidi);
+        $manager->persist($ygueddou);
+        $manager->persist($jgadomski);
+        $manager->persist($nbengamra);
+        $manager->persist($abenmiled);
+        $manager->persist($pdezarnaud);
         $manager->flush();
-        $this->addReference('carte', $carte);
-        $this->addReference('carte1', $carte1);
-        $this->addReference('carte2', $carte2);
-        $this->addReference('carte3', $carte3);
+        $this->addReference('carteAouahidi', $carteAouahidi);
+        $this->addReference('carteYgueddou', $carteYgueddou);
+        $this->addReference('carteJgadomski', $carteJgadomski);
+        $this->addReference('carteNbengamra', $carteNbengamra);
+        $this->addReference('carteAbenmiled', $carteAbenmiled);
+        $this->addReference('cartePdezarnaud', $cartePdezarnaud);
     }
 
     public function getOrder() {

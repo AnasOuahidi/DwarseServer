@@ -31,9 +31,9 @@ class LoadCategorieData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($cadre);
         $manager->persist($stagiaire);
         $manager->flush();
-        $this->addReference('responsable', $resonsable);
-        $this->addReference('cadre', $cadre);
-        $this->addReference('stagiaire', $stagiaire);
+        $this->addReference('categorieResponsable', $resonsable);
+        $this->addReference('categorieCadre', $cadre);
+        $this->addReference('categorieStagiaire', $stagiaire);
     }
 
     public function getOrder() {
