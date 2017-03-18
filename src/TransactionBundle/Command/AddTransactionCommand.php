@@ -32,7 +32,7 @@ class AddTransactionCommand extends ContainerAwareCommand {
                 $em->persist($transaction1);
             }
             $montant2 = $this->random_float(5, 15);
-            if ($montant1 < $carte->getSolde() && !$carte->getOpposed()) {
+            if ($montant2 < $carte->getSolde() && !$carte->getOpposed()) {
                 $lecteur2 = $lecteurs[rand(0, 2)];
                 $date2 = new \DateTime();
                 $date2->modify('-3 hours');
