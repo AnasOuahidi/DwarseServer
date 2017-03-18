@@ -9,8 +9,6 @@ class VerifTransaction {
 
     private $numeroCarte;
 
-    private $numeroLecteur;
-
     private $montant;
 
     private $pin;
@@ -23,16 +21,6 @@ class VerifTransaction {
 
     public function getNumeroCarte() {
         return $this->numeroCarte;
-    }
-
-    public function setNumeroLecteur($numeroLecteur) {
-        $this->numeroLecteur = $numeroLecteur;
-
-        return $this;
-    }
-
-    public function getNumeroLecteur() {
-        return $this->numeroLecteur;
     }
 
     public function setMontant($montant) {

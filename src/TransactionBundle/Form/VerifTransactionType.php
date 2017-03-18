@@ -11,7 +11,7 @@ class VerifTransactionType extends AbstractType {
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('numeroCarte')->add('numeroLecteur')->add('montant')->add('pin');
+        $builder->add('numeroCarte')->add('montant')->add('pin');
     }
 
     /**

@@ -23,14 +23,18 @@ class TransactionController extends Controller {
         if (!$form->isValid()) {
             return $form;
         }
+        $token = $request->query->get("token");
         $em = $this->get('doctrine.orm.entity_manager');
+        $authToken = $em->getRepository('AuthBundle:AuthToken')->findOneByValue($token);
+        $user = $authToken->getUser();
+        $commercant = $user->getCommercant();
+        $lecteur = $commercant->getLecteur();
+        if ($lecteur == null) {
+            return View::create(['message' => 'Vous n\'avez pas de lecteur'], Response::HTTP_BAD_REQUEST);
+        }
         $carte = $em->getRepository("EmployeBundle:Carte")->findOneByNumero($verifTransaction->getNumeroCarte());
         if ($carte == null) {
             return View::create(['message' => 'Carte introuvable'], Response::HTTP_BAD_REQUEST);
-        }
-        $lecteur = $em->getRepository("CommercantBundle:Lecteur")->findOneByNumero($verifTransaction->getNumeroLecteur());
-        if ($lecteur == null) {
-            return View::create(['message' => 'Lecteur introuvable'], Response::HTTP_BAD_REQUEST);
         }
         $encoder = $this->get('security.password_encoder');
         $isPinValid = $encoder->isPasswordValid($carte, $verifTransaction->getPin());
