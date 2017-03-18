@@ -35,7 +35,7 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
 
     private function addTransaction($montant, $carte, $lecteur) {
         $transaction = new Transaction();
-        $transaction->setDate($this->faker->dateTimeBetween('-10 days', 'now'));
+        $transaction->setDate($this->faker->dateTimeBetween('-10 days', '-1 days'));
         $transaction->setMontant($montant);
         $transaction->setCarte($carte);
         $transaction->setLecteur($lecteur);
@@ -55,10 +55,23 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
         $lecteurs = [$lecteur1, $lecteur2, $lecteur3];
         $cartes = [$carteAouahidi, $carteYgueddou, $carteJgadomski, $carteNbengamra, $carteAbenmiled, $cartePdezarnaud];
         for ($i = 0; $i < 100; $i++) {
-            $transaction = $this->addTransaction(rand(5, 50), $cartes[rand(0, 5)], $lecteurs[rand(0, 2)]);
-            $manager->persist($transaction);
+            $montant = $this->random_float(5, 10);
+            $carte = $cartes[rand(0, 5)];
+            $lecteur = $lecteurs[rand(0, 2)];
+            if ($montant < $carte->getSolde() && !$carte->getOpposed()) {
+                $transaction = $this->addTransaction($montant, $carte, $lecteur);
+                $carte->setSolde($carte->getSolde() - $montant);
+                $lecteur->setSolde($lecteur->getSolde() + $montant);
+                $manager->persist($transaction);
+                $manager->persist($carte);
+                $manager->persist($lecteur);
+            }
         }
         $manager->flush();
+    }
+
+    function random_float($min, $max) {
+        return floatval(round(($min + lcg_value() * (abs($max - $min))), 2));
     }
 
     public function getOrder() {

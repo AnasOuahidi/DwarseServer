@@ -40,12 +40,12 @@ class LoadCarteData extends AbstractFixture implements OrderedFixtureInterface, 
         $nbengamra = $this->getReference('nbengamra');
         $abenmiled = $this->getReference('abenmiled');
         $pdezarnaud = $this->getReference('pdezarnaud');
-        $carteAouahidi = $this->addCarte($this->generateToken(8), $aouahidi, $responsable);
-        $carteYgueddou = $this->addCarte($this->generateToken(8), $ygueddou, $cadre);
-        $carteJgadomski = $this->addCarte($this->generateToken(8), $jgadomski, $responsable);
-        $carteNbengamra = $this->addCarte($this->generateToken(8), $nbengamra, $cadre);
-        $carteAbenmiled = $this->addCarte($this->generateToken(8), $abenmiled, $stagiaire);
-        $cartePdezarnaud = $this->addCarte($this->generateToken(8), $pdezarnaud, $stagiaire);
+        $carteAouahidi = $this->addCarte('0x4 0x84 0x2D 0x4A 0x63 0x43 0x80', $aouahidi, $responsable);
+        $carteYgueddou = $this->addCarte('0x4 0x24 0x27 0x4A 0x73 0x43 0x80', $ygueddou, $cadre);
+        $carteJgadomski = $this->addCarte('0x4 0x1A 0x27 0x4A 0x73 0x43 0x80', $jgadomski, $responsable);
+        $carteNbengamra = $this->addCarte('0x4 0x47 0x28 0x4A 0x73 0x43 0x80', $nbengamra, $cadre);
+        $carteAbenmiled = $this->addCarte('0x4 0x8D 0x2D 0x4A 0x63 0x43 0x80', $abenmiled, $stagiaire);
+        $cartePdezarnaud = $this->addCarte('0x3C 0x65 0x55 0xB', $pdezarnaud, $stagiaire);
         $manager->persist($carteAouahidi);
         $manager->persist($carteYgueddou);
         $manager->persist($carteJgadomski);
