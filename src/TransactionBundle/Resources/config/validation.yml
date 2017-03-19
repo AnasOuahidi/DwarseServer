@@ -3,9 +3,6 @@ TransactionBundle\Entity\VerifTransaction:
         numeroCarte:
             - NotBlank:
                 message: 'Le numero de la carte ne doit pas être vide'
-        numeroLecteur:
-            - NotBlank:
-                message: 'Le numero de lecteur ne doit pas être vide'
         montant:
             - NotBlank:
                 message: 'Le montant ne doit pas être vide'

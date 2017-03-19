@@ -48,22 +48,23 @@ class SendTransactionCommand extends ContainerAwareCommand {
         $secret = getenv('AWS_SECRET_ACCESS_KEY') ? getenv('AWS_SECRET_ACCESS_KEY') : $secretContent;
         $s3 = S3Client::factory(['key' => $key, 'secret' => $secret]);
         $s3->upload($bucket, 'transactions/decrypted/' . $dateDuJour . '.xml', $xml, 'public-read');
+        $token = $this->generateToken(64);
         $transactionsXML = [];
         foreach ($transationsDuJour as $transaction) {
             $transactionXML = new TransactionXML();
-            $transactionXML->setId($this->crypter(strval($transaction->getId())));
-            $transactionXML->setDate($this->crypter($transaction->getDate()->format('Y-m-d H:i')));
-            $transactionXML->setMontant($this->crypter(strval($transaction->getMontant())));
-            $transactionXML->setIdCommercant($this->crypter(strval($transaction->getLecteur()->getCommercant()->getId())));
-            $transactionXML->setNomCommercant($this->crypter($transaction->getLecteur()->getCommercant()->getLibelle()));
-            $transactionXML->setIbanCommercant($this->crypter($transaction->getLecteur()->getCommercant()->getIban()));
+            $transactionXML->setId($this->crypter($token, strval($transaction->getId())));
+            $transactionXML->setDate($this->crypter($token, $transaction->getDate()->format('Y-m-d H:i')));
+            $transactionXML->setMontant($this->crypter($token, strval($transaction->getMontant())));
+            $transactionXML->setIdCommercant($this->crypter($token, strval($transaction->getLecteur()->getCommercant()->getId())));
+            $transactionXML->setNomCommercant($this->crypter($token, $transaction->getLecteur()->getCommercant()->getLibelle()));
+            $transactionXML->setIbanCommercant($this->crypter($token, $transaction->getLecteur()->getCommercant()->getIban()));
             $transactionsXML[] = $transactionXML;
         }
         $xml = $serializer->serialize($transactionsXML, 'xml');
         $s3->upload($bucket, 'transactions/crypted/' . $dateDuJour . '.xml', $xml, 'public-read');
         $url = 'http://dwarsebanque.herokuapp.com/transactions';
         //        $url = 'http://dwarse.bank/transactions';
-        $headers = ['Content-Type' => 'application/xml', 'Accept' => 'application/json'];
+        $headers = ['Content-Type' => 'application/xml', 'Accept' => 'application/json', 'Token' => $token];
         $response = \Requests::post($url, $headers, $xml);
         $responseJson = json_decode($response->body);
         foreach ($responseJson as $item) {
@@ -76,8 +77,8 @@ class SendTransactionCommand extends ContainerAwareCommand {
         $output->writeln('Fin EDI');
     }
 
-    private function crypter($data) {
-        $maCleDeCryptage = md5("bcb04b7e103a0cd8b54763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
+    private function crypter($token, $data) {
+        $maCleDeCryptage = md5($token);
         $letter = -1;
         $newstr = "";
         $strlen = strlen($data);
@@ -93,6 +94,17 @@ class SendTransactionCommand extends ContainerAwareCommand {
             $newstr .= chr($neword);
         }
         return base64_encode($newstr);
+    }
+
+
+    private function generateToken($length) {
+        $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        $string = '';
+        $max = strlen($characters) - 1;
+        for ($i = 0; $i < $length; $i++) {
+            $string .= $characters[mt_rand(0, $max)];
+        }
+        return $string;
     }
 
 }
