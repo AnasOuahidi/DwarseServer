@@ -51,10 +51,10 @@ class SendTransactionCommand extends ContainerAwareCommand {
         $transactionsXML = [];
         foreach ($transationsDuJour as $transaction) {
             $transactionXML = new TransactionXML();
-            $transactionXML->setId($this->crypter($transaction->getId()));
+            $transactionXML->setId($this->crypter(strval($transaction->getId())));
             $transactionXML->setDate($this->crypter($transaction->getDate()->format('Y-m-d H:i')));
-            $transactionXML->setMontant($this->crypter($transaction->getMontant()));
-            $transactionXML->setIdCommercant($this->crypter($transaction->getLecteur()->getCommercant()->getId()));
+            $transactionXML->setMontant($this->crypter(strval($transaction->getMontant())));
+            $transactionXML->setIdCommercant($this->crypter(strval($transaction->getLecteur()->getCommercant()->getId())));
             $transactionXML->setNomCommercant($this->crypter($transaction->getLecteur()->getCommercant()->getLibelle()));
             $transactionXML->setIbanCommercant($this->crypter($transaction->getLecteur()->getCommercant()->getIban()));
             $transactionsXML[] = $transactionXML;
@@ -62,7 +62,7 @@ class SendTransactionCommand extends ContainerAwareCommand {
         $xml = $serializer->serialize($transactionsXML, 'xml');
         $s3->upload($bucket, 'transactions/crypted/' . $dateDuJour . '.xml', $xml, 'public-read');
         $url = 'http://dwarsebanque.herokuapp.com/transactions';
-//        $url = 'http://dwarse.bank/transactions';
+        //        $url = 'http://dwarse.bank/transactions';
         $headers = ['Content-Type' => 'application/xml', 'Accept' => 'application/json'];
         $response = \Requests::post($url, $headers, $xml);
         $responseJson = json_decode($response->body);
@@ -77,12 +77,22 @@ class SendTransactionCommand extends ContainerAwareCommand {
     }
 
     private function crypter($data) {
-        $key = pack('H*', "bcb04b7e103a0cd8b54763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
-        $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
-        $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-        $ciphertext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);
-        $ciphertext = $iv . $ciphertext;
-        return $ciphertext_base64 = base64_encode($ciphertext);
+        $maCleDeCryptage = md5("bcb04b7e103a0cd8b54763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
+        $letter = -1;
+        $newstr = "";
+        $strlen = strlen($data);
+        for ($i = 0; $i < $strlen; $i++) {
+            $letter++;
+            if ($letter > 31) {
+                $letter = 0;
+            }
+            $neword = ord($data{$i}) + ord($maCleDeCryptage{$letter});
+            if ($neword > 255) {
+                $neword -= 256;
+            }
+            $newstr .= chr($neword);
+        }
+        return base64_encode($newstr);
     }
 
 }
