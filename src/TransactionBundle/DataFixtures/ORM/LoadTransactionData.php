@@ -38,6 +38,7 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
         $transaction->setDate($this->faker->dateTimeBetween('-10 days', '-1 days'));
         $transaction->setMontant($montant);
         $transaction->setCarte($carte);
+        $transaction->setAvenir(false);
         $transaction->setLecteur($lecteur);
         return $transaction;
     }

@@ -1,0 +1,237 @@
+<page style="width: 800px;">
+    <p align="left">&nbsp;</p>
+    <h1 class="western" style="text-align: center;" align="center">F A C T U R E</h1>
+    <table style="height: 118px; width: 800px;">
+        <tbody>
+        <tr>
+            <td style="width: 370px;">
+                <img src="https://s3.amazonaws.com/dwarse/assets/img/logo.png"
+                     width="100" height="100"/>
+            </td>
+            <td style="width: 370px; text-align: right; margin-right: 15px">
+                <p>
+                    <span style="font-size: 14pt;"><strong>Facture N&deg; :</strong> {{ numFacture }}</span>
+                </p>
+                <p>
+                    <span style="font-size: 14pt;"><strong>Date de Facturation :</strong> {{ date | date("d/m/Y") }}</span>
+                </p>
+                <p>
+                </p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table style="width: 800px;">
+        <tbody>
+        <tr>
+            <td style="width: 370px;">
+                <p>
+                    <span style="font-size: 14pt;"><strong>Factur&eacute; &agrave;:</strong></span>
+                </p>
+                <p>
+                    <span style="font-size: 12pt;">Libelle: {{ libelleCommercant }}</span><br>
+                    <span style="font-size: 12pt;">Adresse: {{ adresseCommercant }}</span><br>
+                    <span style="font-size: 12pt;">Siret: {{ siretCommercant }}</span><br>
+                    <span style="font-size: 12pt;">T&eacute;l&eacute;phone: {{ telCommercant }}</span><br>
+                    <span style="font-size: 12pt;">Courriel: {{ emailCommercant }}</span><br>
+                </p>
+            </td>
+            <td style="width: 370px; text-align: right; margin-right: 15px">
+                <p style="text-align: justify;">
+                    <span style="font-size: 14pt;">
+                        Service de Facturation quotidien Suite &agrave;
+                        l'&eacute;change de donn&eacute;es informatis&eacute;
+                    </span>
+                </p>
+                <p style="text-align: justify;">
+                    <span style="font-size: 14pt;">
+                        <strong>P&eacute;riode totale&nbsp;</strong>: {{ mois }}
+                    </span>
+                </p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table style="width: 740px;" cellspacing="0" cellpadding="7" style="margin-right: 15px">
+        <tbody>
+        <tr style="height: 20px;">
+            <td style="background: #22add2; width: 150px; text-align: center;">
+                <p style="text-align: center;" align="center">
+                    <span style="font-size: 12pt;">
+                        <strong>
+                            <span style="font-family: Arial, sans-serif;">
+                                Numéro
+                            </span>
+                        </strong>
+                    </span>
+                </p>
+            </td>
+            <td style="background: #22add2; width: 150px; text-align: center;">
+                <p style="text-align: center;" align="center">
+                    <span style="font-size: 12pt;">
+                        <strong>
+                            <span style="font-family: Arial, sans-serif;">
+                                Soci&eacute;t&eacute;
+                            </span>
+                        </strong>
+                    </span>
+                </p>
+            </td>
+            <td style="background: #22add2; width: 150px; text-align: center;">
+                <p style="text-align: center;" align="center">
+                    <span style="font-size: 12pt;">
+                        <strong>
+                            <span style="font-family: Arial, sans-serif;">
+                                Date
+                            </span>
+                        </strong>
+                    </span>
+                </p>
+            </td>
+            <td style="background: #22add2; width: 150px; text-align: center;">
+                <p style="text-align: center;" align="center">
+                    <span style="font-size: 12pt;">
+                        <strong>
+                            <span style="font-family: Arial, sans-serif;">
+                                Heure
+                            </span>
+                        </strong>
+                    </span>
+                </p>
+            </td>
+            <td style="background: #22add2; width: 150px; text-align: center;">
+                <p style="text-align: center;" align="center">
+                    <span style="font-size: 12pt;">
+                        <strong>
+                            <span style="font-family: Arial, sans-serif;">
+                                Montant
+                            </span>
+                        </strong>
+                    </span>
+                </p>
+            </td>
+        </tr>
+        {% for transaction in transactions %}
+            <tr style="height: 20px;">
+                <td style="width: 150px; background: #4d4d4d; text-align: center;">
+                    <p style="text-align: center;" align="center">
+                        <span style="font-size: 12pt;">
+                            <strong>
+                                <span style="font-family: Arial, sans-serif;">
+                                    {{ transaction.id }}
+                                </span>
+                            </strong>
+                        </span>
+                    </p>
+                </td>
+                <td style="width: 150px; background: #4d4d4d; text-align: center;">
+                    <p style="text-align: center;" align="center">
+                        <span style="font-size: 12pt;">
+                            <strong>
+                                <span style="font-family: Arial, sans-serif;">
+                                    {{ transaction.carte.employe.employeur.libelle }}
+                                </span>
+                            </strong>
+                        </span>
+                    </p>
+                </td>
+                <td style="width: 150px; background: #4d4d4d; text-align: center;">
+                    <p style="text-align: center;" align="center">
+                        <span style="font-size: 12pt;">
+                            <strong>
+                                <span style="font-family: Arial, sans-serif;">
+                                    {{ transaction.date | date("d/m/Y") }}
+                                </span>
+                            </strong>
+                        </span>
+                    </p>
+                </td>
+                <td style="width: 150px; background: #4d4d4d; text-align: center;">
+                    <p style="text-align: center;" align="center">
+                        <span style="font-size: 12pt;">
+                            <strong>
+                                <span style="font-family: Arial, sans-serif;">
+                                    {{ transaction.date | date("g:ia") }}
+                                </span>
+                            </strong>
+                        </span>
+                    </p>
+                </td>
+                <td style="width: 150px; background: #4d4d4d; text-align: center;">
+                    <p style="text-align: center;" align="center">
+                        <span style="font-size: 12pt;">
+                            <strong>
+                                <span style="font-family: Arial, sans-serif;">
+                                    {{ transaction.montant }} &euro;
+                                </span>
+                            </strong>
+                        </span>
+                    </p>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <table style="width: 800px;">
+        <tbody>
+        <tr>
+            <td style="width: 370px;">
+                <p>
+                    <span style="font-size: 14pt;"><strong>Total TTC en euros:</strong> {{ totale }} &euro;</span>
+                </p>
+            </td>
+            <td style="width: 370px; text-align: right; margin-right: 15px"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <div>
+        <p align="justify">
+            <span style="color: #808080; font-family: Arial, sans-serif; font-size: small;">
+                Conditions de paiement&nbsp;: paiement &agrave; r&eacute;ception de facture, &agrave;
+                30 jours...
+            </span>
+        </p>
+        <p align="justify">
+            <span style="color: #808080; font-family: Arial, sans-serif; font-size: small;">
+                Aucun escompte consenti pour r&egrave;glement anticip&eacute;
+            </span>
+        </p>
+        <p align="justify">
+            <span style="color: #808080; font-family: Arial, sans-serif; font-size: small;">
+                Tout incident de paiement est passible d'int&eacute;r&ecirc;t de retard. Le montant des
+                p&eacute;nalit&eacute;s r&eacute;sulte de l'application aux sommes <br>
+                restant dues d'un taux d'int&eacute;r&ecirc;t l&eacute;gal en vigueur au
+                moment de l'incident.
+            </span>
+        </p>
+        <p align="justify">
+            <span style="color: #808080; font-family: Arial, sans-serif; font-size: small;">
+                Indemnit&eacute; forfaitaire pour frais de recouvrement due au cr&eacute;ancier en cas de
+                retard de paiement: 40&euro;
+            </span>
+        </p>
+    </div>
+    <br>
+    <p style="text-align: center;">
+        <strong>
+            <span style="font-size: 10pt;">
+                Dwarse Developpement &ndash; EDI &minus;
+                <a href="https://dwarse.github.io">www.dwarse.github.io</a>
+            </span>
+        </strong>
+    </p>
+    <p style="text-align: center;">
+        <strong>
+            <span style="font-size: 10pt;">
+                20 Avenue Albert Einstein Lyon, France | T&eacute;l. +1-555-123456 |
+                <a href="support@dwarse.fr">
+                    Contactez nous
+                </a>
+            </span>
+        </strong>
+    </p>
+</page>

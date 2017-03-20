@@ -1,5 +1,4 @@
 <?php
-
 namespace AuthBundle\Controller;
 
 use AuthBundle\Entity\User;
@@ -30,11 +29,16 @@ class UserController extends Controller {
             $message = \Swift_Message::newInstance();
             $logoImgUrl = $message->embed(\Swift_Image::fromPath('https://s3.amazonaws.com/dwarse/assets/img/logo.png'));
             $heartImgUrl = $message->embed(\Swift_Image::fromPath('https://s3.amazonaws.com/dwarse/assets/img/heart.png'));
-            $message->setSubject('Confirmation de compte')->setFrom(array('dwarse.development@gmail.com' => 'Dwarse Team'))->setTo($user->getEmail())->setCharset('utf-8')->setContentType('text/html')->setBody($this->renderView('AuthBundle:Emails:post_auth_tokens.html.twig', ['login' => $user->getLogin(), 'url' => $url, 'logoImgUrl' => $logoImgUrl, 'heartImgUrl' => $heartImgUrl]));
+            $message->setSubject('Confirmation de compte')
+                ->setFrom(array('dwarse.development@gmail.com' => 'Dwarse Team'))->setTo($user->getEmail())
+                ->setCharset('utf-8')->setContentType('text/html')
+                ->setBody($this->renderView('AuthBundle:Emails:post_auth_tokens.html.twig', ['login' => $user->getLogin(),
+                    'url' => $url, 'logoImgUrl' => $logoImgUrl, 'heartImgUrl' => $heartImgUrl]));
             $this->get('mailer')->send($message);
             $em->flush();
             return $user;
-        } else {
+        }
+        else {
             return $form;
         }
     }

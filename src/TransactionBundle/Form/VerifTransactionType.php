@@ -1,5 +1,4 @@
 <?php
-
 namespace TransactionBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -18,7 +17,8 @@ class VerifTransactionType extends AbstractType {
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(array('data_class' => 'TransactionBundle\Entity\VerifTransaction', 'csrf_protection' => false));
+        $resolver->setDefaults(array('data_class' => 'TransactionBundle\Entity\VerifTransaction',
+            'csrf_protection' => false));
     }
 
     /**
@@ -27,6 +27,4 @@ class VerifTransactionType extends AbstractType {
     public function getBlockPrefix() {
         return 'transactionbundle_veriftransaction';
     }
-
-
 }

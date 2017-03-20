@@ -1,5 +1,4 @@
 <?php
-
 namespace TransactionBundle\Entity;
 
 use CommercantBundle\Entity\Lecteur;
@@ -21,27 +20,29 @@ class Transaction {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
-
     /**
      * @var float
      *
      * @ORM\Column(name="montant", type="float")
      */
     private $montant;
-
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="avenir", type="boolean")
+     */
+    private $avenir;
     /**
      * @ORM\ManyToOne(targetEntity="EmployeBundle\Entity\Carte", inversedBy="transactions")
      * @ORM\JoinColumn(name="carte_id", referencedColumnName="id")
      */
     private $carte;
-
     /**
      * @ORM\ManyToOne(targetEntity="CommercantBundle\Entity\Lecteur", inversedBy="transactions")
      * @ORM\JoinColumn(name="lecteur_id", referencedColumnName="id")
@@ -66,7 +67,6 @@ class Transaction {
      */
     public function setDate($date) {
         $this->date = $date;
-
         return $this;
     }
 
@@ -88,7 +88,6 @@ class Transaction {
      */
     public function setMontant($montant) {
         $this->montant = $montant;
-
         return $this;
     }
 
@@ -110,7 +109,6 @@ class Transaction {
      */
     public function setCarte(Carte $carte = null) {
         $this->carte = $carte;
-
         return $this;
     }
 
@@ -132,7 +130,6 @@ class Transaction {
      */
     public function setLecteur(Lecteur $lecteur = null) {
         $this->lecteur = $lecteur;
-
         return $this;
     }
 
@@ -143,5 +140,26 @@ class Transaction {
      */
     public function getLecteur() {
         return $this->lecteur;
+    }
+
+    /**
+     * Set avenir
+     *
+     * @param boolean $avenir
+     *
+     * @return Transaction
+     */
+    public function setAvenir($avenir) {
+        $this->avenir = $avenir;
+        return $this;
+    }
+
+    /**
+     * Get avenir
+     *
+     * @return boolean
+     */
+    public function getAvenir() {
+        return $this->avenir;
     }
 }

@@ -24,6 +24,7 @@ class AddTransactionCommand extends ContainerAwareCommand {
                 $date1 = new \DateTime();
                 $date1->modify('+3 hours');
                 $transaction1 = new Transaction();
+                $transaction1->setAvenir(true);
                 $transaction1->setDate($date1);
                 $transaction1->setMontant($montant1);
                 $transaction1->setCarte($carte);
@@ -37,6 +38,7 @@ class AddTransactionCommand extends ContainerAwareCommand {
                 $date2 = new \DateTime();
                 $date2->modify('-3 hours');
                 $transaction2 = new Transaction();
+                $transaction2->setAvenir(true);
                 $transaction2->setDate($date2);
                 $transaction2->setMontant($montant2);
                 $transaction2->setCarte($carte);

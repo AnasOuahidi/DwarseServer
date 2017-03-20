@@ -1,5 +1,4 @@
 <?php
-
 namespace AuthBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

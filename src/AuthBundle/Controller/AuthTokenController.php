@@ -1,5 +1,4 @@
 <?php
-
 namespace AuthBundle\Controller;
 
 use AuthBundle\Entity\AuthToken;
@@ -46,7 +45,8 @@ class AuthTokenController extends Controller {
     private function invalidToken($exist) {
         if ($exist) {
             return View::create(['message' => 'Aucun utilisateur avec ce token'], Response::HTTP_BAD_REQUEST);
-        } else {
+        }
+        else {
             return View::create(['message' => 'Aucun token fourni'], Response::HTTP_BAD_REQUEST);
         }
     }
