@@ -36,8 +36,7 @@
 		"aws/aws-sdk-php": "~2.6",
 		"fzaninotto/faker": "^1.6",
 		"spipu/html2pdf": "^4.6",
-		"rmccue/requests": "^1.7",
-		"ext-gd": "*"
+		"rmccue/requests": "^1.7"
 	},
 	"require-dev": {
 		"sensio/generator-bundle": "^3.0",
