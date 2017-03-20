@@ -7,6 +7,8 @@ TransactionBundle\Entity\Transaction:
             groups: ['transaction']
         montant:
             groups: ['transaction']
+        avenir:
+            groups: ['transaction']
         carte:
             groups: ['transaction']
         lecteur:
