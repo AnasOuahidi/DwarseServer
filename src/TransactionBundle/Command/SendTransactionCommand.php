@@ -59,7 +59,7 @@ class SendTransactionCommand extends ContainerAwareCommand {
         $xml = $serializer->serialize($transactionsXML, 'xml');
         $s3->upload($bucket, 'transactions/crypted/' . $dateDuJour . '.xml', $xml, 'public-read');
         $headers = ['Content-Type' => 'application/xml', 'Accept' => 'application/json', 'Token' => $token];
-        $options = ['timeout' => 2.5];
+        $options = ['timeout' => 25];
         $response = \Requests::post($url . '/transactions', $headers, $xml, $options);
         $responseJson = json_decode($response->body);
         foreach ($transationsDuJour as $transaction) {
