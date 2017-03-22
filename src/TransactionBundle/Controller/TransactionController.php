@@ -1,6 +1,7 @@
 <?php
 namespace TransactionBundle\Controller;
 
+use Aws\S3\S3Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,12 +67,33 @@ class TransactionController extends Controller {
                 ->getNom() . ' ' . $lecteur->getCommercant()->getPrenom();
         $messageCommercant->setSubject('Nouvelle transaction Aventix')
             ->setFrom(array('dwarse.development@gmail.com' => 'Dwarse Team'))->setTo($lecteur->getCommercant()
-            ->getUser()->getEmail())->setCharset('utf-8')->setContentType('text/html')
+                ->getUser()->getEmail())->setCharset('utf-8')->setContentType('text/html')
             ->setBody($this->renderView('@Transaction/Emails/post_transaction_commercant.html.twig', ['logoImgUrl' => $logoImgUrl,
                 'heartImgUrl' => $heartImgUrl, 'name' => $nameCommercant,
                 'date' => $transaction->getDate()->format('d/m/Y'), 'heure' => $transaction->getDate()->format('H:i'),
                 'montant' => $transaction->getMontant()]));
         $this->get('mailer')->send($messageCommercant);
+        $root = $this->get('kernel')->getRootDir();
+        $keyContent = file_get_contents($root . '/AWS_ACCESS_KEY_ID.txt');
+        $secretContent = file_get_contents($root . '/AWS_SECRET_ACCESS_KEY.txt');
+        $bucket = getenv('S3_BUCKET_NAME') ? getenv('S3_BUCKET_NAME') : 'dwarse';
+        $key = getenv('AWS_ACCESS_KEY_ID') ? getenv('AWS_ACCESS_KEY_ID') : $keyContent;
+        $secret = getenv('AWS_SECRET_ACCESS_KEY') ? getenv('AWS_SECRET_ACCESS_KEY') : $secretContent;
+        $s3 = S3Client::factory(['key' => $key, 'secret' => $secret]);
+        $factureNum = time() . mt_rand();
+        $datet = new \DateTime();
+        $content = $this->get('templating')
+            ->render('TransactionBundle:Pdfs:post_edi_commercant.html.twig', ['numFacture' => $factureNum,
+                'date' => $datet, 'nom' => $carte->getEmploye()->getNom(),
+                'prenom' => $carte->getEmploye()->getPrenom(), 'adresse' => $carte->getEmploye()->getAdresse(),
+                'telephone' => $carte->getEmploye()->getNumTel(),
+                'email' => $carte->getEmploye()->getUser()->getEmail(), 'transaction' => $transaction]);
+        $html2pdf = new \HTML2PDF('P', 'A4', 'fr');
+        $html2pdf->WriteHTML($content);
+        $content_PDF = $html2pdf->Output('', true);
+        $pdf = $s3->upload($bucket, 'pdfs/employes/' . $carte->getEmploye()
+                ->getId() . '/' . $transaction->getId() . '.pdf', $content_PDF, 'public-read');
+        $link = $pdf->get('ObjectURL');
         $messageEmploye = \Swift_Message::newInstance();
         $logoImgUrl = $messageEmploye->embed(\Swift_Image::fromPath('https://s3.amazonaws.com/dwarse/assets/img/logo.png'));
         $heartImgUrl = $messageEmploye->embed(\Swift_Image::fromPath('https://s3.amazonaws.com/dwarse/assets/img/heart.png'));
@@ -79,11 +101,11 @@ class TransactionController extends Controller {
                 ->getNom() . ' ' . $carte->getEmploye()->getPrenom();
         $messageEmploye->setSubject('Nouvelle transaction Aventix')
             ->setFrom(array('dwarse.development@gmail.com' => 'Dwarse Team'))->setTo($carte->getEmploye()->getUser()
-            ->getEmail())->setCharset('utf-8')->setContentType('text/html')
+                ->getEmail())->setCharset('utf-8')->setContentType('text/html')
             ->setBody($this->renderView('@Transaction/Emails/post_transaction_employe.html.twig', ['logoImgUrl' => $logoImgUrl,
                 'heartImgUrl' => $heartImgUrl, 'name' => $nameEmploye,
                 'date' => $transaction->getDate()->format('d/m/Y'), 'heure' => $transaction->getDate()->format('H:i'),
-                'montant' => $transaction->getMontant()]));
+                'montant' => $transaction->getMontant()]))->attach(\Swift_Attachment::fromPath($link));;
         $this->get('mailer')->send($messageEmploye);
         return ["Success" => "La transaction à bien été effectuée"];
     }

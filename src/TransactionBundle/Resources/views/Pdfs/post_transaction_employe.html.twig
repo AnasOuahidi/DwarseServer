@@ -5,8 +5,8 @@
         <tbody>
         <tr>
             <td style="width: 370px;">
-                <h3 class="western" style="text-align: center;" align="center"><span
-                            style="color: #22add2;">Dwarse</span><br><span style="color:#4d4d4d">Developement</span>
+                <h3 class="western" style="text-align: center;" align="center">
+                    <span style="color: #22add2;">Dwarse</span><br><span style="color:#4d4d4d">Developement</span>
                 </h3>
             </td>
             <td style="width: 370px; text-align: right; margin-right: 15px">
@@ -31,24 +31,11 @@
                     <span style="font-size: 14pt;"><strong>Factur&eacute; &agrave;:</strong></span>
                 </p>
                 <p>
-                    <span style="font-size: 12pt;">Libelle: {{ libelleCommercant }}</span><br>
-                    <span style="font-size: 12pt;">Adresse: {{ adresseCommercant }}</span><br>
-                    <span style="font-size: 12pt;">Siret: {{ siretCommercant }}</span><br>
-                    <span style="font-size: 12pt;">T&eacute;l&eacute;phone: {{ telCommercant }}</span><br>
-                    <span style="font-size: 12pt;">Courriel: {{ emailCommercant }}</span><br>
-                </p>
-            </td>
-            <td style="width: 370px; text-align: right; margin-right: 15px">
-                <p style="text-align: justify;">
-                    <span style="font-size: 14pt;">
-                        Service de Facturation quotidien Suite &agrave;
-                        l'&eacute;change de donn&eacute;es informatis&eacute;
-                    </span>
-                </p>
-                <p style="text-align: justify;">
-                    <span style="font-size: 14pt;">
-                        <strong>P&eacute;riode totale&nbsp;</strong>: {{ mois }}
-                    </span>
+                    <span style="font-size: 12pt;">Nom: {{ nom }}</span><br>
+                    <span style="font-size: 12pt;">Pr&eacutenom: {{ prenom }}</span><br>
+                    <span style="font-size: 12pt;">Adresse: {{ adresse}}</span><br>
+                    <span style="font-size: 12pt;">T&eacute;l&eacute;phone: {{ telephone}}</span><br>
+                    <span style="font-size: 12pt;">Courriel: {{ email }}</span><br>
                 </p>
             </td>
         </tr>
@@ -63,7 +50,7 @@
                     <span style="font-size: 12pt;">
                         <strong>
                             <span style="font-family: Arial, sans-serif;">
-                                Numéro
+                                Num&eacutero
                             </span>
                         </strong>
                     </span>
@@ -74,7 +61,7 @@
                     <span style="font-size: 12pt;">
                         <strong>
                             <span style="font-family: Arial, sans-serif;">
-                                Soci&eacute;t&eacute;
+                                Restaurant
                             </span>
                         </strong>
                     </span>
@@ -114,10 +101,9 @@
                 </p>
             </td>
         </tr>
-        {% for transaction in transactions %}
-            <tr style="height: 20px;">
-                <td style="width: 150px; background: #4d4d4d; text-align: center;">
-                    <p style="text-align: center;" align="center">
+        <tr style="height: 20px;">
+            <td style="width: 150px; background: #4d4d4d; text-align: center;">
+                <p style="text-align: center;" align="center">
                         <span style="font-size: 12pt;">
                             <strong>
                                 <span style="font-family: Arial, sans-serif;">
@@ -125,21 +111,21 @@
                                 </span>
                             </strong>
                         </span>
-                    </p>
-                </td>
-                <td style="width: 150px; background: #4d4d4d; text-align: center;">
-                    <p style="text-align: center;" align="center">
+                </p>
+            </td>
+            <td style="width: 150px; background: #4d4d4d; text-align: center;">
+                <p style="text-align: center;" align="center">
                         <span style="font-size: 12pt;">
                             <strong>
                                 <span style="font-family: Arial, sans-serif;">
-                                    {{ transaction.carte.employe.employeur.libelle }}
+                                    {{ transaction.lecteur.commercant.libelle }}
                                 </span>
                             </strong>
                         </span>
-                    </p>
-                </td>
-                <td style="width: 150px; background: #4d4d4d; text-align: center;">
-                    <p style="text-align: center;" align="center">
+                </p>
+            </td>
+            <td style="width: 150px; background: #4d4d4d; text-align: center;">
+                <p style="text-align: center;" align="center">
                         <span style="font-size: 12pt;">
                             <strong>
                                 <span style="font-family: Arial, sans-serif;">
@@ -147,10 +133,10 @@
                                 </span>
                             </strong>
                         </span>
-                    </p>
-                </td>
-                <td style="width: 150px; background: #4d4d4d; text-align: center;">
-                    <p style="text-align: center;" align="center">
+                </p>
+            </td>
+            <td style="width: 150px; background: #4d4d4d; text-align: center;">
+                <p style="text-align: center;" align="center">
                         <span style="font-size: 12pt;">
                             <strong>
                                 <span style="font-family: Arial, sans-serif;">
@@ -158,10 +144,10 @@
                                 </span>
                             </strong>
                         </span>
-                    </p>
-                </td>
-                <td style="width: 150px; background: #4d4d4d; text-align: center;">
-                    <p style="text-align: center;" align="center">
+                </p>
+            </td>
+            <td style="width: 150px; background: #4d4d4d; text-align: center;">
+                <p style="text-align: center;" align="center">
                         <span style="font-size: 12pt;">
                             <strong>
                                 <span style="font-family: Arial, sans-serif;">
@@ -169,10 +155,9 @@
                                 </span>
                             </strong>
                         </span>
-                    </p>
-                </td>
-            </tr>
-        {% endfor %}
+                </p>
+            </td>
+        </tr>
         </tbody>
     </table>
     <br>
