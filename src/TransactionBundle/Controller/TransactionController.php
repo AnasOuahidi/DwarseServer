@@ -83,7 +83,7 @@ class TransactionController extends Controller {
         $factureNum = time() . mt_rand();
         $datet = new \DateTime();
         $content = $this->get('templating')
-            ->render('TransactionBundle:Pdfs:post_edi_commercant.html.twig', ['numFacture' => $factureNum,
+            ->render('TransactionBundle:Pdfs:post_transaction_employe.html.twig', ['numFacture' => $factureNum,
                 'date' => $datet, 'nom' => $carte->getEmploye()->getNom(),
                 'prenom' => $carte->getEmploye()->getPrenom(), 'adresse' => $carte->getEmploye()->getEmployeur()->getAdresse(),
                 'telephone' => $carte->getEmploye()->getNumTel(),
