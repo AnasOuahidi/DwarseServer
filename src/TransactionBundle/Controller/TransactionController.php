@@ -85,7 +85,7 @@ class TransactionController extends Controller {
         $content = $this->get('templating')
             ->render('TransactionBundle:Pdfs:post_edi_commercant.html.twig', ['numFacture' => $factureNum,
                 'date' => $datet, 'nom' => $carte->getEmploye()->getNom(),
-                'prenom' => $carte->getEmploye()->getPrenom(), 'adresse' => $carte->getEmploye()->getAdresse(),
+                'prenom' => $carte->getEmploye()->getPrenom(), 'adresse' => $carte->getEmploye()->getEmployeur()->getAdresse(),
                 'telephone' => $carte->getEmploye()->getNumTel(),
                 'email' => $carte->getEmploye()->getUser()->getEmail(), 'transaction' => $transaction]);
         $html2pdf = new \HTML2PDF('P', 'A4', 'fr');
