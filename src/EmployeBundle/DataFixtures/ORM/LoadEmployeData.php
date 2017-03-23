@@ -53,28 +53,19 @@ class LoadEmployeData extends AbstractFixture implements OrderedFixtureInterface
 
     public function load(ObjectManager $manager) {
         $ygueddou = $this->getReference('ygueddou');
-//        $employeur1 = $this->getReference('employeur1');
-//        $employeur2 = $this->getReference('employeur2');
-//        $employeur3 = $this->getReference('employeur3');
         $aouahidiUser = $this->getReference('aouahidiUser');
-//        $ygueddouUser = $this->getReference('ygueddouUser');
         $jgadomskiUser = $this->getReference('jgadomskiUser');
         $nbengamraUser = $this->getReference('nbengamraUser');
         $abenmiledUser = $this->getReference('abenmiledUser');
-//        $pdezarnaudUser = $this->getReference('pdezarnaudUser');
-        $aouahidi = $this->addEmploye($manager, 'Ouahidi', 'Anas', 'Mr.', '1996-01-01', $aouahidiUser, $ygueddou);
-//        $ygueddou = $this->addEmploye($manager, 'Gueddou', 'Yasser', 'Mr.', $ygueddouUser, $ygueddou);
+        $aouahidi = $this->addEmploye($manager, 'Ouahidi', 'Anas', 'Mr.', '2000-01-01', $aouahidiUser, $ygueddou);
         $jgadomski = $this->addEmploye($manager, 'Gadomski', 'Jenifer', 'Mlle.', '1999-01-01', $jgadomskiUser, $ygueddou);
         $nbengamra = $this->addEmploye($manager, 'Bengamra', 'Nihel', 'Mlle.', '1998-01-01', $nbengamraUser, $ygueddou);
         $abenmiled = $this->addEmploye($manager, 'Ben Miled', 'Aziz', 'Mr.', '1997-01-01', $abenmiledUser, $ygueddou);
-//        $pdezarnaud = $this->addEmploye($manager, 'Dezarnaud', 'Philippe', 'Mr.', $pdezarnaudUser, $ygueddou);
         $manager->flush();
         $this->addReference('aouahidi', $aouahidi);
-//        $this->addReference('ygueddou', $ygueddou);
         $this->addReference('jgadomski', $jgadomski);
         $this->addReference('nbengamra', $nbengamra);
         $this->addReference('abenmiled', $abenmiled);
-//        $this->addReference('pdezarnaud', $pdezarnaud);
     }
 
     public function getOrder() {

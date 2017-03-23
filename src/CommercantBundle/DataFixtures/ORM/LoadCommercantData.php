@@ -51,21 +51,11 @@ class LoadCommercantData extends AbstractFixture implements OrderedFixtureInterf
 
     public function load(ObjectManager $manager) {
         $pdezarnaudUser = $this->getReference('pdezarnaudUser');
-//        $commercant2User = $this->getReference('commercant2User');
-//        $commercant3User = $this->getReference('commercant3User');
         $pdezarnaud = $this->addCommercant('Dezarnaud', 'Philippes', 'Mr.', $pdezarnaudUser);
-//        $commercant2 = $this->addCommercant($commercant2User);
-//        $commercant3 = $this->addCommercant($commercant3User);
         $manager->persist($pdezarnaud);
-//        $manager->persist($commercant2);
-//        $manager->persist($commercant3);
         $manager->persist($pdezarnaudUser);
-//        $manager->persist($commercant2User);
-//        $manager->persist($commercant3User);
         $manager->flush();
         $this->addReference('pdezarnaud', $pdezarnaud);
-//        $this->addReference('commercant2', $commercant2);
-//        $this->addReference('commercant3', $commercant3);
     }
 
     public function getOrder() {

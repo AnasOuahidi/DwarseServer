@@ -48,21 +48,11 @@ class LoadEmployeurData extends AbstractFixture implements OrderedFixtureInterfa
 
     public function load(ObjectManager $manager) {
         $ygueddouUser = $this->getReference('ygueddouUser');
-//        $employeur2User = $this->getReference('employeur2User');
-//        $employeur3User = $this->getReference('employeur3User');
         $ygueddou = $this->addEmployeur('Gueddou', 'Yasser', 'Mr.', $ygueddouUser);
-//        $employeur2 = $this->addEmployeur($employeur2User);
-//        $employeur3 = $this->addEmployeur($employeur3User);
         $manager->persist($ygueddouUser);
-//        $manager->persist($employeur2User);
-//        $manager->persist($employeur3User);
         $manager->persist($ygueddou);
-//        $manager->persist($employeur2);
-//        $manager->persist($employeur3);
         $manager->flush();
         $this->addReference('ygueddou', $ygueddou);
-//        $this->addReference('employeur2', $employeur2);
-//        $this->addReference('employeur3', $employeur3);
     }
 
     public function getOrder() {
