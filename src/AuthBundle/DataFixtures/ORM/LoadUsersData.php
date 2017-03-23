@@ -45,30 +45,30 @@ class LoadUsersData extends AbstractFixture implements OrderedFixtureInterface, 
     }
 
     public function load(ObjectManager $manager) {
-        $aouahidi = $this->addUser('aouahidi', 'aouahidi@dwarse.fr', 'ROLE_EMPLOYE');
-        $ygueddou = $this->addUser('ygueddou', 'ygueddou@dwarse.fr', 'ROLE_EMPLOYE');
-        $jgadomski = $this->addUser('jgadomski', 'jgadomski@dwarse.fr', 'ROLE_EMPLOYE');
-        $nbengamra = $this->addUser('nbengamra', 'nbengamra@dwarse.fr', 'ROLE_EMPLOYE');
-        $abenmiled = $this->addUser('abenmiled', 'abenmiled@dwarse.fr', 'ROLE_EMPLOYE');
-        $pdezarnaud = $this->addUser('pdezarnaud', 'pdezarnaud@dwarse.fr', 'ROLE_EMPLOYE');
-        $employeur1 = $this->addUser('employeur1', $this->faker->companyEmail, 'ROLE_EMPLOYEUR');
-        $employeur2 = $this->addUser('employeur2', $this->faker->companyEmail, 'ROLE_EMPLOYEUR');
-        $employeur3 = $this->addUser('employeur3', $this->faker->companyEmail, 'ROLE_EMPLOYEUR');
-        $commercant1 = $this->addUser('commercant1', $this->faker->companyEmail, 'ROLE_COMMERCANT');
-        $commercant2 = $this->addUser('commercant2', $this->faker->companyEmail, 'ROLE_COMMERCANT');
-        $commercant3 = $this->addUser('commercant3', $this->faker->companyEmail, 'ROLE_COMMERCANT');
+        $aouahidi = $this->addUser('aouahidi', 'anas.ouahidi@insa-lyon.fr', 'ROLE_EMPLOYE');
+//        $ygueddou = $this->addUser('ygueddou', 'ygueddou@dwarse.fr', 'ROLE_EMPLOYE');
+        $jgadomski = $this->addUser('jgadomski', 'jenifer.gadomski@insa-lyon.fr', 'ROLE_EMPLOYE');
+        $nbengamra = $this->addUser('nbengamra', 'nihel.ben-gamra@insa-lyon.fr', 'ROLE_EMPLOYE');
+        $abenmiled = $this->addUser('abenmiled', 'aziz.ben-miled@insa-lyon.fr', 'ROLE_EMPLOYE');
+        $ygueddou = $this->addUser('ygueddou', 'yasser.gueddou@insa-lyon.fr', 'ROLE_EMPLOYEUR');
+//        $employeur2 = $this->addUser('employeur2', $this->faker->companyEmail, 'ROLE_EMPLOYEUR');
+//        $employeur3 = $this->addUser('employeur3', $this->faker->companyEmail, 'ROLE_EMPLOYEUR');
+        $pdezarnaud = $this->addUser('pdezarnaud', 'philippes.dezarnaud@insa-lyon.fr', 'ROLE_COMMERCANT');
+//        $commercant1 = $this->addUser('commercant1', $this->faker->companyEmail, 'ROLE_COMMERCANT');
+//        $commercant2 = $this->addUser('commercant2', $this->faker->companyEmail, 'ROLE_COMMERCANT');
+//        $commercant3 = $this->addUser('commercant3', $this->faker->companyEmail, 'ROLE_COMMERCANT');
         $manager->persist($aouahidi);
         $manager->persist($ygueddou);
         $manager->persist($jgadomski);
         $manager->persist($nbengamra);
         $manager->persist($abenmiled);
         $manager->persist($pdezarnaud);
-        $manager->persist($employeur1);
-        $manager->persist($employeur2);
-        $manager->persist($employeur3);
-        $manager->persist($commercant1);
-        $manager->persist($commercant2);
-        $manager->persist($commercant3);
+//        $manager->persist($employeur1);
+//        $manager->persist($employeur2);
+//        $manager->persist($employeur3);
+//        $manager->persist($commercant1);
+//        $manager->persist($commercant2);
+//        $manager->persist($commercant3);
         $manager->flush();
         $this->addReference('aouahidiUser', $aouahidi);
         $this->addReference('ygueddouUser', $ygueddou);
@@ -76,12 +76,12 @@ class LoadUsersData extends AbstractFixture implements OrderedFixtureInterface, 
         $this->addReference('nbengamraUser', $nbengamra);
         $this->addReference('abenmiledUser', $abenmiled);
         $this->addReference('pdezarnaudUser', $pdezarnaud);
-        $this->addReference('employeur1User', $employeur1);
-        $this->addReference('employeur2User', $employeur2);
-        $this->addReference('employeur3User', $employeur3);
-        $this->addReference('commercant1User', $commercant1);
-        $this->addReference('commercant2User', $commercant2);
-        $this->addReference('commercant3User', $commercant3);
+//        $this->addReference('employeur1User', $employeur1);
+//        $this->addReference('employeur2User', $employeur2);
+//        $this->addReference('employeur3User', $employeur3);
+//        $this->addReference('commercant1User', $commercant1);
+//        $this->addReference('commercant2User', $commercant2);
+//        $this->addReference('commercant3User', $commercant3);
     }
 
     public function getOrder() {

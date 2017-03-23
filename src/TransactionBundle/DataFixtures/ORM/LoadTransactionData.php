@@ -45,20 +45,20 @@ class LoadTransactionData extends AbstractFixture implements OrderedFixtureInter
 
     public function load(ObjectManager $manager) {
         $carteAouahidi = $this->getReference('carteAouahidi');
-        $carteYgueddou = $this->getReference('carteYgueddou');
+//        $carteYgueddou = $this->getReference('carteYgueddou');
         $carteJgadomski = $this->getReference('carteJgadomski');
         $carteNbengamra = $this->getReference('carteNbengamra');
         $carteAbenmiled = $this->getReference('carteAbenmiled');
-        $cartePdezarnaud = $this->getReference('cartePdezarnaud');
-        $lecteur1 = $this->getReference('lecteur1');
-        $lecteur2 = $this->getReference('lecteur2');
-        $lecteur3 = $this->getReference('lecteur3');
-        $lecteurs = [$lecteur1, $lecteur2, $lecteur3];
-        $cartes = [$carteAouahidi, $carteYgueddou, $carteJgadomski, $carteNbengamra, $carteAbenmiled, $cartePdezarnaud];
+//        $cartePdezarnaud = $this->getReference('cartePdezarnaud');
+        $lecteur = $this->getReference('lecteur');
+//        $lecteur2 = $this->getReference('lecteur2');
+//        $lecteur3 = $this->getReference('lecteur3');
+//        $lecteurs = [$lecteur1, $lecteur2, $lecteur3];
+        $cartes = [$carteAouahidi, $carteJgadomski, $carteNbengamra, $carteAbenmiled];
         for ($i = 0; $i < 100; $i++) {
             $montant = $this->random_float(5, 10);
-            $carte = $cartes[rand(0, 5)];
-            $lecteur = $lecteurs[rand(0, 2)];
+            $carte = $cartes[rand(0, 3)];
+//            $lecteur = $lecteurs[rand(0, 2)];
             if ($montant < $carte->getSolde() && !$carte->getOpposed()) {
                 $transaction = $this->addTransaction($montant, $carte, $lecteur);
                 $carte->setSolde($carte->getSolde() - $montant);

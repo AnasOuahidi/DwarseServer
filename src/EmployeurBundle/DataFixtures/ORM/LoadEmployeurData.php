@@ -31,12 +31,12 @@ class LoadEmployeurData extends AbstractFixture implements OrderedFixtureInterfa
         $this->faker->addProvider(new Internet($this->faker));
     }
 
-    private function addEmployeur($user) {
+    private function addEmployeur($nom, $prenom, $civilite, $user) {
         $employeur = new Employeur();
         $employeur->setLibelle($this->faker->company);
-        $employeur->setNom($this->faker->lastName);
-        $employeur->setPrenom($this->faker->firstName);
-        $employeur->setCivilite($this->faker->title);
+        $employeur->setNom($nom);
+        $employeur->setPrenom($prenom);
+        $employeur->setCivilite($civilite);
         $employeur->setPhoto('https://s3.amazonaws.com/dwarse/employeur/photo/' . $user->getLogin() . '.png');
         $employeur->setAdresse($this->faker->address);
         $employeur->setSiret($this->faker->siret);
@@ -47,22 +47,22 @@ class LoadEmployeurData extends AbstractFixture implements OrderedFixtureInterfa
     }
 
     public function load(ObjectManager $manager) {
-        $employeur1User = $this->getReference('employeur1User');
-        $employeur2User = $this->getReference('employeur2User');
-        $employeur3User = $this->getReference('employeur3User');
-        $employeur1 = $this->addEmployeur($employeur1User);
-        $employeur2 = $this->addEmployeur($employeur2User);
-        $employeur3 = $this->addEmployeur($employeur3User);
-        $manager->persist($employeur1User);
-        $manager->persist($employeur2User);
-        $manager->persist($employeur3User);
-        $manager->persist($employeur1);
-        $manager->persist($employeur2);
-        $manager->persist($employeur3);
+        $ygueddouUser = $this->getReference('ygueddouUser');
+//        $employeur2User = $this->getReference('employeur2User');
+//        $employeur3User = $this->getReference('employeur3User');
+        $ygueddou = $this->addEmployeur('Gueddou', 'Yasser', 'Mr.', $ygueddouUser);
+//        $employeur2 = $this->addEmployeur($employeur2User);
+//        $employeur3 = $this->addEmployeur($employeur3User);
+        $manager->persist($ygueddouUser);
+//        $manager->persist($employeur2User);
+//        $manager->persist($employeur3User);
+        $manager->persist($ygueddou);
+//        $manager->persist($employeur2);
+//        $manager->persist($employeur3);
         $manager->flush();
-        $this->addReference('employeur1', $employeur1);
-        $this->addReference('employeur2', $employeur2);
-        $this->addReference('employeur3', $employeur3);
+        $this->addReference('ygueddou', $ygueddou);
+//        $this->addReference('employeur2', $employeur2);
+//        $this->addReference('employeur3', $employeur3);
     }
 
     public function getOrder() {

@@ -33,13 +33,13 @@ class LoadCommercantData extends AbstractFixture implements OrderedFixtureInterf
         $this->faker->addProvider(new Internet($this->faker));
     }
 
-    private function addCommercant($user) {
+    private function addCommercant($nom, $prenom, $civilite, $user) {
         $commercant = new Commercant();
         $commercant->setLibelle($this->faker->company);
-        $commercant->setNom($this->faker->lastName);
-        $commercant->setPrenom($this->faker->firstName);
-        $commercant->setCivilite($this->faker->title);
-        $commercant->setPhoto('https://s3.amazonaws.com/dwarse/employeur/photo/' . $user->getLogin() . '.png');
+        $commercant->setNom($nom);
+        $commercant->setPrenom($prenom);
+        $commercant->setCivilite($civilite);
+        $commercant->setPhoto('https://s3.amazonaws.com/dwarse/commercant/photo/' . $user->getLogin() . '.png');
         $commercant->setAdresse($this->faker->address);
         $commercant->setSiret($this->faker->siret);
         $commercant->setIban($this->faker->iban('fr_FR'));
@@ -50,22 +50,22 @@ class LoadCommercantData extends AbstractFixture implements OrderedFixtureInterf
     }
 
     public function load(ObjectManager $manager) {
-        $commercant1User = $this->getReference('commercant1User');
-        $commercant2User = $this->getReference('commercant2User');
-        $commercant3User = $this->getReference('commercant3User');
-        $commercant1 = $this->addCommercant($commercant1User);
-        $commercant2 = $this->addCommercant($commercant2User);
-        $commercant3 = $this->addCommercant($commercant3User);
-        $manager->persist($commercant1);
-        $manager->persist($commercant2);
-        $manager->persist($commercant3);
-        $manager->persist($commercant1User);
-        $manager->persist($commercant2User);
-        $manager->persist($commercant3User);
+        $pdezarnaudUser = $this->getReference('pdezarnaudUser');
+//        $commercant2User = $this->getReference('commercant2User');
+//        $commercant3User = $this->getReference('commercant3User');
+        $pdezarnaud = $this->addCommercant('Dezarnaud', 'Philippes', 'Mr.', $pdezarnaudUser);
+//        $commercant2 = $this->addCommercant($commercant2User);
+//        $commercant3 = $this->addCommercant($commercant3User);
+        $manager->persist($pdezarnaud);
+//        $manager->persist($commercant2);
+//        $manager->persist($commercant3);
+        $manager->persist($pdezarnaudUser);
+//        $manager->persist($commercant2User);
+//        $manager->persist($commercant3User);
         $manager->flush();
-        $this->addReference('commercant1', $commercant1);
-        $this->addReference('commercant2', $commercant2);
-        $this->addReference('commercant3', $commercant3);
+        $this->addReference('pdezarnaud', $pdezarnaud);
+//        $this->addReference('commercant2', $commercant2);
+//        $this->addReference('commercant3', $commercant3);
     }
 
     public function getOrder() {
