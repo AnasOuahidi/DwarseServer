@@ -1,5 +1,4 @@
 <?php
-
 namespace TransactionBundle\Command;
 
 use TransactionBundle\Entity\Transaction;
@@ -20,7 +19,7 @@ class AddTransactionCommand extends ContainerAwareCommand {
         foreach ($cartes as $carte) {
             $montant1 = $this->random_float(5, 15);
             if ($montant1 < $carte->getSolde() && !$carte->getOpposed()) {
-                $lecteur1 = $lecteurs[rand(0, 2)];
+                $lecteur = $lecteurs[0];
                 $date1 = new \DateTime();
                 $date1->modify('+3 hours');
                 $transaction1 = new Transaction();
@@ -28,13 +27,13 @@ class AddTransactionCommand extends ContainerAwareCommand {
                 $transaction1->setDate($date1);
                 $transaction1->setMontant($montant1);
                 $transaction1->setCarte($carte);
-                $transaction1->setLecteur($lecteur1);
+                $transaction1->setLecteur($lecteur);
                 $carte->setSolde($carte->getSolde() - $montant1);
                 $em->persist($transaction1);
             }
             $montant2 = $this->random_float(5, 15);
             if ($montant2 < $carte->getSolde() && !$carte->getOpposed()) {
-                $lecteur2 = $lecteurs[rand(0, 2)];
+                $lecteur = $lecteurs[0];
                 $date2 = new \DateTime();
                 $date2->modify('-3 hours');
                 $transaction2 = new Transaction();
@@ -42,7 +41,7 @@ class AddTransactionCommand extends ContainerAwareCommand {
                 $transaction2->setDate($date2);
                 $transaction2->setMontant($montant2);
                 $transaction2->setCarte($carte);
-                $transaction2->setLecteur($lecteur2);
+                $transaction2->setLecteur($lecteur);
                 $carte->setSolde($carte->getSolde() - $montant2);
                 $em->persist($transaction2);
             }
@@ -54,5 +53,4 @@ class AddTransactionCommand extends ContainerAwareCommand {
     function random_float($min, $max) {
         return floatval(round(($min + lcg_value() * (abs($max - $min))), 2));
     }
-
 }
