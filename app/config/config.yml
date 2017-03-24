@@ -70,8 +70,8 @@ swiftmailer:
     encryption: ssl
     auth_mode:  login
     host:      smtp.gmail.com
-    username:  dwarse.developement@gmail.com
-    password:  dwarsiens
+    username:  clientaventix@gmail.com
+    password:  client123
     spool:     { type: memory }
 
 
