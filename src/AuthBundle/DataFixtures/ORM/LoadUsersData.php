@@ -45,7 +45,7 @@ class LoadUsersData extends AbstractFixture implements OrderedFixtureInterface, 
     }
 
     public function load(ObjectManager $manager) {
-        $aouahidi = $this->addUser('aouahidi', 'anas.ouahidi@insa-lyon.fr', 'ROLE_EMPLOYE');
+        $aouahidi = $this->addUser('aouahidi', 'anasouahidi@gmail.com', 'ROLE_EMPLOYE');
         $jgadomski = $this->addUser('jgadomski', 'jenifer.gadomski@insa-lyon.fr', 'ROLE_EMPLOYE');
         $nbengamra = $this->addUser('nbengamra', 'nihel.ben-gamra@insa-lyon.fr', 'ROLE_EMPLOYE');
         $abenmiled = $this->addUser('abenmiled', 'aziz.ben-miled@insa-lyon.fr', 'ROLE_EMPLOYE');
@@ -53,8 +53,8 @@ class LoadUsersData extends AbstractFixture implements OrderedFixtureInterface, 
         $pdezarnaud = $this->addUser('pdezarnaud', 'philippe.dezarnaud@insa-lyon.fr', 'ROLE_COMMERCANT');
         $pascale = $this->addUser('pascale', 'pascale.coquard@insa-lyon.fr', 'ROLE_EMPLOYE');
         $youssef = $this->addUser('youssef', 'youssef.amghar@insa-lyon.fr', 'ROLE_EMPLOYE');
-        $mohammed = $this->addUser('mohammed', 'mohammed.ouhalima@insa-lyon.fr', 'ROLE_EMPLOYE');
-        $florron = $this->addUser('floront', 'floront.duclos@insa-lyon.fr', 'ROLE_EMPLOYE');
+        $mohammed = $this->addUser('mohamed', 'mohamed.ouhalima@insa-lyon.fr', 'ROLE_EMPLOYE');
+        $florron = $this->addUser('florent', 'florent.duclos@insa-lyon.fr', 'ROLE_EMPLOYE');
         $manager->persist($aouahidi);
         $manager->persist($ygueddou);
         $manager->persist($jgadomski);
