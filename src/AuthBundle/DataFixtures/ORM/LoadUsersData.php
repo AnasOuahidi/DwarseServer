@@ -51,12 +51,20 @@ class LoadUsersData extends AbstractFixture implements OrderedFixtureInterface, 
         $abenmiled = $this->addUser('abenmiled', 'aziz.ben-miled@insa-lyon.fr', 'ROLE_EMPLOYE');
         $ygueddou = $this->addUser('ygueddou', 'yasser.gueddou@insa-lyon.fr', 'ROLE_EMPLOYEUR');
         $pdezarnaud = $this->addUser('pdezarnaud', 'philippes.dezarnaud@insa-lyon.fr', 'ROLE_COMMERCANT');
+        $pascale = $this->addUser('pascale', 'pascale.coquard@insa-lyon.fr', 'ROLE_EMPLOYE');
+        $youssef = $this->addUser('youssef', 'youssef.amghar@insa-lyon.fr', 'ROLE_EMPLOYE');
+        $mohammed = $this->addUser('mohammed', 'mohammed.ou-halima@insa-lyon.fr', 'ROLE_EMPLOYE');
+        $florron = $this->addUser('floront', 'floront.duclos@insa-lyon.fr', 'ROLE_EMPLOYE');
         $manager->persist($aouahidi);
         $manager->persist($ygueddou);
         $manager->persist($jgadomski);
         $manager->persist($nbengamra);
         $manager->persist($abenmiled);
         $manager->persist($pdezarnaud);
+        $manager->persist($pascale);
+        $manager->persist($youssef);
+        $manager->persist($mohammed);
+        $manager->persist($florron);
         $manager->flush();
         $this->addReference('aouahidiUser', $aouahidi);
         $this->addReference('ygueddouUser', $ygueddou);
@@ -64,6 +72,10 @@ class LoadUsersData extends AbstractFixture implements OrderedFixtureInterface, 
         $this->addReference('nbengamraUser', $nbengamra);
         $this->addReference('abenmiledUser', $abenmiled);
         $this->addReference('pdezarnaudUser', $pdezarnaud);
+        $this->addReference('pascaleUser', $pascale);
+        $this->addReference('youssefUser', $youssef);
+        $this->addReference('mohammedUser', $mohammed);
+        $this->addReference('florronUser', $florron);
     }
 
     public function getOrder() {

@@ -53,6 +53,10 @@ class LoadAuthTokensData extends AbstractFixture implements OrderedFixtureInterf
         $this->tokenToUser($manager, $this->getReference('nbengamraUser'), $this->addAuthToken());
         $this->tokenToUser($manager, $this->getReference('abenmiledUser'), $this->addAuthToken());
         $this->tokenToUser($manager, $this->getReference('pdezarnaudUser'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('pascaleUser'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('youssefUser'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('mohammedUser'), $this->addAuthToken());
+        $this->tokenToUser($manager, $this->getReference('florronUser'), $this->addAuthToken());
         $manager->flush();
     }
 

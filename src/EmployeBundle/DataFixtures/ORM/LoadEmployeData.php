@@ -57,15 +57,27 @@ class LoadEmployeData extends AbstractFixture implements OrderedFixtureInterface
         $jgadomskiUser = $this->getReference('jgadomskiUser');
         $nbengamraUser = $this->getReference('nbengamraUser');
         $abenmiledUser = $this->getReference('abenmiledUser');
+        $pascaleUser = $this->getReference('pascaleUser');
+        $youssefUser = $this->getReference('youssefUser');
+        $mohammedUser = $this->getReference('mohammedUser');
+        $florronUser = $this->getReference('florronUser');
         $aouahidi = $this->addEmploye($manager, 'Ouahidi', 'Anas', 'Mr.', '2000-01-01', $aouahidiUser, $ygueddou);
         $jgadomski = $this->addEmploye($manager, 'Gadomski', 'Jenifer', 'Mlle.', '1999-01-01', $jgadomskiUser, $ygueddou);
         $nbengamra = $this->addEmploye($manager, 'Bengamra', 'Nihel', 'Mlle.', '1998-01-01', $nbengamraUser, $ygueddou);
         $abenmiled = $this->addEmploye($manager, 'Ben Miled', 'Aziz', 'Mr.', '1997-01-01', $abenmiledUser, $ygueddou);
+        $pascale = $this->addEmploye($manager, 'Coquard', 'Pascale', 'Mme.', '1997-01-01', $pascaleUser, $ygueddou);
+        $youssef = $this->addEmploye($manager, 'Amghar', 'Youssef', 'Mr.', '1997-01-01', $youssefUser, $ygueddou);
+        $mohammed = $this->addEmploye($manager, 'OuHalima', 'Mohammed', 'Mr.', '1997-01-01', $mohammedUser, $ygueddou);
+        $florron = $this->addEmploye($manager, 'Floront', 'Duclos', 'Mr.', '1997-01-01', $florronUser, $ygueddou);
         $manager->flush();
         $this->addReference('aouahidi', $aouahidi);
         $this->addReference('jgadomski', $jgadomski);
         $this->addReference('nbengamra', $nbengamra);
         $this->addReference('abenmiled', $abenmiled);
+        $this->addReference('pascale', $pascale);
+        $this->addReference('youssef', $youssef);
+        $this->addReference('mohammed', $mohammed);
+        $this->addReference('florron', $florron);
     }
 
     public function getOrder() {

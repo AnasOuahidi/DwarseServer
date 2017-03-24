@@ -33,9 +33,9 @@ class LoadCommercantData extends AbstractFixture implements OrderedFixtureInterf
         $this->faker->addProvider(new Internet($this->faker));
     }
 
-    private function addCommercant($nom, $prenom, $civilite, $user) {
+    private function addCommercant($libelle, $nom, $prenom, $civilite, $user) {
         $commercant = new Commercant();
-        $commercant->setLibelle($this->faker->company);
+        $commercant->setLibelle($libelle);
         $commercant->setNom($nom);
         $commercant->setPrenom($prenom);
         $commercant->setCivilite($civilite);
@@ -51,7 +51,7 @@ class LoadCommercantData extends AbstractFixture implements OrderedFixtureInterf
 
     public function load(ObjectManager $manager) {
         $pdezarnaudUser = $this->getReference('pdezarnaudUser');
-        $pdezarnaud = $this->addCommercant('Dezarnaud', 'Philippes', 'Mr.', $pdezarnaudUser);
+        $pdezarnaud = $this->addCommercant('Chez Philippes', 'Dezarnaud', 'Philippes', 'Mr.', $pdezarnaudUser);
         $manager->persist($pdezarnaud);
         $manager->persist($pdezarnaudUser);
         $manager->flush();
