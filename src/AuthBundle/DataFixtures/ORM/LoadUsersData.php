@@ -50,7 +50,7 @@ class LoadUsersData extends AbstractFixture implements OrderedFixtureInterface, 
         $nbengamra = $this->addUser('nbengamra', 'nihel.ben-gamra@insa-lyon.fr', 'ROLE_EMPLOYE');
         $abenmiled = $this->addUser('abenmiled', 'aziz.ben-miled@insa-lyon.fr', 'ROLE_EMPLOYE');
         $ygueddou = $this->addUser('ygueddou', 'yasser.gueddou@insa-lyon.fr', 'ROLE_EMPLOYEUR');
-        $pdezarnaud = $this->addUser('pdezarnaud', 'philippes.dezarnaud@insa-lyon.fr', 'ROLE_COMMERCANT');
+        $pdezarnaud = $this->addUser('pdezarnaud', 'philippe.dezarnaud@insa-lyon.fr', 'ROLE_COMMERCANT');
         $pascale = $this->addUser('pascale', 'pascale.coquard@insa-lyon.fr', 'ROLE_EMPLOYE');
         $youssef = $this->addUser('youssef', 'youssef.amghar@insa-lyon.fr', 'ROLE_EMPLOYE');
         $mohammed = $this->addUser('mohammed', 'mohammed.ouhalima@insa-lyon.fr', 'ROLE_EMPLOYE');
