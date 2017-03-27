@@ -1,5 +1,4 @@
 .idea/
-/build/
 /var/*
 !/var/cache
 /var/cache/*
@@ -11,9 +10,10 @@
 /var/sessions/*
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
+app/config/parameters.yml
+app/config/parameters_prod.yml
 /vendor/
 /web/bundles/
-Supprimerait tests/
 app/sqlite.db.cache
 app/AWS_ACCESS_KEY_ID.txt
 app/AWS_SECRET_ACCESS_KEY.txt
