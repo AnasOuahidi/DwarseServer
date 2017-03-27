@@ -10,8 +10,8 @@
 /var/sessions/*
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
-app/config/parameters.yml
-app/config/parameters_prod.yml
+/app/config/parameters.yml
+/app/config/parameters_prod.yml
 /vendor/
 /web/bundles/
 app/sqlite.db.cache
